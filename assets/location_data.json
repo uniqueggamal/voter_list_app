@@ -1,0 +1,259 @@
+{
+  "Bagmati": {
+    "id": 3,
+    "districts": {
+      "Kathmandu": {
+        "id": 1,
+        "municipalities": {
+          "काठमाडौँ महानगरपालिका": {
+            "id": 1,
+            "type": "BA-K-KMC",
+            "wards": {
+              "BA-K-KMC-16": {
+                "id": 1,
+                "ward_no": 16,
+                "booths": [
+                  {
+                    "id": 1,
+                    "booth_code": "BA-K-KMC-16-1",
+                    "booth_name": "अमृत इंगलिस वोर्डिङ स्कुल म्हैपि"
+                  },
+                  {
+                    "id": 10,
+                    "booth_code": "BA-K-KMC-16-10",
+                    "booth_name": "सिद्धार्थ वनस्थली इन्स्टिच्यूट, वालाजु"
+                  },
+                  {
+                    "id": 2,
+                    "booth_code": "BA-K-KMC-16-2",
+                    "booth_name": "एभरेडी व्याट्री कारखाना वालाजु रिङरोड"
+                  },
+                  {
+                    "id": 3,
+                    "booth_code": "BA-K-KMC-16-3",
+                    "booth_name": "केन्द्रिय मत्स्य भवन माछापोखरी वालाजु\n"
+                  },
+                  {
+                    "id": 4,
+                    "booth_code": "BA-K-KMC-16-4",
+                    "booth_name": "तरुण मा.वि. वाईपास वालाजु\n"
+                  },
+                  {
+                    "id": 5,
+                    "booth_code": "BA-K-KMC-16-5",
+                    "booth_name": "नेपाल युवक मा.वि. साउनेपाटी क्षेत्रपाटी\n"
+                  },
+                  {
+                    "id": 6,
+                    "booth_code": "BA-K-KMC-16-6",
+                    "booth_name": "लेखनाथ सदन भवन नयावजार\n"
+                  },
+                  {
+                    "id": 7,
+                    "booth_code": "BA-K-KMC-16-7",
+                    "booth_name": "वडा भवन पछाडीको व्यास भवन सोह्रखुट्टे\n"
+                  },
+                  {
+                    "id": 8,
+                    "booth_code": "BA-K-KMC-16-8",
+                    "booth_name": "सरस्वति क्याम्पस ठमेल\n"
+                  },
+                  {
+                    "id": 9,
+                    "booth_code": "BA-K-KMC-16-9",
+                    "booth_name": "सितल मा.वि. टौडोल\n"
+                  }
+                ]
+              },
+              "BA-K-KMC-17": {
+                "id": 2,
+                "ward_no": 17,
+                "booths": [
+                  {
+                    "id": 11,
+                    "booth_code": "BA-K-KMC-17-1",
+                    "booth_name": "नेपाल राष्ट्रिय माध्यामिक विद्यालय , ढल्को \n"
+                  },
+                  {
+                    "id": 12,
+                    "booth_code": "BA-K-KMC-17-2",
+                    "booth_name": "पब्लिक युथ क्याम्पस, धोविचौर\n"
+                  },
+                  {
+                    "id": 13,
+                    "booth_code": "BA-K-KMC-17-3",
+                    "booth_name": "वडा नं. सत्र खुशिबु भोय छे केन्द्र"
+                  },
+                  {
+                    "id": 14,
+                    "booth_code": "BA-K-KMC-17-4",
+                    "booth_name": "शान्ति शिक्षा मन्दिर मा.वि. ठहिटी"
+                  }
+                ]
+              },
+              "BA-K-KMC-18": {
+                "id": 3,
+                "ward_no": 18,
+                "booths": [
+                  {
+                    "id": 15,
+                    "booth_code": "BA-K-KMC-18-1",
+                    "booth_name": "नरदेवि आयुर्वेदिक हस्पिटल, नरदेवी"
+                  },
+                  {
+                    "id": 16,
+                    "booth_code": "BA-K-KMC-18-2",
+                    "booth_name": "श्री भक्त विधाश्रम मा.वि. रक्तकाली टेंगल\n"
+                  },
+                  {
+                    "id": 17,
+                    "booth_code": "BA-K-KMC-18-3",
+                    "booth_name": "स्वर्णिम शिक्षा सदन स्कुल, भुरूञ्खेल"
+                  }
+                ]
+              },
+              "BA-K-KMC-25": {
+                "id": 4,
+                "ward_no": 25,
+                "booths": [
+                  {
+                    "id": 18,
+                    "booth_code": "BA-K-KMC-25-1",
+                    "booth_name": "कन्या मन्दिर मा.वि. न्हयौखा\n"
+                  },
+                  {
+                    "id": 19,
+                    "booth_code": "BA-K-KMC-25-2",
+                    "booth_name": " तनति बहाल तनति\n"
+                  },
+                  {
+                    "id": 20,
+                    "booth_code": "BA-K-KMC-25-3",
+                    "booth_name": "ध्वाखा वहाल ढोकाटोल\n"
+                  },
+                  {
+                    "id": 21,
+                    "booth_code": "BA-K-KMC-25-4",
+                    "booth_name": "मछिन्द्र बहाल मछिन्द्रटोल"
+                  }
+                ]
+              }
+            }
+          },
+          "तारकेश्वर नगरपालिका\n": {
+            "id": 2,
+            "type": "BA-K-TNC",
+            "wards": {
+              "BA-K-TNC-3": {
+                "id": 5,
+                "ward_no": 3,
+                "booths": [
+                  {
+                    "id": 22,
+                    "booth_code": "BA-K-TNC-3-1",
+                    "booth_name": "कालिका मा. वि. तिनपिपले"
+                  }
+                ]
+              },
+              "BA-K-TNC-4": {
+                "id": 6,
+                "ward_no": 4,
+                "booths": [
+                  {
+                    "id": 23,
+                    "booth_code": "BA-K-TNC-4-1",
+                    "booth_name": "पुरानो गुह्येश्वरी मा.वि."
+                  }
+                ]
+              },
+              "BA-K-TNC-5": {
+                "id": 7,
+                "ward_no": 5,
+                "booths": [
+                  {
+                    "id": 24,
+                    "booth_code": "BA-K-TNC-5-1",
+                    "booth_name": "नागार्जुन माध्यमिक विद्यालय . गोलढुंगा\n"
+                  },
+                  {
+                    "id": 25,
+                    "booth_code": "BA-K-TNC-5-2",
+                    "booth_name": "पृथ्वीनारायण मा.वि."
+                  }
+                ]
+              }
+            }
+          },
+          "नागार्जुन नगरपालिका\n": {
+            "id": 3,
+            "type": "BA-K-NNC",
+            "wards": {
+              "BA-K-NNC-1": {
+                "id": 8,
+                "ward_no": 1,
+                "booths": [
+                  {
+                    "id": 26,
+                    "booth_code": "BA-K-NNC-1-1",
+                    "booth_name": "वालविकास माध्यमिक विद्यालय . रानीवन"
+                  }
+                ]
+              },
+              "BA-K-NNC-2": {
+                "id": 9,
+                "ward_no": 2,
+                "booths": [
+                  {
+                    "id": 27,
+                    "booth_code": "BA-K-NNC-2-1",
+                    "booth_name": "- रीड मोडल कलेज, ठूलो भयङ"
+                  }
+                ]
+              },
+              "BA-K-NNC-3": {
+                "id": 10,
+                "ward_no": 3,
+                "booths": [
+                  {
+                    "id": 28,
+                    "booth_code": "BA-K-NNC-3-1",
+                    "booth_name": "महादेव चौक इचंगु नारायण\n"
+                  },
+                  {
+                    "id": 29,
+                    "booth_code": "BA-K-NNC-3-2",
+                    "booth_name": "सिता वालविश्राम प्राथमिक विद्यालय. गैरीगाउ"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "Gandaki": {
+    "id": 4,
+    "districts": {}
+  },
+  "Karnali": {
+    "id": 6,
+    "districts": {}
+  },
+  "Koshi": {
+    "id": 1,
+    "districts": {}
+  },
+  "Lumbini": {
+    "id": 5,
+    "districts": {}
+  },
+  "Madhesh": {
+    "id": 2,
+    "districts": {}
+  },
+  "Sudarpaschim": {
+    "id": 7,
+    "districts": {}
+  }
+}
