@@ -225,32 +225,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               child: Text('ID'),
                             ),
                             DropdownMenuItem(
-                              value:
-                                  null, // placeholder - change when you add real mode
+                              value: null,
+                              enabled:
+                                  false, // placeholder - change when you add real mode
                               child: Text(
                                 'More...',
                                 style: TextStyle(color: Colors.grey),
                               ),
                             ),
                           ],
-                          onChanged: (SearchField? newField) {
-                            if (newField != null) {
-                              // For now only name & id are functional
-                              if (newField != SearchField.name ||
-                                  newField != SearchField.voterId) {
-                                // TODO: handle "More..." when implemented
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'More options coming soon...',
-                                    ),
+                          onChanged: (SearchField? newValue) {
+                            if (newValue == null) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'थप विकल्पहरू चाँडै आउँदैछन्...',
                                   ),
-                                );
-                                return;
-                              }
-                              ref.read(searchParamsProvider.notifier).state =
-                                  searchParams.copyWith(field: newField);
+                                ),
+                              );
+                              return;
                             }
+                            ref.read(searchParamsProvider.notifier).state =
+                                searchParams.copyWith(field: newValue);
                           },
                         ),
                       ),
