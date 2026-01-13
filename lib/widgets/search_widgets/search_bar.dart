@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/voter_provider.dart';
-import '../providers/filter_provider.dart';
+import '../../providers/voter_provider.dart';
+import '../../providers/filter_provider.dart';
 
 enum SearchMode {
   defaultMode(label: 'Name / Voter ID'),

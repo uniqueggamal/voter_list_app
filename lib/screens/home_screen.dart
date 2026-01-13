@@ -2,20 +2,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// ── Fake Voter model (replace with your real model from models/voter.dart)
-class Voter {
-  final String name;
-  final String voterId;
-  final String gender; // 'M' or 'F'
+// ── Search Modes ─────────────────────────────────────────────────────────────
+enum SearchField { name, voterId }
 
-  Voter({required this.name, required this.voterId, required this.gender});
+enum SearchMatchMode { startsWith, contains }
+
+class SearchParams {
+  final SearchField field;
+  final SearchMatchMode matchMode;
+  final String query;
+
+  const SearchParams({
+    this.field = SearchField.name,
+    this.matchMode = SearchMatchMode.startsWith,
+    this.query = '',
+  });
+
+  SearchParams copyWith({
+    SearchField? field,
+    SearchMatchMode? matchMode,
+    String? query,
+  }) {
+    return SearchParams(
+      field: field ?? this.field,
+      matchMode: matchMode ?? this.matchMode,
+      query: query ?? this.query,
+    );
+  }
 }
 
 // ── Providers ────────────────────────────────────────────────────────────────
-// In real app → load from database_helper.dart
 final votersProvider = StateProvider<List<Voter>>(
   (ref) => [
-    // Demo data - replace with real loading
     Voter(name: "Ram Bahadur Thapa", voterId: "1234567890", gender: "M"),
     Voter(name: "Sita Kumari", voterId: "0987654321", gender: "F"),
     Voter(name: "Hari Prasad", voterId: "1122334455", gender: "M"),
@@ -24,20 +42,37 @@ final votersProvider = StateProvider<List<Voter>>(
   ],
 );
 
-final searchQueryProvider = StateProvider<String>((ref) => '');
+final searchParamsProvider = StateProvider<SearchParams>(
+  (ref) => const SearchParams(),
+);
 
 final filteredVotersProvider = Provider<List<Voter>>((ref) {
   final voters = ref.watch(votersProvider);
-  final query = ref.watch(searchQueryProvider).trim().toLowerCase();
+  final params = ref.watch(searchParamsProvider);
 
-  if (query.isEmpty) return voters;
+  if (params.query.isEmpty) return voters;
+
+  final queryLower = params.query.trim().toLowerCase();
 
   return voters.where((voter) {
-    final nameLower = voter.name.toLowerCase();
-    final idLower = voter.voterId.toLowerCase();
-    return nameLower.startsWith(query) || idLower.startsWith(query);
+    final value = params.field == SearchField.name
+        ? voter.name.toLowerCase()
+        : voter.voterId.toLowerCase();
+
+    return params.matchMode == SearchMatchMode.startsWith
+        ? value.startsWith(queryLower)
+        : value.contains(queryLower);
   }).toList();
 });
+
+// ── Fake Voter model (replace with real model later)
+class Voter {
+  final String name;
+  final String voterId;
+  final String gender; // 'M' or 'F'
+
+  Voter({required this.name, required this.voterId, required this.gender});
+}
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -47,7 +82,25 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  final _searchController = TextEditingController();
   bool _showAnalytics = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      final query = _searchController.text;
+      ref.read(searchParamsProvider.notifier).state = ref
+          .read(searchParamsProvider)
+          .copyWith(query: query);
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   void _toggleAnalytics() {
     setState(() => _showAnalytics = !_showAnalytics);
@@ -72,10 +125,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
+  String _getDynamicHintText(SearchParams params) {
+    final fieldText = params.field == SearchField.name ? 'नाम' : 'मतदाता नं.';
+    final modeText = params.matchMode == SearchMatchMode.startsWith
+        ? 'सुरुदेखि'
+        : 'भित्रै';
+    return '$fieldText खोज्नुहोस् ($modeText)...';
+  }
+
   @override
   Widget build(BuildContext context) {
     final filteredVoters = ref.watch(filteredVotersProvider);
-    final searchQuery = ref.watch(searchQueryProvider);
+    final searchParams = ref.watch(searchParamsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -90,36 +151,124 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: Column(
         children: [
-          // Search + Analytics toggle row
+          // Search controls
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 8),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Search name or voter ID (starts with)',
-                      prefixIcon: const Icon(Icons.search),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
+                // Search mode selector (Name / Voter ID)
+                TextField(
+                  controller: _searchController,
+                  textAlign: TextAlign.left,
+                  decoration: InputDecoration(
+                    // ── LEFT: Match mode (Starts with / Contains) ────────────────────────────
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 8),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<SearchMatchMode>(
+                          value: searchParams.matchMode,
+                          icon: const Icon(Icons.arrow_drop_down, size: 18),
+                          isDense: true,
+                          style: const TextStyle(
+                            fontSize: 13.5,
+                            color: Colors.black87,
+                          ),
+                          items: const [
+                            DropdownMenuItem(
+                              value: SearchMatchMode.startsWith,
+                              child: Text('Starts with'),
+                            ),
+                            DropdownMenuItem(
+                              value: SearchMatchMode.contains,
+                              child: Text('Contains'),
+                            ),
+                          ],
+                          onChanged: (SearchMatchMode? newMode) {
+                            if (newMode != null) {
+                              ref.read(searchParamsProvider.notifier).state =
+                                  searchParams.copyWith(matchMode: newMode);
+                            }
+                          },
+                        ),
                       ),
-                      filled: true,
-                      fillColor: Colors.grey.shade100,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 0),
                     ),
-                    onChanged: (value) {
-                      ref.read(searchQueryProvider.notifier).state = value;
-                    },
+
+                    // ── MIDDLE: Search input ─────────────────────────────────────────────────
+                    hintText: _getDynamicHintText(searchParams),
+                    hintStyle: TextStyle(color: Colors.grey.shade500),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 14,
+                      horizontal: 12,
+                    ),
+
+                    // ── RIGHT: Field selector (Name / ID / More...) ──────────────────────────
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 8, left: 8),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<SearchField>(
+                          value: searchParams.field,
+                          icon: const Icon(Icons.arrow_drop_down, size: 18),
+                          alignment: Alignment.centerRight,
+                          isDense: true,
+                          style: const TextStyle(
+                            fontSize: 13.5,
+                            color: Colors.black87,
+                          ),
+                          items: const [
+                            DropdownMenuItem(
+                              value: SearchField.name,
+                              child: Text('Name'),
+                            ),
+                            DropdownMenuItem(
+                              value: SearchField.voterId,
+                              child: Text('ID'),
+                            ),
+                            DropdownMenuItem(
+                              value:
+                                  null, // placeholder - change when you add real mode
+                              child: Text(
+                                'More...',
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ),
+                          ],
+                          onChanged: (SearchField? newField) {
+                            if (newField != null) {
+                              // For now only name & id are functional
+                              if (newField != SearchField.name ||
+                                  newField != SearchField.voterId) {
+                                // TODO: handle "More..." when implemented
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'More options coming soon...',
+                                    ),
+                                  ),
+                                );
+                                return;
+                              }
+                              ref.read(searchParamsProvider.notifier).state =
+                                  searchParams.copyWith(field: newField);
+                            }
+                          },
+                        ),
+                      ),
+                    ),
+
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.grey.shade100,
                   ),
+                  textInputAction: TextInputAction.search,
                 ),
-                const SizedBox(width: 12),
-                IconButton.filledTonal(
-                  icon: Icon(
-                    _showAnalytics ? Icons.analytics : Icons.analytics_outlined,
-                  ),
-                  tooltip: 'Toggle Analytics',
-                  onPressed: _toggleAnalytics,
-                ),
+                const SizedBox(height: 8),
+
+                // Starts with / Contains toggle
+                // Search field selection - Dropdown
               ],
             ),
           ),
@@ -178,9 +327,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildAnalyticsRow() {
     // In real app → use FutureProvider + database queries
-    final total = 174832; // placeholder
-    final male = 89214;
-    final female = 85618;
+    const total = 174832;
+    const male = 89214;
+    const female = 85618;
 
     return Card(
       elevation: 2,
@@ -199,6 +348,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
+// ── StatItem & FilterPanel remain the same ──────────────────────────────────
 class _StatItem extends StatelessWidget {
   final String title;
   final int value;
@@ -228,7 +378,6 @@ class _StatItem extends StatelessWidget {
   }
 }
 
-// ── Filter Panel (Bottom Sheet) ──────────────────────────────────────────────
 class FilterPanel extends StatelessWidget {
   final ScrollController scrollController;
 
@@ -247,7 +396,6 @@ class FilterPanel extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // Example filter options - expand as needed
           const ListTile(
             leading: Icon(Icons.location_on),
             title: Text('District / Municipality'),
