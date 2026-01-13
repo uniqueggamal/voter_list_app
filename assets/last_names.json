@@ -1,0 +1,4060 @@
+[
+  {
+    "lastname": "तुलाधर",
+    "sub_category_id": 501,
+    "notes": "Upper Newar - Uray/Buddhist merchant group",
+    "variants": ["Tuladhar", "तुलाधर(बोहरा)", "तुलाधर(स्थापित)", "तुलाधार"]
+  },
+  {
+    "lastname": "मालाकार",
+    "sub_category_id": 502,
+    "notes": "Newar artisan, often linked to Jyapu/Shrestha",
+    "variants": ["Malakar", "मालाकार(श्रेष्‍ठ)"]
+  },
+  {
+    "lastname": "खड्का",
+    "sub_category_id": 102,
+    "notes": "Common Chhetri surname",
+    "variants": ["Khadka", "खड्का(खत्री)", "खड्का(कार्की)", "खड्का(थापा)", "खड्का(सिंह)", "खड्का(बुडाथोकी)"]
+  },
+  {
+    "lastname": "भट्टराई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Bhattarai", "भट्टराई(खनाल)", "भट्टराई(काफ्ले)", "भट्टरार्इ"]
+  },
+  {
+    "lastname": "घिमिरे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Ghimire", "घिमिरे(सापकोटा)", "घिमिरे(मरासिनी)", "घिमिरे(खनाल)", "घिमीरे"]
+  },
+  {
+    "lastname": "ढकाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Dhkal", "ढकाल(लामिछाने)"]
+  },
+  {
+    "lastname": "आचार्य",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Acharya"]
+  },
+  {
+    "lastname": "पौडेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Paudel", "Poudel", "पौड्याल", "पौडेल(घिमिरे)", "पौडेल(अधिकारी)", "पौडेल(सुबेदी)", "पाैडेल"]
+  },
+  {
+    "lastname": "अधिकारी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Adhikari", "(थापा)अधिकारी", "अधिकारी(पौडेल)", "अधिकारी(घमिरे)", "अधिकारी(भट्टराई)", "अधिकारी(सिंखडा)", "अधिकारि"]
+  },
+  {
+    "lastname": "थापा",
+    "sub_category_id": 102,
+    "notes": "Chhetri (widely used, also by Janajati groups in Koshi)",
+    "variants": ["Thapa", "थापा(सिलवाल)", "थापा(क्षेत्री)", "थापा(जोशी)", "थापा(कर्माचार्य)", "थापा(न्यौपाने)", "थापा(राना)", "थापा`", "थापा(खत्री)", "आले(थापा)", "के.सी(थापा)", "वस्नेत(थापा)", "बोहरा(थापा)"]
+  },
+  {
+    "lastname": "खनाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Khanal", "खनाल(पराजुली)", "खनाल(शाह)", "खनाल(न्यौपाने)", "खनाल(गौतम)", "खनाल(पौडेल)"]
+  },
+  {
+    "lastname": "महर्जन",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu/farmer group",
+    "variants": ["Maharjan", "महर्जन(प्रजापती)", "महर्जन(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "राजवंशी",
+    "sub_category_id": 202,
+    "notes": "Tarai Janajati (indigenous Terai group)",
+    "variants": ["Rajbanshi", "राजवंशी(राना)"]
+  },
+  {
+    "lastname": "शर्मा",
+    "sub_category_id": 101,
+    "notes": "Most common Hill Bahun surname",
+    "variants": ["Sharma", "शर्मा(प्याकुरेल)", "शर्मा(ज्ञवाली)", "शर्मा(सुवेदी)", "शर्मा(पौडेल)", "शर्मा(काफ्ले)", "शर्मा(ढुङ्गाना)", "शर्मा(रेग्मी)", "शर्मा(कुँवर)", "शर्मा(बेल्बासे)", "शर्मा(आचार्य)", "शर्मा(घिमिरे)", "शर्मा(उपाध्याय)", "शर्मा(पन्त)"]
+  },
+  {
+    "lastname": "ज्ञवाली",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Gyawali", "ज्ञवाली(कुँवर)", "ज्ञवाली(रेग्मी)", "ज्ञवाली(पौडेल)"]
+  },
+  {
+    "lastname": "झा",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste (often Maithil Brahmin)"
+  },
+  {
+    "lastname": "शाह",
+    "sub_category_id": 103,
+    "notes": "Thakuri",
+    "variants": ["Shah", "शाही", "शाह(ढकाल)", "शाह(खड्का)", "शाही(मल्ल)", "शाही(ठकुरी)", "शाही(खड्गी)", "शाह"]
+  },
+  {
+    "lastname": "पाण्डे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Pandey", "पाण्डेय", "पाण्डे(कंडेल)", "पाण्डे(चिलुवाल)"]
+  },
+  {
+    "lastname": "गिरी",
+    "sub_category_id": 104,
+    "notes": "Sanyasi/Dashnami (Khas-Arya)",
+    "variants": ["Giri", "गिरी(कार्की)"]
+  },
+  {
+    "lastname": "बिष्ट",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Bista", "Bisht", "विष्ट", "बिष्‍ट(बोहरा)"]
+  },
+  {
+    "lastname": "राना",
+    "sub_category_id": 103,
+    "notes": "Thakuri/Chhetri",
+    "variants": ["Rana", "रानाभाट", "रानामगर", "राणा(बोहरा)", "राणा(शाह)"]
+  },
+  {
+    "lastname": "श्रेष्ठ",
+    "sub_category_id": 501,
+    "notes": "Upper Newar",
+    "variants": ["Shrestha", "श्रेष्‍ठ", "श्रेष्ठ(अमात्‍य)", "श्रेष्‍ठ(प्रधान)", "श्रेष्‍ठ(जोशी)", "श्रेष्‍ठ(धमला)", "श्रेष्‍ठ(डंगोल)", "श्रेष्‍ठ(गुरुङ्ग)", "श्रेष्‍ठ(मल्ल)", "श्रेष्‍ठ(थापा)"]
+  },
+  {
+    "lastname": "प्रजापति",
+    "sub_category_id": 502,
+    "notes": "Newar artisan/Jyapu",
+    "variants": ["Prajapati", "प्रजापती", "प्रजापति(महर्जन)", "प्रजापती(महर्जन)"]
+  },
+  {
+    "lastname": "गुरुङ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Gurung",
+    "variants": ["Gurung", "गुरुङ्ग", "गुरुङ(बोहरा)", "गुरुङ्ग(तुलाधर)"]
+  },
+  {
+    "lastname": "मगर",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Magar",
+    "variants": ["Magar", "मगर)"]
+  },
+  {
+    "lastname": "शाक्य",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist",
+    "variants": ["Shakya", "शक्‍य", "शाक्य"]
+  },
+  {
+    "lastname": "मानन्धर",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu/oil-presser",
+    "variants": ["Manandhar", "मानन्धर(कर्माचार्य)", "मानन्धर(नकर्मी)"]
+  },
+  {
+    "lastname": "गौतम",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Gautam", "गौतम(ज्ञवाली)", "गौतम(पौडेल)", "गौतम(सुवेदी)", "गौतम(घिमिरे)"]
+  },
+  {
+    "lastname": "राई",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Rai (very common in Koshi hills)"
+  },
+  {
+    "lastname": "लामिछाने",
+    "sub_category_id": 101,
+    "notes": "Bahun/Chhetri mixed",
+    "variants": ["Lamichhane", "लामिछाने(काफ्ले)", "लामिछाने(पौडेल)"]
+  },
+  {
+    "lastname": "सापकोटा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Sapkota", "सापकोटा(भट्टराई)", "सापकोटा(के.सी)", "सापकोटा(कंडेल)", "सापकोटी"]
+  },
+  {
+    "lastname": "शेर्पा",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Sherpa"
+  },
+  {
+    "lastname": "चौधरी",
+    "sub_category_id": 302,
+    "notes": "Madhesi Middle / Tharu-related",
+    "variants": ["Chaudhary", "चौधरी(तामाङ्ग)"]
+  },
+  {
+    "lastname": "तामाङ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Tamang",
+    "variants": ["Tamang", "तामाङ्ग", "तामाङ्", "वन्त(तामाङ्ग)"]
+  },
+  {
+    "lastname": "परियार",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "यादव",
+    "sub_category_id": 302,
+    "notes": "Madhesi Middle Caste"
+  },
+  {
+    "lastname": "लिम्बु",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Limbu (prominent in eastern Koshi)"
+  },
+  {
+    "lastname": "के.सी",
+    "sub_category_id": 102,
+    "notes": "Chhetri (K.C. = Khatri Chhetri)",
+    "variants": ["K.C.", "के.सी.(थापा)", "के.सी(पौडेल)", "के.सी(खड्का)", "केसी"]
+  },
+  {
+    "lastname": "कुँवर",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Kunwar", "कुवँर", "कुँवर(श्रेष्ठ)", "कुवर"]
+  },
+  {
+    "lastname": "बोहरा",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Bohara", "बोहरा(क्षेत्री)", "बोहरा(थापा)", "बोहरा(जोशी)"]
+  },
+  {
+    "lastname": "रिजाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Rijal", "रिजाल(पौडेल)", "रिजाल(सापकोटा)"]
+  },
+  {
+    "lastname": "पोखरेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Pokhrel", "पोख्रेल", "पोखरेल(गौतम)", "पोख्रेल"]
+  },
+  {
+    "lastname": "दाहाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Dahal", "दाहाल(श्रेष्‍ठ)", "दहाल"]
+  },
+  {
+    "lastname": "सुवेदी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Subedi", "सुवेदी(ढुङ्गाना)", "सुवेदी(सापकोटा)"]
+  },
+  {
+    "lastname": "कठायत",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Kathayat", "कठायत(खड्का)"]
+  },
+  {
+    "lastname": "ठकुरी",
+    "sub_category_id": 103,
+    "notes": "Thakuri"
+  },
+  {
+    "lastname": "बज्राचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist priestly",
+    "variants": ["Bajracharya", "बज्राचार्य(तुलाधर)"]
+  },
+  {
+    "lastname": "कर्माचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar / sometimes Bahun",
+    "variants": ["Karmacharya", "कर्माचार्य(श्रेष्‍ठ)"]
+  },
+  {
+    "lastname": "न्यौपाने",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Neupane", "न्यौपाने(जोशी)", "न्यौपाने(कँडेल)"]
+  },
+  {
+    "lastname": "रेग्मी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Regmi", "रेग्मि", "रेग्मी(लामा)", "रेग्मी(चालिसे)", "रेग्मी(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "कटुवाल",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Katuwal", "कट्वाल", "कट्टेल(थापा)", "कट्टेल"]
+  },
+  {
+    "lastname": "बस्नेत",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Basnet", "वस्नेत", "वस्नेत(थापा)", "वस्नेत/बाँनिया"]
+  },
+  {
+    "lastname": "ओली",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "घले",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Gurung/Magar related)"
+  },
+  {
+    "lastname": "पनेरु",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Paneru", "पनेरु/जोशी"]
+  },
+  {
+    "lastname": "महत",
+    "sub_category_id": 102,
+    "notes": "Chhetri / sometimes mixed",
+    "variants": ["Mahat", "थापा/महत"]
+  },
+  {
+    "lastname": "रायमाझी",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Rayamajhi", "रायमाझी(खड्का)"]
+  },
+  {
+    "lastname": "ढुङ्गाना",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Dhungana", "ढुङ्गाना", "ढुङ्गांना"]
+  },
+  {
+    "lastname": "रन्जित",
+    "sub_category_id": 502,
+    "notes": "Newar (Ranjitkar artisan group)",
+    "variants": ["Ranjit", "रञ्जित", "रंजित", "रंन्जीत", "रंजितकार"]
+  },
+  {
+    "lastname": "थकाली",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Thakali"
+  },
+  {
+    "lastname": "खनिया",
+    "sub_category_id": 101,
+    "notes": "Bahun-related"
+  },
+  {
+    "lastname": "जोशी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun / sometimes Newar",
+    "variants": ["Joshi", "जोसी", "जोशी(प्रधान)"]
+  },
+  {
+    "lastname": "उपाध्याय",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Upadhyaya", "उपाध्याय(सुबेदी)"]
+  },
+  {
+    "lastname": "बानियाँ",
+    "sub_category_id": 701,
+    "notes": "Other - Marwadi/Bania trade community",
+    "variants": ["Baniya", "वानियाँ", "भण्डारी(बानिया)"]
+  },
+  {
+    "lastname": "मिश्र",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste",
+    "variants": ["Mishra", "मिश्र(घिमिरे)"]
+  },
+  {
+    "lastname": "टण्डन",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste"
+  },
+  {
+    "lastname": "रावल",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "पन्त",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Pant", "पन्त(सुवेदी)"]
+  },
+  {
+    "lastname": "आले",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (often Magar/Gurung)",
+    "variants": ["Ale", "आले(थापा)"]
+  },
+  {
+    "lastname": "बन्जारा",
+    "sub_category_id": 701,
+    "notes": "Other / nomadic group"
+  },
+  {
+    "lastname": "अमगाई",
+    "sub_category_id": 101,
+    "notes": "Bahun variant"
+  },
+  {
+    "lastname": "कोइराला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "कडेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Kandel", "कंडेल", "कंडेल[पाण्डे]", "कँडेल"]
+  },
+  {
+    "lastname": "रोकाया",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati"
+  },
+  {
+    "lastname": "मास्के",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "लामा",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati / Sherpa/Tamang related"
+  },
+  {
+    "lastname": "खातुन",
+    "sub_category_id": 6,
+    "notes": "Muslim community (Tarai/Hill)"
+  },
+  {
+    "lastname": "श्रीवास्तव",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste"
+  },
+  {
+    "lastname": "धमला",
+    "sub_category_id": 101,
+    "notes": "Bahun"
+  },
+  {
+    "lastname": "कुमाल",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (potter group)"
+  },
+  {
+    "lastname": "गैरे",
+    "sub_category_id": 101,
+    "notes": "Bahun variant"
+  },
+  {
+    "lastname": "देवकोटा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Devkota", "देवकोटा(अधिकारी)", "देवकोटा(पाण्डे)"]
+  },
+  {
+    "lastname": "पराजुली",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Parajuli", "पराजुली(पौडेल)"]
+  },
+  {
+    "lastname": "राजभण्डारी",
+    "sub_category_id": 501,
+    "notes": "Newar Upper"
+  },
+  {
+    "lastname": "अर्याल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (common in Koshi hills)",
+    "variants": ["Aryal", "अर्याल/पोखरेल", "अर्याल(खनिया)", "अर्याल(दवाडी)", "अर्याल(खनाल)", "अर्याल(शर्मा)", "अर्याल(पोख्रेल)", "अर्याल(सुवेदी)", "अर्याल(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "कुँवर",
+    "sub_category_id": 102,
+    "notes": "Chhetri (Khas-Chhetri)",
+    "variants": ["Kunwar", "कुँबर", "कुँवर(आचार्य)", "कुवंर", "कुँवर(शेरचन)", "कॅुवर"]
+  },
+  {
+    "lastname": "पाण्डे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Pande", "Pandey", "पाण्डे(पनेरु)", "पण्डिल", "पण्डित(पौडेल)", "पाण्डे(भण्डारी)", "पाण्डे(महत)", "पाण्डे(निरौला)", "पाण्डे(पन्त)"]
+  },
+  {
+    "lastname": "भुसाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (some Jaisi subgroup)",
+    "variants": ["Bhusal", "भुसाल(जैसी)", "भुषाल", "भुसाल"]
+  },
+  {
+    "lastname": "वि.सी.",
+    "sub_category_id": 102,
+    "notes": "Chhetri (Khatri Chhetri variant)",
+    "variants": ["V.C.", "B.C.", "वि.सी."]
+  },
+  {
+    "lastname": "खड्का",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Khadka", "खड्का(पाण्डे)", "खडका"]
+  },
+  {
+    "lastname": "वासिष्ठ",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "गौली",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Magar-related)"
+  },
+  {
+    "lastname": "खनीया",
+    "sub_category_id": 101,
+    "notes": "Bahun variant"
+  },
+  {
+    "lastname": "प्रजापति",
+    "sub_category_id": 502,
+    "notes": "Newar artisan/Jyapu",
+    "variants": ["Prajapati", "प्रजापति(मुनिकार)", "प्रजापती(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "ढुङ्गेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Dhungel", "ढुंगेल", "ढुंगाना"]
+  },
+  {
+    "lastname": "मैनाली",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "ढकाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Dhakal", "ढकाल(बराल)", "ढकाल/पन्त", "ढकाल(अर्याल)", "ढकाल(भूर्तेल)"]
+  },
+  {
+    "lastname": "प्रधानाङ्ग",
+    "sub_category_id": 501,
+    "notes": "Upper Newar",
+    "variants": ["Pradhanang", "प्रधानाङ्ग(मुल)", "प्रधानाङ"]
+  },
+  {
+    "lastname": "बतास",
+    "sub_category_id": 101,
+    "notes": "Bahun variant"
+  },
+  {
+    "lastname": "चौलागाई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Chaulagai", "चौंलागाई", "चम्लागाई"]
+  },
+  {
+    "lastname": "अली",
+    "sub_category_id": 601,
+    "notes": "Muslim community"
+  },
+  {
+    "lastname": "पनेरु",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Paneru", "पनेरु(पन्त)"]
+  },
+  {
+    "lastname": "पुडासैनी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Pudasaini", "पुडासैनी(बोहरा)", "पुडाशैनी"]
+  },
+  {
+    "lastname": "भटट्राई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (variant of Bhattarai)"
+  },
+  {
+    "lastname": "भण्डारी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun / sometimes Chhetri",
+    "variants": ["Bhandari", "भण्डारी(बोहरा)", "भण्डारी(रिमाल)", "भण्डारी(ज्ञवाली)", "भण्डारी(पौडेल)", "भण्डारी(न्यौपाने)"]
+  },
+  {
+    "lastname": "लोहनी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Lohani", "लोहनी(कडारिया)"]
+  },
+  {
+    "lastname": "सिलवाल",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Silwal", "सिलवाल(अर्याल)"]
+  },
+  {
+    "lastname": "बुध्दाचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist",
+    "variants": ["Buddhacharya", "बुद्धाचार्ये"]
+  },
+  {
+    "lastname": "ठकुरी",
+    "sub_category_id": 103,
+    "notes": "Thakuri",
+    "variants": ["Thakuri", "ठकुरी(शाह)"]
+  },
+  {
+    "lastname": "न्यौपाने",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Neupane", "न्यौपाने(सिंखडा)", "न्‍योपाने", "न्यौपाने(पौडेल)", "न्यौपाने(खतिवडा)"]
+  },
+  {
+    "lastname": "भारती",
+    "sub_category_id": 701,
+    "notes": "Other (nationality-related)"
+  },
+  {
+    "lastname": "क्षेत्री",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Kshettri", "क्षेत्री(कठायत)", "क्षेत्री(के.सी)", "क्षेत्ती"]
+  },
+  {
+    "lastname": "फुयाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Phuyal", "फुयाँल"]
+  },
+  {
+    "lastname": "कोइराला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Koirala", "कोइराला(आचार्य)", "कोइराला(गौतम)", "कोइराला(पौडेल)"]
+  },
+  {
+    "lastname": "वन्जारा",
+    "sub_category_id": 701,
+    "notes": "Other / nomadic group",
+    "variants": ["Banjara", "बन्जारा(क्षेत्री)", "वन्जारा", "वन्जरा"]
+  },
+  {
+    "lastname": "बजगाई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "कपाली",
+    "sub_category_id": 502,
+    "notes": "Newar (Uray/Udhas)"
+  },
+  {
+    "lastname": "जोशी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun / sometimes Newar",
+    "variants": ["Joshi", "जोशी(श्रेष्‍ठ)", "जोशी(राजवंशी)", "जोशी(मानन्धर)"]
+  },
+  {
+    "lastname": "खाती",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Khati", "(पन्त)खाती"]
+  },
+  {
+    "lastname": "मानन्धर",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu/oil-presser",
+    "variants": ["Manandhar", "मानन्धर", "मानधर", "मानन्धर(श्रेष्‍ठ)", "मानन्धर(लामा)"]
+  },
+  {
+    "lastname": "चन",
+    "sub_category_id": 103,
+    "notes": "Thakuri / Newar",
+    "variants": ["Chan", "चन(मल्ल)"]
+  },
+  {
+    "lastname": "ठगुन्ना",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "चित्रकार",
+    "sub_category_id": 502,
+    "notes": "Newar (painter/artisan)"
+  },
+  {
+    "lastname": "बलामी",
+    "sub_category_id": 502,
+    "notes": "Newar (Balami subgroup)",
+    "variants": ["Balami", "बलामी(रानामगर)", "बलामी(लामा)", "बलामी(श्रेष्‍ठ)", "बलामी(पण्डित)", "बलामी(गुरुङ्ग)", "बलामी", "बलामि", "बलामी"]
+  },
+  {
+    "lastname": "बडाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "नेपाली",
+    "sub_category_id": 101,
+    "notes": "Bahun / neutral (nationality-related)",
+    "variants": ["Nepali", "नेपाली(क्षेत्री)", "नेपाली(रमतेल)", "नेपाल(नेपाली)"]
+  },
+  {
+    "lastname": "बिडारी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Bidari", "बिडारी(घिमिरे)"]
+  },
+  {
+    "lastname": "नापित",
+    "sub_category_id": 502,
+    "notes": "Newar (barber group)",
+    "variants": ["Napit", "नापीत", "नापित"]
+  },
+  {
+    "lastname": "प्रकाश",
+    "sub_category_id": 701,
+    "notes": "Other / neutral"
+  },
+  {
+    "lastname": "देवकोटा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Devkota", "देवकोटा(पौडैल)"]
+  },
+  {
+    "lastname": "पंगेनी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "लामा",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Sherpa/Tamang)",
+    "variants": ["Lama", "लामा(कुँवर)", "लामा(तामाङ्ग)", "लामा(थापा)", "लामा(बलामी)", "लामा(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "वास्तोला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "वोगटी",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "चालिसे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Chalise", "चालिसे(आचार्य)"]
+  },
+  {
+    "lastname": "गोतामे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "बस्नेत",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Basnet", "बस्नेत(भण्‍डारी)", "बस्नेत(घिमिरे)", "बस्नेत(थापा)", "बस्नेत(पण्डित)", "बस्याल", "वस्न्यात", "वस्न्यात(थापा)"]
+  },
+  {
+    "lastname": "ओझा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "गुरुङ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Gurung",
+    "variants": ["Gurung", "गुरुङ्", "गुरुङ(घले)", "गुरुङ(शेर्पा)", "गुरुङ(शाक्य)", "उझोनयथछिगुरुङ"]
+  },
+  {
+    "lastname": "डंगोल",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu",
+    "variants": ["Dangol", "ड‌गोल"]
+  },
+  {
+    "lastname": "राजबहाक",
+    "sub_category_id": 701,
+    "notes": "Other / minor group",
+    "variants": ["Rajbahak", "राजबाहक", "राजवाहक", "राजपाहक", "राजवहाक"]
+  },
+  {
+    "lastname": "रम्तेल",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit (variant of Ramtel)",
+    "variants": ["Ramtel", "रम्तेल", "रमतेल", "रम्तेलम", "रम्तेल(नेपाली)", "नेपाली(रमतेल)"]
+  },
+  {
+    "lastname": "रीजाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "सोडारी",
+    "sub_category_id": 101,
+    "notes": "Bahun"
+  },
+  {
+    "lastname": "पुरकोटी",
+    "sub_category_id": 101,
+    "notes": "Bahun"
+  },
+  {
+    "lastname": "घर्ति",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Magar-related)"
+  },
+  {
+    "lastname": "बस्न्यात",
+    "sub_category_id": 102,
+    "notes": "Chhetri (variant of Basnyat)"
+  },
+  {
+    "lastname": "बोहोरा",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Bohora", "बोहोरा"]
+  },
+  {
+    "lastname": "गुबाजु",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist"
+  },
+  {
+    "lastname": "सिहं",
+    "sub_category_id": 302,
+    "notes": "Madhesi / Thakuri",
+    "variants": ["Singh", "सिह"]
+  },
+  {
+    "lastname": "राय",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati / sometimes Madhesi",
+    "variants": ["Ray", "राय(मिश्र)"]
+  },
+  {
+    "lastname": "सुनुवार",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Sunuwar)"
+  },
+  {
+    "lastname": "भुजेल",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Bhujel)"
+  },
+  {
+    "lastname": "विश्वकर्मा",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit (Bishwakarma)",
+    "variants": ["Bishwakarma", "बिश्वकर्मा"]
+  },
+  {
+    "lastname": "आले",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Magar)"
+  },
+  {
+    "lastname": "संगम",
+    "sub_category_id": 701,
+    "notes": "Neutral / other"
+  },
+  {
+    "lastname": "आङवुहाङ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Limbu-related)"
+  },
+  {
+    "lastname": "बाँडा",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बैध",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste (Vaidya)"
+  },
+  {
+    "lastname": "जिरेल",
+    "sub_category_id": 201,
+    "notes": "Jirel (Janajati)"
+  },
+  {
+    "lastname": "थारु",
+    "sub_category_id": 202,
+    "notes": "Tarai Janajati - Tharu"
+  },
+  {
+    "lastname": "चक्रधर",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "दुलाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "निरौला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Niraula", "निरौला(महत)"]
+  },
+  {
+    "lastname": "कायस्थ",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste (Kayastha)",
+    "variants": ["Kayastha", "कायस्थ(सुवाल)", "कायस्त"]
+  },
+  {
+    "lastname": "सुनार",
+    "sub_category_id": 401,
+    "notes": "Dalit (goldsmith)"
+  },
+  {
+    "lastname": "शिल्पकार",
+    "sub_category_id": 502,
+    "notes": "Newar artisan"
+  },
+  {
+    "lastname": "दमै",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit (tailor)"
+  },
+  {
+    "lastname": "सिक्रकार",
+    "sub_category_id": 502,
+    "notes": "Newar (goldsmith)"
+  },
+  {
+    "lastname": "कंसाकार",
+    "sub_category_id": 502,
+    "notes": "Newar (bronzesmith)",
+    "variants": ["Kansakar", "क‌साकार"]
+  },
+  {
+    "lastname": "अन्सारी",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "मिया",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "शेख",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "मुस्लिम",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "अनिल",
+    "sub_category_id": 701,
+    "notes": "Neutral / other (possibly first name or rare surname)"
+  },
+  {
+    "lastname": "पाँडे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (variant of Pandey)",
+    "variants": ["पाँडे", "पाण्डे(पनेरु)", "पाँडे(क्षेत्री)", "पाँडे"]
+  },
+  {
+    "lastname": "सिख्राकार",
+    "sub_category_id": 502,
+    "notes": "Newar artisan group (woodworker)"
+  },
+  {
+    "lastname": "तुलाधर",
+    "sub_category_id": 501,
+    "notes": "Upper Newar - Uray/Buddhist merchant",
+    "variants": ["तुलाधर(कंसाकार)", "तुलाधर(निरौला)", "तुलाधर(सिकर्मी)"]
+  },
+  {
+    "lastname": "तन्दुकार",
+    "sub_category_id": 502,
+    "notes": "Newar (Tandukar - oil-presser group)",
+    "variants": ["तन्दुकार", "तण्‍दुकार"]
+  },
+  {
+    "lastname": "सिन्दुराकार",
+    "sub_category_id": 502,
+    "notes": "Newar artisan (Sindurakar)"
+  },
+  {
+    "lastname": "मगराती",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Magar"
+  },
+  {
+    "lastname": "नेपाली",
+    "sub_category_id": 101,
+    "notes": "Bahun / neutral",
+    "variants": ["नेपाली(शाक्य)"]
+  },
+  {
+    "lastname": "जोशी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun / sometimes Newar",
+    "variants": ["जोशी(सिंह)", "जोशी(पाण्डे)"]
+  },
+  {
+    "lastname": "आकिब",
+    "sub_category_id": 601,
+    "notes": "Muslim community"
+  },
+  {
+    "lastname": "आसिफ",
+    "sub_category_id": 601,
+    "notes": "Muslim community"
+  },
+  {
+    "lastname": "बरुवाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "खड्गी",
+    "sub_category_id": 103,
+    "notes": "Thakuri / sometimes Chhetri",
+    "variants": ["खड्गी(शाही)"]
+  },
+  {
+    "lastname": "चाकुबाजी",
+    "sub_category_id": 502,
+    "notes": "Newar artisan (Chakubaji)"
+  },
+  {
+    "lastname": "तामाङ्ग",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Tamang",
+    "variants": ["तामाङ्ग(लामा)", "तमाङ", "तामाङग", "तामांङ"]
+  },
+  {
+    "lastname": "पहेली",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "मुस्लीम",
+    "sub_category_id": 601,
+    "notes": "Muslim community"
+  },
+  {
+    "lastname": "अर्याल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["अर्याल", "अर्याल(थपलिया)", "अर्याल"]
+  },
+  {
+    "lastname": "सिकर्मी",
+    "sub_category_id": 502,
+    "notes": "Newar artisan (carpenter group)"
+  },
+  {
+    "lastname": "शाही",
+    "sub_category_id": 103,
+    "notes": "Thakuri",
+    "variants": ["शाही(प्रधान)", "शाही"]
+  },
+  {
+    "lastname": "सुनाम",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "सिलाकार",
+    "sub_category_id": 502,
+    "notes": "Newar artisan"
+  },
+  {
+    "lastname": "दर्शनछारी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "पुतुवार",
+    "sub_category_id": 502,
+    "notes": "Newar (Putuwar subgroup)",
+    "variants": ["पुतुवार", "पुतवार", "पुतुवर", "पुतुवारर", "पूतवार", "पुटुवार"]
+  },
+  {
+    "lastname": "पौडेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["पौडेल(शर्मा)", "पौडेल(भट्टराई)", "पौडेल(न्यौप‍ाने)"]
+  },
+  {
+    "lastname": "कुसवार",
+    "sub_category_id": 502,
+    "notes": "Newar artisan"
+  },
+  {
+    "lastname": "थापा",
+    "sub_category_id": 102,
+    "notes": "Chhetri (widely used)",
+    "variants": ["थापा(बस्नेत)", "थापा(मगर)", "थापा(ढकाल)"]
+  },
+  {
+    "lastname": "पुतकार",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बहुगुणा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "भेटुवाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "रंञ्जित",
+    "sub_category_id": 502,
+    "notes": "Newar (Ranjitkar)",
+    "variants": ["रंञ्जित", "रंजीत", "रञ्जित(सैजु)", "रञ्जित(श्रेष्ठ)", "रञ्जीत", "रञ्जीतकार"]
+  },
+  {
+    "lastname": "बजिमय",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "घिमिरे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["घिमिरे(रीमाल)", "घिमिरे(रिजाल)", "घिमिरे(पराजुली)"]
+  },
+  {
+    "lastname": "वैद्य",
+    "sub_category_id": 501,
+    "notes": "Newar / Madhesi High Caste",
+    "variants": ["Vaidya", "वैद्य(श्रेष्ठ)", "बैद्य(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "सिमखडा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Simkhada", "सिमखडा", "षिम्खदा", "सिमवडा", "सिम्खडा(अधिकारी)", "सिम्खडा/चन्द"]
+  },
+  {
+    "lastname": "पुडासैनी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "जैसवाल",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste"
+  },
+  {
+    "lastname": "हुमागाई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "राजबंशी",
+    "sub_category_id": 202,
+    "notes": "Tarai Janajati"
+  },
+  {
+    "lastname": "हिराचन",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "शिलाकार",
+    "sub_category_id": 502,
+    "notes": "Newar artisan"
+  },
+  {
+    "lastname": "डंगोल",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu",
+    "variants": ["Dangol", "डंगोल(मानन्धर)", "डंगोल/महर्जन"]
+  },
+  {
+    "lastname": "बाबु",
+    "sub_category_id": 701,
+    "notes": "Neutral / other"
+  },
+  {
+    "lastname": "गैडा",
+    "sub_category_id": 502,
+    "notes": "Newar",
+    "variants": ["Gaira", "गैडा(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "चित्तकार",
+    "sub_category_id": 502,
+    "notes": "Newar (painter)"
+  },
+  {
+    "lastname": "अगस्‍ती",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "कालिका",
+    "sub_category_id": 101,
+    "notes": "Bahun"
+  },
+  {
+    "lastname": "पुन",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Pun)"
+  },
+  {
+    "lastname": "दनुवार",
+    "sub_category_id": 202,
+    "notes": "Tarai Janajati (Danuwar)"
+  },
+  {
+    "lastname": "सुवाल",
+    "sub_category_id": 301,
+    "notes": "Madhesi / Newar",
+    "variants": ["Suwal", "सुवाल(डंगोल)", "सुवाल(सिंह)"]
+  },
+  {
+    "lastname": "बश्याल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "स्वांर",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बाँस्तोला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "श्रेत्री",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "कार्की",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Karki", "कार्की(खड्का)", "कार्की(के.सी.)", "कार्की(अधिकारी)"]
+  },
+  {
+    "lastname": "फुँयाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "वोहरी",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "हेल्जु",
+    "sub_category_id": 502,
+    "notes": "Newar",
+    "variants": ["Helju", "हेल्जु(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "चौधरी",
+    "sub_category_id": 302,
+    "notes": "Madhesi Middle / Tharu",
+    "variants": ["Chaudhary", "चौधरी(जैसवाल)"]
+  },
+  {
+    "lastname": "टंडन",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste"
+  },
+  {
+    "lastname": "दुलाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Dulal", "दुलाल(कोइराला)", "दुलाल(पाण्डे)", "सुब्बा(दुलाल)"]
+  },
+  {
+    "lastname": "सिजापति",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Sijapati", "सिजापति(दाहाल)"]
+  },
+  {
+    "lastname": "नर्कमी",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "ताम्राकार",
+    "sub_category_id": 502,
+    "notes": "Newar bronzesmith",
+    "variants": ["Tamrakar", "ताम्राकार/श्रेष्‍ठ", "ताम्राकार(तुलाधर)"]
+  },
+  {
+    "lastname": "खड्गी",
+    "sub_category_id": 103,
+    "notes": "Thakuri"
+  },
+  {
+    "lastname": "खड्की",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "मगर",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Magar",
+    "variants": ["मगर(नकर्मि)"]
+  },
+  {
+    "lastname": "बुढाथोकी",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["Budhathoki", "बुढाठोकी", "बुढाथोकी(लामा)"]
+  },
+  {
+    "lastname": "खकुरेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "गुणी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Guni", "गुणी(फूयाल)", "गुणी(सिमखडा)"]
+  },
+  {
+    "lastname": "आचार्य",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Acharya", "आचार्य(थपलिया)"]
+  },
+  {
+    "lastname": "राना",
+    "sub_category_id": 103,
+    "notes": "Thakuri",
+    "variants": ["Rana", "राना(गुरुङ)", "राना/मगर"]
+  },
+  {
+    "lastname": "कुजु",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "महर्जन",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu",
+    "variants": ["Maharjan", "महर्जन(डंगोल)", "महर्जन(शाही)"]
+  },
+  {
+    "lastname": "रुपाखेती",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "देवकोटा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Devkota", "देवकोटा(घिमिरे)"]
+  },
+  {
+    "lastname": "रेग्मी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Regmi", "रेग्मी(अर्याल)", "रेग्मी(घिमिरे)", "रेग्मी(खनाल)", "रेग्मी(राउत)", "रेग्मी(रिमाल)"]
+  },
+  {
+    "lastname": "बज्राचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist",
+    "variants": ["Bajracharya", "बज्राचार्य(अमात्य)", "बज्राचार्य(शाक्य)", "बज्राचार्य(श्रेष्ठ)"]
+  },
+  {
+    "lastname": "वैध्य",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "रजौरिया",
+    "sub_category_id": 302,
+    "notes": "Madhesi Middle Caste"
+  },
+  {
+    "lastname": "योञ्जन",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Yonjan - Rai/Limbu)",
+    "variants": ["Yonjan", "योञ्जन(लामा)"]
+  },
+  {
+    "lastname": "हमाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Hamal", "हमाल(मानन्धर)"]
+  },
+  {
+    "lastname": "सन्जेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "थुलुङ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Thulung Rai)"
+  },
+  {
+    "lastname": "खनाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Khanal", "खनाल(अर्याल)", "खनाल(काफ्‍ले)"]
+  },
+  {
+    "lastname": "बाडे",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "गर्तौला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["Gartaula", "गड्तौला"]
+  },
+  {
+    "lastname": "चुडाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "रजक",
+    "sub_category_id": 302,
+    "notes": "Madhesi Middle Caste (washerman)"
+  },
+  {
+    "lastname": "राणा",
+    "sub_category_id": 103,
+    "notes": "Thakuri",
+    "variants": ["Rana", "राणा(अधिकारी)", "राणा(थापा)", "राणा(पाँडे)"]
+  },
+  {
+    "lastname": "मेहता",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste"
+  },
+  {
+    "lastname": "सेढाई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "अर्ज्याल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (variant of Aryal)"
+  },
+  {
+    "lastname": "चिमरिया",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "गेलाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "मिश्र",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste (often Maithil Brahmin)",
+    "variants": ["मिश्र(खत्री)"]
+  },
+  {
+    "lastname": "पाठक",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["पाठक(घिमिरे)", "पाठक(सिलवाल)", "पाठक(गुणी)"]
+  },
+  {
+    "lastname": "देबकोटा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (variant of Devkota)"
+  },
+  {
+    "lastname": "ढकाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["ढकाल(अधिकारी)", "ढकाल(सोती)"]
+  },
+  {
+    "lastname": "राजथला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "योङहाङ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Yonghang - Limbu/Rai related)"
+  },
+  {
+    "lastname": "अवस्थी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "ओझा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["ओझा(कोईराला)", "ओझा(धिताल)"]
+  },
+  {
+    "lastname": "नेवार",
+    "sub_category_id": 5,
+    "notes": "Newar (ethnic group, not a surname but used as identifier)"
+  },
+  {
+    "lastname": "शर्मा",
+    "sub_category_id": 101,
+    "notes": "Most common Hill Bahun",
+    "variants": ["शर्मा(न्यौपाने)", "शर्मा(रिजाल)", "शर्मा(नकर्मी)", "शर्मा(अधिकारी)"]
+  },
+  {
+    "lastname": "कुइकेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "खराल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "पंन्त",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (Pant)",
+    "variants": ["पंन्त", "पन्त"]
+  },
+  {
+    "lastname": "मुडभरी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["मुडभरी", "मुडभरी(फुयाल)"]
+  },
+  {
+    "lastname": "दाहाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["दाहाल(डंगोल)"]
+  },
+  {
+    "lastname": "पोडेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (variant of Paudel)"
+  },
+  {
+    "lastname": "स्वार",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "हिराजन",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "श्रेष्ठ",
+    "sub_category_id": 501,
+    "notes": "Upper Newar",
+    "variants": ["श्रेष्ठ", "श्रेष्‍ठ", "श्रेष्‍ठ(सुवाल)", "श्रेष्‍ठ(लाकौल)", "श्रेष्‍ठ(तुलाधर)", "श्रेष्‍ठ(कायष्‍ठ)", "श्रेष्‍ठ(प्रजापति)", "श्रेष्‍ठ(राजभण्डारी)", "श्रेष्‍ठ(प्राधानाङ्ग)", "श्रेष्‍ठ(वन्त)", "श्रेष्‍ठ(कसजु)"]
+  },
+  {
+    "lastname": "मुग्राती",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Magar"
+  },
+  {
+    "lastname": "भट्टराई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["भट्टराई(दाहाल)", "भट्टराई(लम्साल)"]
+  },
+  {
+    "lastname": "बञ्जाडे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["बञ्जाडे(पाण्डे)"]
+  },
+  {
+    "lastname": "गरुङग",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Gurung"
+  },
+  {
+    "lastname": "नेम्वाङ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Limbu-related)"
+  },
+  {
+    "lastname": "लिम्वु",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Limbu"
+  },
+  {
+    "lastname": "परियार",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit",
+    "variants": ["परियार(भुषाल)", "परियार(दमाई)"]
+  },
+  {
+    "lastname": "नगरकोटी",
+    "sub_category_id": 502,
+    "notes": "Newar",
+    "variants": ["नगरकोटी(खड्गी)", "नगरकोटी(लामा)"]
+  },
+  {
+    "lastname": "बस्नयात",
+    "sub_category_id": 102,
+    "notes": "Chhetri (variant of Basnyat)"
+  },
+  {
+    "lastname": "महर्जन",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu",
+    "variants": ["महर्जन(पुतुवार)", "महर्जन(राई)", "महर्जन(प्रधान)"]
+  },
+  {
+    "lastname": "धिताल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["धिताल(घिमिरे)"]
+  },
+  {
+    "lastname": "आचार्य",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["आचार्य(रेग्मी)", "आचार्य(अधिकारी)"]
+  },
+  {
+    "lastname": "वि.सी",
+    "sub_category_id": 102,
+    "notes": "Chhetri (K.C. variant)"
+  },
+  {
+    "lastname": "सोमै",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["सोमै(पाण्डे)"]
+  },
+  {
+    "lastname": "क्षेत्री",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["क्षेत्री(भण्डारी)"]
+  },
+  {
+    "lastname": "प्रधान",
+    "sub_category_id": 501,
+    "notes": "Upper Newar",
+    "variants": ["प्रधान(महर्जन)", "प्रधान(क्षेत्री)", "प्रधान(वैद्य)"]
+  },
+  {
+    "lastname": "घतानी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "तुलाचन",
+    "sub_category_id": 501,
+    "notes": "Upper Newar - Tulachan"
+  },
+  {
+    "lastname": "सिखडा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "गोङ्गबा",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "पुतुवार",
+    "sub_category_id": 502,
+    "notes": "Newar (Putuwar)",
+    "variants": ["पुतुवार(श्रेष्‍ठ)", "पुतुवार(नगरकोटी)", "पुतुवार(खड्‍का)", "पुतुवार(गुरुङ)"]
+  },
+  {
+    "lastname": "बोगटी",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["बोगटी(प्याकुरेल)"]
+  },
+  {
+    "lastname": "गैाचन",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मल्ल",
+    "sub_category_id": 103,
+    "notes": "Thakuri / Newar",
+    "variants": ["मल्ल(माथेमा)"]
+  },
+  {
+    "lastname": "खड्का",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["खड्का(आचार्य)", "खड्का(बास्कोटा)"]
+  },
+  {
+    "lastname": "पंडित",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "भेटवाल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["भेटवाल", "भेटुवाल"]
+  },
+  {
+    "lastname": "बास्कोटा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["बास्कोटा(खनाल)"]
+  },
+  {
+    "lastname": "निरौला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["निरौला(न्यौपाने)"]
+  },
+  {
+    "lastname": "लामिछाने",
+    "sub_category_id": 101,
+    "notes": "Bahun/Chhetri mixed",
+    "variants": ["लामिछाने(खत्री)", "लामिछाने(गौतम)"]
+  },
+  {
+    "lastname": "पन्थ",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["पन्थ(पाण्डे)"]
+  },
+  {
+    "lastname": "के.सी.",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["के.सी.(क्षेत्री)", "के.सी.(बानिया)", "के.सी.(बस्नेत)", "के.सी.खड्‍गी"]
+  },
+  {
+    "lastname": "कमर",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "सिवाकोटी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "गजुरेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["गजुरेल(फुयाल)"]
+  },
+  {
+    "lastname": "कंसाकार",
+    "sub_category_id": 502,
+    "notes": "Newar bronzesmith",
+    "variants": ["कंसाकार(बज्राचार्य)"]
+  },
+  {
+    "lastname": "छेत्री",
+    "sub_category_id": 102,
+    "notes": "Chhetri (variant of क्षेत्री)"
+  },
+  {
+    "lastname": "गुनी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "थपलिया",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["थपलिया(पाण्डे)"]
+  },
+  {
+    "lastname": "सिल्वाल",
+    "sub_category_id": 102,
+    "notes": "Chhetri",
+    "variants": ["सिल्वाल(सिखडा)", "सिलवाल(भट्टराई)", "सिलवाल(पंन्त)", "सिलवाल(पाण्‍डे)"]
+  },
+  {
+    "lastname": "मजगाई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "देउजा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "हजाम",
+    "sub_category_id": 401,
+    "notes": "Dalit (barber occupational)"
+  },
+  {
+    "lastname": "गौतम",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["गौतम(भट्‍टराई)", "गौतम(गौली)"]
+  },
+  {
+    "lastname": "गूरुङ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Gurung",
+    "variants": ["गूरुङ", "गरुङग", "गुरङ", "गुरूङ", "गुरुङ(लामा)", "गुरुङग(तामाङग)", "गुरुङसेनी"]
+  },
+  {
+    "lastname": "ढुङगाना",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["ढुङगाना(अर्याल)", "ढुगाना", "ढुङ्गगाना", "ढुङ्गना"]
+  },
+  {
+    "lastname": "सापकोटा",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["सापकोटा(कडेल)"]
+  },
+  {
+    "lastname": "शिवभक्ति",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "मर्हजन",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu (variant of Maharjan)"
+  },
+  {
+    "lastname": "तामाङनी",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Tamang female variant"
+  },
+  {
+    "lastname": "न्यौपाने",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["न्यौपाने(पुडासैनी)"]
+  },
+  {
+    "lastname": "बोमजन",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Bomjan - Magar)"
+  },
+  {
+    "lastname": "मुनीकार",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "भंडारी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["भंडारी", "भण्डारी(कटुवाल)", "भण्डारी(धिताल)"]
+  },
+  {
+    "lastname": "सिटौला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["सिटौला(तिवारी)"]
+  },
+  {
+    "lastname": "दुवाल",
+    "sub_category_id": 502,
+    "notes": "Newar",
+    "variants": ["दुवाल(श्रेष्‍ठ)"]
+  },
+  {
+    "lastname": "हिमालय",
+    "sub_category_id": 701,
+    "notes": "Neutral / other"
+  },
+  {
+    "lastname": "प्रसाई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "योकपाङदेन",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Yokpangden - Limbu)"
+  },
+  {
+    "lastname": "डि.सी.",
+    "sub_category_id": 102,
+    "notes": "Chhetri (D.C. variant)"
+  },
+  {
+    "lastname": "शाखाकर्मी",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "लालचन",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मगर्नी",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Magar female"
+  },
+  {
+    "lastname": "अंसारी",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "भटट",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (variant of Bhatt)"
+  },
+  {
+    "lastname": "ताम्रकार",
+    "sub_category_id": 502,
+    "notes": "Newar bronzesmith"
+  },
+  {
+    "lastname": "बराकोटी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "लुईटेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["लुईटेल"]
+  },
+  {
+    "lastname": "बत्रा",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "मालाकर",
+    "sub_category_id": 502,
+    "notes": "Newar artisan"
+  },
+  {
+    "lastname": "धाख्‍वा",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "सैजु",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "अलि",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "प्रधानाङग",
+    "sub_category_id": 501,
+    "notes": "Upper Newar"
+  },
+  {
+    "lastname": "कनौंया",
+    "sub_category_id": 301,
+    "notes": "Madhesi"
+  },
+  {
+    "lastname": "भौकाजी",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "भासू",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "थकु",
+    "sub_category_id": 103,
+    "notes": "Thakuri"
+  },
+  {
+    "lastname": "सिक्रीकार",
+    "sub_category_id": 502,
+    "notes": "Newar artisan"
+  },
+  {
+    "lastname": "गुरुड",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Gurung"
+  },
+  {
+    "lastname": "अधिकारी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["अधिकारी(आचार्य)"]
+  },
+  {
+    "lastname": "गुरागाई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["गुरागाई", "गुरागाईं", "गुरागाँई"]
+  },
+  {
+    "lastname": "वजरा",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "अम्माई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "भन्‍ताना",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "दीप",
+    "sub_category_id": 701,
+    "notes": "Neutral / other",
+    "variants": ["दिप"]
+  },
+  {
+    "lastname": "काफले",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["काफले"]
+  },
+  {
+    "lastname": "आलेमगर",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Magar (Ale subgroup)"
+  },
+  {
+    "lastname": "उपाध्‍याय",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["उपाध्‍याय(घिमिरे)"]
+  },
+  {
+    "lastname": "वाइवा",
+    "sub_category_id": 502,
+    "notes": "Newar",
+    "variants": ["लामा(वाइवा)"]
+  },
+  {
+    "lastname": "राजवँशी",
+    "sub_category_id": 202,
+    "notes": "Tarai Janajati"
+  },
+  {
+    "lastname": "नकर्मी",
+    "sub_category_id": 502,
+    "notes": "Newar lower group",
+    "variants": ["नकर्मी(श्रेष्‍ठ)"]
+  },
+  {
+    "lastname": "फातेमा",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "धले",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati"
+  },
+  {
+    "lastname": "थाञ्‍जु",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Thanjhu - Rai)"
+  },
+  {
+    "lastname": "थपलीया",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "थान्जु",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati",
+    "variants": ["थान्जू"]
+  },
+  {
+    "lastname": "नहर्की",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "कार्माचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "चापागाई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["चापागाई(पोखरेल)"]
+  },
+  {
+    "lastname": "प्रिय",
+    "sub_category_id": 701,
+    "notes": "Neutral / other"
+  },
+  {
+    "lastname": "स्वाँर",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बानिया",
+    "sub_category_id": 701,
+    "notes": "Other - Marwadi/Bania",
+    "variants": ["बानिया(अधिकारी)"]
+  },
+  {
+    "lastname": "गैरै",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "चिपालु",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बजाचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist"
+  },
+  {
+    "lastname": "पौडैल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (variant)"
+  },
+  {
+    "lastname": "महर्जन",
+    "sub_category_id": 502,
+    "notes": "Newar Jyapu",
+    "variants": ["महर्जन(प्रधान)"]
+  },
+  {
+    "lastname": "थेवे",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati"
+  },
+  {
+    "lastname": "ध्‍वौजु",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "वडु",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "अमान",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "वत्रा",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "स्‍गापित",
+    "sub_category_id": 501,
+    "notes": "Newar (Sthapit variant)"
+  },
+  {
+    "lastname": "बैद्य",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "शिक्रिकार",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "खड्के",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "वुद्दचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist"
+  },
+  {
+    "lastname": "अंगावई",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "स्थपित",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "भारी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "तन्डुकार",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "खोनेजा",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "पाडे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "सितान",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "वानो",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "कसा",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "लोहला",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "बलिया",
+    "sub_category_id": 302,
+    "notes": "Madhesi Middle"
+  },
+  {
+    "lastname": "तामाड",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati"
+  },
+  {
+    "lastname": "कडुवाल",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "हुसेन",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "माली",
+    "sub_category_id": 502,
+    "notes": "Newar (gardener/artisan)",
+    "variants": ["माली(मालाकार)"]
+  },
+  {
+    "lastname": "स्थापीत",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मस्‍लीम",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "प्राजपति",
+    "sub_category_id": 502,
+    "notes": "Newar artisan",
+    "variants": ["प्राजपति"]
+  },
+  {
+    "lastname": "अमात्‍या",
+    "sub_category_id": 501,
+    "notes": "Newar title/group"
+  },
+  {
+    "lastname": "श्रेष्‍ठचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist"
+  },
+  {
+    "lastname": "बुद्धाचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar Buddhist"
+  },
+  {
+    "lastname": "सिंन्तान",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बुढाप्रिती",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["बुढाप्रिती", "बुडाप्रिति"]
+  },
+  {
+    "lastname": "आफरिन",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "भजु",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "सिंतान",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "उदाश",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बैधजु",
+    "sub_category_id": 502,
+    "notes": "Newar",
+    "variants": ["बैधजु/श्रेष्‍ठ"]
+  },
+  {
+    "lastname": "मरहट्ट",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["मरहट्ट"]
+  },
+  {
+    "lastname": "भट्टारई",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "बुलुन",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "भैल",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "वयलकोटी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "पीडेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "मग्राती",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Magar"
+  },
+  {
+    "lastname": "तिमसिना",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun",
+    "variants": ["तिमसिना(मरहट्टा)"]
+  },
+  {
+    "lastname": "राजभण्डारी",
+    "sub_category_id": 501,
+    "notes": "Upper Newar",
+    "variants": ["राजभण्डारी(भोमी)"]
+  },
+  {
+    "lastname": "बालकोटी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "राइ",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati - Rai"
+  },
+  {
+    "lastname": "राकसकोटी",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "शेरचन",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati",
+    "variants": ["शेरचन(तुलाचन)"]
+  },
+  {
+    "lastname": "खातुन्",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "धोवि",
+    "sub_category_id": 302,
+    "notes": "Madhesi Middle (washerman)"
+  },
+  {
+    "lastname": "पाख्रिन",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Pakhrin - Tamang)"
+  },
+  {
+    "lastname": "कालिकोटे",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun (regional)"
+  },
+  {
+    "lastname": "विजक्छे",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "उप्रेति",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "भडेल",
+    "sub_category_id": 502,
+    "notes": "Newar",
+    "variants": ["भडेल(नेवार)"]
+  },
+  {
+    "lastname": "देशार",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "लमिनी",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "रानाभाटा",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "लिवी",
+    "sub_category_id": 701,
+    "notes": "Rare / other"
+  },
+  {
+    "lastname": "मरासिनि",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "पैडेल",
+    "sub_category_id": 101,
+    "notes": "Hill Bahun"
+  },
+  {
+    "lastname": "सिङ्गतान",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "गुप्ता",
+    "sub_category_id": 701,
+    "notes": "Marwadi/Bania (Other Social Groups, व्यापारी समुदाय)"
+  },
+  {
+    "lastname": "वगाले",
+    "sub_category_id": 102,
+    "notes": "Chhetri (Khas-Arya)"
+  },
+  {
+    "lastname": "बनियाँ",
+    "sub_category_id": 701,
+    "notes": "Marwadi/Bania (Other) वा Madhesi Middle Caste"
+  },
+  {
+    "lastname": "थापा(गुरूङ)",
+    "sub_category_id": 205,
+    "notes": "Gurung/Tamang (Hill Janajati), थापा क्लान Gurung मा प्रयोग हुन्छ"
+  },
+  {
+    "lastname": "अमात्य(श्रेष्‍ठ)",
+    "sub_category_id": 501,
+    "notes": "Upper Newar (Shrestha group)"
+  },
+  {
+    "lastname": "लंगुर",
+    "sub_category_id": 501,
+    "notes": "Newar (variants of Langur/Shrestha)"
+  },
+  {
+    "lastname": "सि्तान",
+    "sub_category_id": 501,
+    "notes": "Newar (Sitang/Singtan variant)"
+  },
+  {
+    "lastname": "क्षेत्रीनी",
+    "sub_category_id": 102,
+    "notes": "Chhetri (female form)"
+  },
+  {
+    "lastname": "कनौजिया",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste वा Tarai origin"
+  },
+  {
+    "lastname": "प‌डित",
+    "sub_category_id": 101,
+    "notes": "Brahmin (Pandit)"
+  },
+  {
+    "lastname": "श्रेष्ठ(कपाली)",
+    "sub_category_id": 501,
+    "notes": "Upper Newar (Shrestha), कपाली variant"
+  },
+  {
+    "lastname": "(भटटराई)शर्मा",
+    "sub_category_id": 101,
+    "notes": "Brahmin (Bahun)"
+  },
+  {
+    "lastname": "गुरूङ(घिमिरे)",
+    "sub_category_id": 205,
+    "notes": "Gurung (Hill Janajati), घिमिरे क्लान"
+  },
+  {
+    "lastname": "संग्रौला",
+    "sub_category_id": 101,
+    "notes": "Brahmin (Sangraula)"
+  },
+  {
+    "lastname": "सी(नेपाल)",
+    "sub_category_id": 501,
+    "notes": "Newar (सी variant)"
+  },
+  {
+    "lastname": "खर्वुजा",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "भट्टराई(पौडेल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin (Bhattarai/Paudel)"
+  },
+  {
+    "lastname": "बयलकोटी",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मुनकर्मी",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit (possible variant)"
+  },
+  {
+    "lastname": "ग्यावा",
+    "sub_category_id": 201,
+    "notes": "Tamang/Gyaba (Hill Janajati)"
+  },
+  {
+    "lastname": "तामाङ(ग्यावा)",
+    "sub_category_id": 205,
+    "notes": "Tamang (Hill Janajati)"
+  },
+  {
+    "lastname": "मल्ल,गोर्खाली",
+    "sub_category_id": 501,
+    "notes": "Newar (Malla) वा Chhetri variant"
+  },
+  {
+    "lastname": "ग्वायमरु",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "श्रेष्ठ(तखाछे)",
+    "sub_category_id": 501,
+    "notes": "Upper Newar (Shrestha)"
+  },
+  {
+    "lastname": "पाणडेय",
+    "sub_category_id": 101,
+    "notes": "Brahmin (Pandey)"
+  },
+  {
+    "lastname": "नेवा(खड्गी)",
+    "sub_category_id": 501,
+    "notes": "Newar (Khadgi)"
+  },
+  {
+    "lastname": "श्रेष्ठा",
+    "sub_category_id": 501,
+    "notes": "Upper Newar"
+  },
+  {
+    "lastname": "बाग्ले",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "प्रधान,श्रेष्ठ",
+    "sub_category_id": 501,
+    "notes": "Upper Newar"
+  },
+  {
+    "lastname": "लामिछाने(आचार्य)",
+    "sub_category_id": 101,
+    "notes": "Brahmin (Lamichhane/Acharya)"
+  },
+  {
+    "lastname": "ज्ञवाली,काफ्ले",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "डुम्रे",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "आर्चाय",
+    "sub_category_id": 101,
+    "notes": "Brahmin (Acharya)"
+  },
+  {
+    "lastname": "जसवाल(मानन्धर)",
+    "sub_category_id": 501,
+    "notes": "Newar (Manandhar)"
+  },
+  {
+    "lastname": "वोहरा(गुणी)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बिजुक्छे",
+    "sub_category_id": 501,
+    "notes": "Newar (Bijukchhe)"
+  },
+  {
+    "lastname": "शाक्य(बुद्धाचार्य)",
+    "sub_category_id": 501,
+    "notes": "Upper Newar (Buddhist Shakya)"
+  },
+  {
+    "lastname": "सिङतान",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "पारजुली",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "घिमिरे(महत)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "धेके",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "प्रजापति/महर्जन",
+    "sub_category_id": 502,
+    "notes": "Jyapu/Maharjan (Newar)"
+  },
+  {
+    "lastname": "सिंताल",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बासकोटा",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "तामङ",
+    "sub_category_id": 205,
+    "notes": "Tamang (Hill Janajati)"
+  },
+  {
+    "lastname": "क्षेत्री(जि.सी.)",
+    "sub_category_id": 102,
+    "notes": "Chhetri (KC)"
+  },
+  {
+    "lastname": "लामिछाने(उप्रेती)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "दहाल(न्यौपाने)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "पौडेल(देवकोटा)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "बस्ती",
+    "sub_category_id": 101,
+    "notes": "Brahmin/Chhetri"
+  },
+  {
+    "lastname": "भण्डारी(मानन्धर)",
+    "sub_category_id": 501,
+    "notes": "Newar variant"
+  },
+  {
+    "lastname": "सुवेदी(रोकाय)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "घ्लान(लामा)",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Lama)"
+  },
+  {
+    "lastname": "श्रेप्ठ",
+    "sub_category_id": 501,
+    "notes": "Upper Newar (Shrestha variant)"
+  },
+  {
+    "lastname": "मल्ल(भजु)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "ग्वायमरू",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बाँनिषा",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "घिमिरे(शर्मा)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "सिँतान",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "तामड",
+    "sub_category_id": 205,
+    "notes": "Tamang variant"
+  },
+  {
+    "lastname": "तम्खू",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati"
+  },
+  {
+    "lastname": "बी",
+    "sub_category_id": 501,
+    "notes": "Newar (Bhee)"
+  },
+  {
+    "lastname": "तिखत्री",
+    "sub_category_id": 102,
+    "notes": "Chhetri variant"
+  },
+  {
+    "lastname": "कसजु",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "दाहाल(घिमिरे)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "बुदाथोकी",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "बद्यै",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit (Badi)"
+  },
+  {
+    "lastname": "काश्‍यप",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "श्रेष्ठाचार्य",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "ताम्राकार(श्रेष्ठाचार्य)",
+    "sub_category_id": 501,
+    "notes": "Newar (Tamrakar)"
+  },
+  {
+    "lastname": "सैयद",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "पोद्दार",
+    "sub_category_id": 701,
+    "notes": "Marwadi/Bania"
+  },
+  {
+    "lastname": "पान्डे",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "सल्मा",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "दुवाडि",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "गूरुङ्ग",
+    "sub_category_id": 205,
+    "notes": "Gurung (Hill Janajati)"
+  },
+  {
+    "lastname": "बानू",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "वादेश्रेष्‍ठ",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मैनाली(सिख्राकार)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "कायस्‍थ(राजभण्‍डारी)",
+    "sub_category_id": 501,
+    "notes": "Newar Kayastha"
+  },
+  {
+    "lastname": "पोख्ररेल",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "थापा(शाह)",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "कार्की(क्षेत्री)",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "महर्जन(तुलाधर)",
+    "sub_category_id": 502,
+    "notes": "Jyapu Newar"
+  },
+  {
+    "lastname": "रोक्‍का",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati"
+  },
+  {
+    "lastname": "रोक्‍का(अधिकारी)",
+    "sub_category_id": 101,
+    "notes": "Brahmin variant"
+  },
+  {
+    "lastname": "तामाङ्गनी",
+    "sub_category_id": 205,
+    "notes": "Tamang female"
+  },
+  {
+    "lastname": "राजभण्डरी",
+    "sub_category_id": 501,
+    "notes": "Upper Newar"
+  },
+  {
+    "lastname": "डंगाेल",
+    "sub_category_id": 502,
+    "notes": "Newar (Dangol)"
+  },
+  {
+    "lastname": "नयाजु",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "थपालिया",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "सिंख्वाल",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "भेटुबाल",
+    "sub_category_id": 101,
+    "notes": "Brahmin/Chhetri"
+  },
+  {
+    "lastname": "श्रेष्ठ(गोर्खली)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "विष्‍ट्र",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "कास्यप",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "मल्‍िलक",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "महर्जन(सिंह)",
+    "sub_category_id": 502,
+    "notes": "Jyapu Newar"
+  },
+  {
+    "lastname": "तामाङी",
+    "sub_category_id": 205,
+    "notes": "Tamang"
+  },
+  {
+    "lastname": "मास्के(जोशी)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "शेर्पा(लामा)",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Sherpa)"
+  },
+  {
+    "lastname": "राय",
+    "sub_category_id": 301,
+    "notes": "Madhesi High Caste"
+  },
+  {
+    "lastname": "अर्याल(भण्डारी)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "मुस्लीम(नेपाली)",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "वानु(मुस्‍लिम)",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "बजागाई",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "निरौला(अमात्‍य)",
+    "sub_category_id": 101,
+    "notes": "Brahmin/Newar"
+  },
+  {
+    "lastname": "लामा(खान)",
+    "sub_category_id": 201,
+    "notes": "Janajati/Muslim mix"
+  },
+  {
+    "lastname": "क्षेत्री(भाट)",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "कुलुङ्ग(राई)",
+    "sub_category_id": 201,
+    "notes": "Rai (Hill Janajati)"
+  },
+  {
+    "lastname": "प्रधान(राजवंशी)",
+    "sub_category_id": 202,
+    "notes": "Tarai Janajati (Rajbanshi)"
+  },
+  {
+    "lastname": "डंगोल(श्रेष्‍ठ)",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "त्रिपाठी(थपलिया)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "बुर्जा",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "गुणा",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "स्थापित(ताम्राकार)",
+    "sub_category_id": 501,
+    "notes": "Newar (Sthapit)"
+  },
+  {
+    "lastname": "(डंगोल)महर्जन",
+    "sub_category_id": 502,
+    "notes": "Jyapu Newar"
+  },
+  {
+    "lastname": "श्रेष्ठ(कायस्थ)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "कर्ण(गोर्खाली)",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "शाक्‍य(महर्जन)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "लेप्चा",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati (Lepcha)"
+  },
+  {
+    "lastname": "वनिया",
+    "sub_category_id": 701,
+    "notes": "Bania"
+  },
+  {
+    "lastname": "प्रधानङ्ग",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "रामभण्डारी(प्रधानाङ्ग)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "सेलालिक(स्थापित)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "पाण्डे(श्रेष्ठ)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "भट्टराड्ढ",
+    "sub_category_id": 101,
+    "notes": "Brahmin variant"
+  },
+  {
+    "lastname": "लामिछाने(ढकाल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "भुसाल(परियार)",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit (Pariyar)"
+  },
+  {
+    "lastname": "खनाल(सिंखडा)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "महर्जन(वलामी)",
+    "sub_category_id": 502,
+    "notes": "Jyapu Newar"
+  },
+  {
+    "lastname": "प्रधान(गोर्खाली)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "राई",
+    "sub_category_id": 201,
+    "notes": "Rai (Hill Janajati)"
+  },
+  {
+    "lastname": "नेपाल(न्यौपाने)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "जैन",
+    "sub_category_id": 701,
+    "notes": "Other (Jain)"
+  },
+  {
+    "lastname": "सुब्‍बा(लिम्‍बु)",
+    "sub_category_id": 201,
+    "notes": "Limbu (Hill Janajati)"
+  },
+  {
+    "lastname": "सिंह(डंगोल)",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "आचार्य(धिताल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "अदिल",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "रञ्जन",
+    "sub_category_id": 301,
+    "notes": "Madhesi"
+  },
+  {
+    "lastname": "क्षेत्री(के.सी.)",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "तुलाधर",
+    "sub_category_id": 501,
+    "notes": "Upper Newar"
+  },
+  {
+    "lastname": "चौलागाई(गौतम)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "न्याैपाने",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "बन्त",
+    "sub_category_id": 201,
+    "notes": "Janajati"
+  },
+  {
+    "lastname": "तमौली",
+    "sub_category_id": 301,
+    "notes": "Madhesi"
+  },
+  {
+    "lastname": "मास्के(श्रेष्ठ)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "दवाडि",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "सापकोटा(खनाल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "शाक्‍य(बज्रचार्य)",
+    "sub_category_id": 501,
+    "notes": "Newar (Vajracharya)"
+  },
+  {
+    "lastname": "भुसाल(बज्राचार्य)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "डोटेल",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "तामाङगनी",
+    "sub_category_id": 205,
+    "notes": "Tamang"
+  },
+  {
+    "lastname": "नान्‍जु",
+    "sub_category_id": 201,
+    "notes": "Janajati"
+  },
+  {
+    "lastname": "लावती",
+    "sub_category_id": 201,
+    "notes": "Janajati"
+  },
+  {
+    "lastname": "आलाम",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "काप्री",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "तिमसिना",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "भट्टराई(रिजाल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "राजवंशी(गोर्खाली)",
+    "sub_category_id": 202,
+    "notes": "Tarai Janajati"
+  },
+  {
+    "lastname": "मुनीकर",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "सिं(डंगोल)",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "सरफराज",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "वसिम",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "टिटु",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "फरहान",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "हलिम",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "मु्स्मिम",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "असलम",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "गनी",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "फाहिद",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "शाहनवाज",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "परियार(भुसाल)",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit (Pariyar)"
+  },
+  {
+    "lastname": "महर्जन(कायस्‍थ)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "तिमसीना",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "मास्के/श्रेष्ठ",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "पन्त(अधिकारी)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "चुगुठी",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "कायस्थ(गोर्खाली)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "श्रेष्ठ(गरुङ्ग)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मालाकार(माली)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "क(महर्जन)",
+    "sub_category_id": 502,
+    "notes": "Jyapu Newar"
+  },
+  {
+    "lastname": "उद्धिन",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "पौडेल(शाह)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "श्रेष्ठ(हाडा)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "हायु(मगर)",
+    "sub_category_id": 201,
+    "notes": "Magar (Hill Janajati)"
+  },
+  {
+    "lastname": "सैयव",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "महर्जन(तामाङ)",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "श्रेष्‍ठ(द्यौवडैल)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "ताम्राकार(बनिया)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "गौतम(रिमाल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "खनाल",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "शेरचन्द",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "बैध(जोशी)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "क्षेत्री",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "परियार(राई)",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "भेटुवाल(थपलिया)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "प्रधान/मास्‍के",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बर्तौला",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "महर्जन(गुरुङ)",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "श्रेष्ठ(रन्जीत)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "वनमालि",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "शाक्‍य(बज्राचार्य)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "श्रेष्‍ठ(नपित)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "कर्नीकार",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "(कुमार)शाक्य",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "क्षेत्री(बनिया)",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "ब्‍यान्‍जु",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "(कुटु)प्रजापति",
+    "sub_category_id": 502,
+    "notes": "Jyapu Newar"
+  },
+  {
+    "lastname": "मुस्लम",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "क्षेत्री(धिमिरे)",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "भेटुवाल(कडुवाल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "नापीत(चौधरी)",
+    "sub_category_id": 501,
+    "notes": "Newar (Napit)"
+  },
+  {
+    "lastname": "भोमी(श्रेष्ठ)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मालाकार(डंगोल)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "सिंह(चित्रकार)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "श्रेष्‍ठ(गोर्खाली)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "प्रधान(राजभण्डारी)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "परवीन",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "चित्रकार(उदास)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "महत",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "पुन(छन्त्‍याल)",
+    "sub_category_id": 201,
+    "notes": "Hill Janajati"
+  },
+  {
+    "lastname": "दमिनी",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "श्रेष्ठ(मालाकार)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "चक्रधर(डंगोल)",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "राई(क्षेत्री)",
+    "sub_category_id": 201,
+    "notes": "Rai (Janajati)"
+  },
+  {
+    "lastname": "बैद्य(प्रधान)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "पोख्रेल(रानाभाट)",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "राजपंशी",
+    "sub_category_id": 202,
+    "notes": "Tarai Janajati"
+  },
+  {
+    "lastname": "उपाध्याय(खनाल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "मानन्‍धर(महर्जन)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "तामाङ(महर्जन)",
+    "sub_category_id": 502,
+    "notes": "Newar variant"
+  },
+  {
+    "lastname": "नोर्बु",
+    "sub_category_id": 201,
+    "notes": "Sherpa/Tibetan origin"
+  },
+  {
+    "lastname": "कुस्ले",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बिसि",
+    "sub_category_id": 102,
+    "notes": "Chhetri"
+  },
+  {
+    "lastname": "घिताल",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "डुवाल(डंगोल)",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मालि",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "थपलिया(भेटुवाल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "अतिक",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "पुजारी",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "खांण",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "पोडे",
+    "sub_category_id": 503,
+    "notes": "Lower Newar (Dalit)"
+  },
+  {
+    "lastname": "सढाई(पन्त)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "पोडेनी",
+    "sub_category_id": 503,
+    "notes": "Lower Newar"
+  },
+  {
+    "lastname": "मगैया",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "तुलाधर(सेलालिका)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "पूजारी",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "आजाद",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "मघैया",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "मियाँ",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "पोडे(पुजारी)",
+    "sub_category_id": 503,
+    "notes": "Lower Newar"
+  },
+  {
+    "lastname": "वासिंछयाक",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "देउला",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "वशर",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "कनौजीया",
+    "sub_category_id": 301,
+    "notes": "Madhesi"
+  },
+  {
+    "lastname": "आशु(आयसा)रंजितकार(मलिक)",
+    "sub_category_id": 501,
+    "notes": "Newar/Muslim"
+  },
+  {
+    "lastname": "मुद्धिन",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "वैद्म",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "(श्रेष्ठ)रंजित",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "सुवल",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "उद्‍दीन",
+    "sub_category_id": 601,
+    "notes": "Muslim"
+  },
+  {
+    "lastname": "खड्गि",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "श्रेष्ठ(मगिया)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "जस्‍पाउ",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "बानीया",
+    "sub_category_id": 701,
+    "notes": "Bania"
+  },
+  {
+    "lastname": "जारी",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "कनौजिया(धोवी)",
+    "sub_category_id": 402,
+    "notes": "Tarai Dalit (Dhobi)"
+  },
+  {
+    "lastname": "मालाकार(रंजीतकार)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "कनौनिया",
+    "sub_category_id": 301,
+    "notes": "Madhesi"
+  },
+  {
+    "lastname": "वासिछ्याक",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "च्‍यामीनी",
+    "sub_category_id": 503,
+    "notes": "Lower Newar"
+  },
+  {
+    "lastname": "मेतर्नी",
+    "sub_category_id": 503,
+    "notes": "Lower Newar"
+  },
+  {
+    "lastname": "मगिया",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "कायस्ठ",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "परिवार",
+    "sub_category_id": null,
+    "notes": "Not a surname"
+  },
+  {
+    "lastname": "डोल्‍कार",
+    "sub_category_id": 201,
+    "notes": "Janajati"
+  },
+  {
+    "lastname": "शारदा",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "श्रेष्ठ/गुरुङ",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "ज.व.रा",
+    "sub_category_id": null,
+    "notes": "Initials"
+  },
+  {
+    "lastname": "कुचिकार",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "धोवी",
+    "sub_category_id": 402,
+    "notes": "Tarai Dalit"
+  },
+  {
+    "lastname": "श्रेष्ठ(वासिंछयाक)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मगीया",
+    "sub_category_id": 401,
+    "notes": "Hill Dalit"
+  },
+  {
+    "lastname": "वासिंछयाक(श्रेष्ठ)",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "धोबी",
+    "sub_category_id": 402,
+    "notes": "Tarai Dalit"
+  },
+  {
+    "lastname": "पोडेनी/नेपाली",
+    "sub_category_id": 503,
+    "notes": "Lower Newar"
+  },
+  {
+    "lastname": "धोवी(रजक)",
+    "sub_category_id": 402,
+    "notes": "Tarai Dalit"
+  },
+  {
+    "lastname": "कनौजिया(मगैया)",
+    "sub_category_id": 402,
+    "notes": "Tarai Dalit"
+  },
+  {
+    "lastname": "कनैया",
+    "sub_category_id": 301,
+    "notes": "Madhesi"
+  },
+  {
+    "lastname": "धोवीनी",
+    "sub_category_id": 402,
+    "notes": "Tarai Dalit"
+  },
+  {
+    "lastname": "गुरुङ्ग(घले)",
+    "sub_category_id": 205,
+    "notes": "Gurung"
+  },
+  {
+    "lastname": "छोड्ङ",
+    "sub_category_id": 201,
+    "notes": "Janajati"
+  },
+  {
+    "lastname": "छीरीङ",
+    "sub_category_id": 201,
+    "notes": "Sherpa/Janajati"
+  },
+  {
+    "lastname": "मधैया",
+    "sub_category_id": 301,
+    "notes": "Madhesi"
+  },
+  {
+    "lastname": "धोबी(कनौजीया)",
+    "sub_category_id": 402,
+    "notes": "Tarai Dalit"
+  },
+  {
+    "lastname": "सेल्डोन",
+    "sub_category_id": 201,
+    "notes": "Janajati"
+  },
+  {
+    "lastname": "खड्का(पोडे)",
+    "sub_category_id": 102,
+    "notes": "Chhetri/Newar mix"
+  },
+  {
+    "lastname": "डंगोल(हाडा)",
+    "sub_category_id": 502,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "मण्डल",
+    "sub_category_id": 301,
+    "notes": "Madhesi"
+  },
+  {
+    "lastname": "सेलालिक",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "छोम्‍बे",
+    "sub_category_id": 201,
+    "notes": "Janajati"
+  },
+  {
+    "lastname": "उपाध्याय(जोशी)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "कनोजिया(धीवी)",
+    "sub_category_id": 402,
+    "notes": "Tarai Dalit"
+  },
+  {
+    "lastname": "तण्‍डूकार",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "पोडे(कुचीकार)",
+    "sub_category_id": 503,
+    "notes": "Lower Newar"
+  },
+  {
+    "lastname": "कन्‍होड्या",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  },
+  {
+    "lastname": "सी.(सिलवाल)",
+    "sub_category_id": 101,
+    "notes": "Brahmin"
+  },
+  {
+    "lastname": "वाग",
+    "sub_category_id": 501,
+    "notes": "Newar"
+  }
+
+
+]

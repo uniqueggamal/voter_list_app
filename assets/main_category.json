@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Khas-Arya",
+    "name_np": "खस-आर्य",
+    "description": "Traditional 'high castes' from the hills, including Brahmin (Bahun), Chhetri, Thakuri, and Sanyasi/Dashnami. Historically dominant in politics, administration, and considered 'twice-born' (tagadhari) in the Hindu system.",
+    "approx_percentage_2021": "~39% (including Hill Dalits sometimes grouped separately)",
+    "key_subgroups": ["Brahmin-Hill", "Chhetri", "Thakuri", "Sanyasi/Dashnami"],
+    "notes": "Dominant in civil service and education historically."
+  },
+  {
+    "id": 2,
+    "name": "Adivasi Janajati (Indigenous Nationalities)",
+    "name_np": "आदिवासी जनजाति",
+    "description": "Broad category of indigenous ethnic groups, mostly Tibeto-Burman origin. Divided by geography and culture; officially recognized as 59+ groups.",
+    "approx_percentage_2021": "~31% (excluding Newar)",
+    "key_subgroups": ["Hill Janajati", "Tarai Janajati"],
+    "notes": "Includes groups like Gurung, Magar, Tamang, Rai, Limbu, Tharu, etc. Many claim higher actual percentage."
+  },
+  {
+    "id": 3,
+    "name": "Madhesi (Tarai Caste Group)",
+    "name_np": "मधेशी",
+    "description": "Caste-origin communities from the southern plains (Terai) with cultural/linguistic ties to northern India. Includes high, middle, and lower castes.",
+    "approx_percentage_2021": "~29% (broad Madhesi grouping)",
+    "key_subgroups": ["Madhesi High Caste", "Madhesi Middle Caste", "Madhesi Dalit"],
+    "notes": "Languages: Maithili, Bhojpuri, Awadhi, etc. Significant in Terai politics."
+  },
+  {
+    "id": 4,
+    "name": "Dalit",
+    "name_np": "दलित",
+    "description": "Historically marginalized 'untouchable' occupational castes facing severe discrimination. Divided by region.",
+    "approx_percentage_2021": "~13-15% (Hill + Tarai combined)",
+    "key_subgroups": ["Hill Dalit", "Tarai Dalit"],
+    "notes": "Includes Kami, Damai, Sarki (Hill); Chamar, Musahar, Dom (Tarai). Lowest in socio-economic indicators."
+  },
+  {
+    "id": 5,
+    "name": "Newar",
+    "name_np": "नेवार",
+    "description": "Indigenous people of the Kathmandu Valley with unique, complex Hindu-Buddhist social structure and castes/sub-castes.",
+    "approx_percentage_2021": "~4.6-5.5%",
+    "key_subgroups": ["Upper Newar", "Middle Newar", "Low Newar", "Buddhist Newar"],
+    "notes": "Own language (Nepal Bhasa), culture, and architecture. Sometimes grouped separately from Janajati."
+  },
+  {
+    "id": 6,
+    "name": "Muslims",
+    "name_np": "मुस्लिम",
+    "description": "Religious minority with communities in both hills and Terai. Distinct cultural and religious identity.",
+    "approx_percentage_2021": "~4.9%",
+    "key_subgroups": ["Hill Muslim", "Tarai Muslim"],
+    "notes": "Classified separately in censuses; includes various sub-groups."
+  },
+  {
+    "id": 7,
+    "name": "Other Social Groups",
+    "name_np": "अन्य सामाजिक समूह",
+    "description": "Smaller communities with foreign ancestry or other minorities, such as Marwadi, Bengali, Punjabi, etc.",
+    "approx_percentage_2021": "~0.3-1%",
+    "key_subgroups": ["Marwadi/Bania", "Bengali", "Punjabi/Sikh"],
+    "notes": "Often business/trade-oriented communities."
+  }
+]

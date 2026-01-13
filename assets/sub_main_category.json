@@ -1,0 +1,164 @@
+[
+  {
+    "id": 101,
+    "main_id": 1,
+    "name": "Brahmin (Bahun)",
+    "name_np": "बाहुन",
+    "description": "Hill Brahmins, traditionally priests and scholars"
+  },
+  {
+    "id": 102,
+    "main_id": 1,
+    "name": "Chhetri",
+    "name_np": "क्षेत्री",
+    "description": "Kshatriya/warrior caste, most populous group in Nepal"
+  },
+  {
+    "id": 103,
+    "main_id": 1,
+    "name": "Thakuri",
+    "name_np": "ठकुरी",
+    "description": "Royal and aristocratic families among Khas-Arya"
+  },
+  {
+    "id": 104,
+    "main_id": 1,
+    "name": "Sanyasi/Dashnami",
+    "name_np": "सन्यासी/दशनामी",
+    "description": "Renunciate and ascetic groups"
+  },
+
+  {
+    "id": 201,
+    "main_id": 2,
+    "name": "Hill Janajati",
+    "name_np": "पहाडी जनजाति",
+    "description": "Indigenous hill groups like Magar, Gurung, Tamang, Rai, Limbu, etc."
+  },
+  {
+    "id": 202,
+    "main_id": 2,
+    "name": "Tarai Janajati",
+    "name_np": "तराई जनजाति",
+    "description": "Indigenous Terai groups like Tharu, Rajbanshi, Dhimal, etc."
+  },
+
+  {
+    "id": 301,
+    "main_id": 3,
+    "name": "Madhesi High Caste",
+    "name_np": "मधेशी उच्च जाति",
+    "description": "Maithil Brahmin, Kayastha, Rajput, Bhumihar, etc."
+  },
+  {
+    "id": 302,
+    "main_id": 3,
+    "name": "Madhesi Middle Caste",
+    "name_np": "मधेशी मध्यम जाति",
+    "description": "Yadav, Kurmi, Teli, Kalwar, Kanu, etc."
+  },
+  {
+    "id": 303,
+    "main_id": 3,
+    "name": "Madhesi Dalit",
+    "name_np": "मधेशी दलित",
+    "description": "Terai Dalit communities (included in Madhesi category in some contexts)"
+  },
+
+  {
+    "id": 401,
+    "main_id": 4,
+    "name": "Hill Dalit",
+    "name_np": "पहाडी दलित",
+    "description": "Kami, Damai, Sarki, etc."
+  },
+  {
+    "id": 402,
+    "main_id": 4,
+    "name": "Tarai Dalit",
+    "name_np": "तराई दलित",
+    "description": "Chamar, Musahar, Dom, Dusadh, Halkhor, etc."
+  },
+
+  {
+    "id": 501,
+    "main_id": 5,
+    "name": "Upper Newar",
+    "name_np": "उच्च नेवार",
+    "description": "Shrestha, Vajracharya, Shakya, Tuladhar, etc."
+  },
+  {
+    "id": 502,
+    "main_id": 5,
+    "name": "Jyapu/Maharjan",
+    "name_np": "ज्यापु/महार्जन",
+    "description": "Traditional farmer caste, most numerous among Newars"
+  },
+  {
+    "id": 503,
+    "main_id": 5,
+    "name": "Lower Newar",
+    "name_np": "निम्न नेवार",
+    "description": "Occupational castes like Kasai, Nau, etc."
+  },
+
+  {
+    "id": 601,
+    "main_id": 6,
+    "name": "Muslim",
+    "name_np": "मुस्लिम",
+    "description": "All Muslim communities (no further caste subdivision typically used)"
+  },
+
+  {
+    "id": 701,
+    "main_id": 7,
+    "name": "Marwadi/Bania",
+    "name_np": "मारवाडी/बनिया",
+    "description": "Business communities from Rajasthan region"
+  },
+  {
+    "id": 702,
+    "main_id": 7,
+    "name": "Punjabi/Sikh",
+    "name_np": "पञ्जाबी/सिख",
+    "description": "Punjabi-origin communities"
+  },
+  {
+    "id": 703,
+    "main_id": 7,
+    "name": "Bengali",
+    "name_np": "बंगाली",
+    "description": "Bengali-speaking minority"
+  },
+  {
+    "id": 203,
+    "main_id": 2,
+    "name": "Tharu",
+    "name_np": "थारु",
+    "description": "Major Tarai indigenous group, often treated separately in policies"
+  },
+
+  {
+    "id": 204,
+    "main_id": 2,
+    "name": "Magar",
+    "name_np": "मगर",
+    "description": "Largest Hill Janajati group"
+  },
+  {
+    "id": 205,
+    "main_id": 2,
+    "name": "Gurung/Tamang",
+    "name_np": "गुरुङ/तमाङ",
+    "description": "Common Gurkha-origin hill groups"
+  },
+
+  {
+    "id": 602,
+    "main_id": 6,
+    "name": "Tarai Muslim",
+    "name_np": "तराई मुस्लिम",
+    "description": "Majority of Nepali Muslims"
+  }
+]
