@@ -159,7 +159,7 @@ class VoterNotifier extends StateNotifier<VoterState> {
       // Apply search filtering in memory if query exists
       List<Voter> filteredVoters = allVoters;
       if (filter.searchQuery?.isNotEmpty == true) {
-        final queryNorm = normalizeNepali(filter.searchQuery);
+        final queryNorm = normalizeForSearch(filter.searchQuery);
         final effectiveField = field ?? filter.searchField ?? SearchField.name;
         final effectiveMatchMode =
             matchMode ?? filter.searchMatchMode ?? SearchMatchMode.startsWith;
@@ -168,7 +168,7 @@ class VoterNotifier extends StateNotifier<VoterState> {
           final value = effectiveField == SearchField.voterId
               ? v.voterId
               : v.nameNepali;
-          final valueNorm = normalizeNepali(value);
+          final valueNorm = normalizeForSearch(value);
           final matches = effectiveMatchMode == SearchMatchMode.startsWith
               ? valueNorm.startsWith(queryNorm)
               : valueNorm.contains(queryNorm);
@@ -333,7 +333,7 @@ class VoterNotifier extends StateNotifier<VoterState> {
 
     // Apply search filtering in memory if query exists
     if (effectiveFilter.searchQuery?.isNotEmpty == true) {
-      final queryNorm = normalizeNepali(effectiveFilter.searchQuery);
+      final queryNorm = normalizeForSearch(effectiveFilter.searchQuery);
       final effectiveField = effectiveFilter.searchField ?? SearchField.name;
       final effectiveMatchMode =
           effectiveFilter.searchMatchMode ?? SearchMatchMode.startsWith;
@@ -342,7 +342,7 @@ class VoterNotifier extends StateNotifier<VoterState> {
         final value = effectiveField == SearchField.voterId
             ? v.voterId
             : v.nameNepali;
-        final valueNorm = normalizeNepali(value);
+        final valueNorm = normalizeForSearch(value);
         return effectiveMatchMode == SearchMatchMode.startsWith
             ? valueNorm.startsWith(queryNorm)
             : valueNorm.contains(queryNorm);

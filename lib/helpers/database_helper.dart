@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/search_params.dart';
 import '../models/voter.dart';
+import '../helpers/text_helper.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._();
@@ -72,13 +73,28 @@ class DatabaseHelper {
     final where = <String>[];
     final args = <dynamic>[];
 
-    // Search condition
-    final valueCol = field == SearchField.name ? 'v.name_np' : 'v.voter_no';
-    final likePattern = mode == SearchMatchMode.startsWith
-        ? '$query%'
-        : '%$query%';
-    where.add('$valueCol LIKE ? COLLATE NOCASE');
-    args.add(likePattern);
+    // Normalize query for search
+    final normalizedQuery = normalizeForSearch(query);
+
+    // Search condition using normalized query
+    final valueCol = field == SearchField.name
+        ? 'LOWER(v.name_np)'
+        : 'LOWER(v.voter_no)';
+
+    if (mode == SearchMatchMode.startsWith) {
+      // Simple prefix match (fast with index)
+      final likePattern = '$normalizedQuery%';
+      where.add('$valueCol LIKE ?');
+      args.add(likePattern);
+    } else {
+      // Contains mode: split query into words and match any word
+      final words = normalizedQuery.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).toList();
+      if (words.isNotEmpty) {
+        final wordConditions = words.map((word) => '$valueCol LIKE ?').toList();
+        where.add('(${wordConditions.join(' OR ')})');
+        args.addAll(words.map((word) => '%$word%'));
+      }
+    }
 
     // Location filters (add more as needed)
     if (boothId != null) {
@@ -102,7 +118,7 @@ class DatabaseHelper {
 
     final sql =
         '''
-      SELECT 
+      SELECT
         v.id,
         v.voter_no AS voterId,
         v.name_np AS nameNepali,

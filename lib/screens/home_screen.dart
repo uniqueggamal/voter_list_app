@@ -7,6 +7,8 @@ import '../providers/voter_search_provider.dart';
 import '../models/search_params.dart';
 import '../widgets/filter_panel_widget.dart';
 import '../screens/voter_detail_screen.dart';
+import '../screens/analytics_screen.dart';
+import '../widgets/export_dialog.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -417,10 +419,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 icon: const Icon(Icons.analytics),
                 label: const Text('Analytics'),
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Analytics view coming soon...'),
-                    ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const AnalyticsScreen()),
                   );
                 },
               ),
@@ -428,10 +429,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 icon: const Icon(Icons.download),
                 label: const Text('Export'),
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Export feature coming soon...'),
-                    ),
+                  showDialog(
+                    context: context,
+                    builder: (_) => const ExportDialog(),
                   );
                 },
               ),
