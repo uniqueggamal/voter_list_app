@@ -2,34 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// ── Search Modes ─────────────────────────────────────────────────────────────
-enum SearchField { name, voterId }
-
-enum SearchMatchMode { startsWith, contains }
-
-class SearchParams {
-  final SearchField field;
-  final SearchMatchMode matchMode;
-  final String query;
-
-  const SearchParams({
-    this.field = SearchField.name,
-    this.matchMode = SearchMatchMode.startsWith,
-    this.query = '',
-  });
-
-  SearchParams copyWith({
-    SearchField? field,
-    SearchMatchMode? matchMode,
-    String? query,
-  }) {
-    return SearchParams(
-      field: field ?? this.field,
-      matchMode: matchMode ?? this.matchMode,
-      query: query ?? this.query,
-    );
-  }
-}
+import '../helpers/database_helper.dart';
+import '../models/search_models.dart';
+import '../providers/location_providers.dart';
+import '../providers/voter_search_provider.dart';
 
 // ── Providers ────────────────────────────────────────────────────────────────
 final votersProvider = StateProvider<List<Voter>>(
@@ -64,15 +40,6 @@ final filteredVotersProvider = Provider<List<Voter>>((ref) {
         : value.contains(queryLower);
   }).toList();
 });
-
-// ── Fake Voter model (replace with real model later)
-class Voter {
-  final String name;
-  final String voterId;
-  final String gender; // 'M' or 'F'
-
-  Voter({required this.name, required this.voterId, required this.gender});
-}
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -135,8 +102,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final filteredVoters = ref.watch(filteredVotersProvider);
     final searchParams = ref.watch(searchParamsProvider);
+    final searchAsync = ref.watch(voterSearchProvider(searchParams));
+    final resultCount = ref.watch(searchResultCountProvider);
+    final isLoading = ref.watch(isSearchLoadingProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -276,13 +245,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: _buildAnalyticsRow(),
             ),
 
-          // Results count
+          // Results count row
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Found ${filteredVoters.length} voters',
+                searchParams.query.isEmpty
+                    ? 'नाम वा मतदाता नं. टाइप गर्नुहोस्...'
+                    : 'फेला पर्‍यो: $resultCount जना मतदाता',
                 style: TextStyle(
                   color: Colors.grey.shade700,
                   fontWeight: FontWeight.w500,
@@ -291,29 +262,55 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
 
-          // Voter List
+          // Voter list area
           Expanded(
-            child: ListView.builder(
-              itemCount: filteredVoters.length,
-              itemBuilder: (context, index) {
-                final voter = filteredVoters[index];
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundColor: voter.gender == 'M'
-                        ? Colors.blue
-                        : Colors.pink,
+            child: searchAsync.when(
+              skipLoadingOnRefresh: false,
+              data: (voters) {
+                if (voters.isEmpty && searchParams.query.isNotEmpty) {
+                  return const Center(
                     child: Text(
-                      voter.gender,
-                      style: const TextStyle(color: Colors.white),
+                      'कुनै मतदाता फेला परेन\nफरक तरिकाले खोज्नुहोस्',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey, fontSize: 16),
                     ),
-                  ),
-                  title: Text(voter.name),
-                  subtitle: Text('Voter ID: ${voter.voterId}'),
-                  onTap: () {
-                    // TODO: Go to detail screen
+                  );
+                }
+                return ListView.builder(
+                  itemCount: voters.length,
+                  itemBuilder: (context, index) {
+                    final voter = voters[index];
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundColor: voter.gender == 'M'
+                            ? Colors.blue
+                            : Colors.pink,
+                        child: Text(
+                          voter.gender,
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      title: Text(voter.name),
+                      subtitle: Text('मतदाता नं: ${voter.voterId}'),
+                      onTap: () {
+                        // TODO: Navigate to voter detail screen
+                        // Navigator.push(context, MaterialPageRoute(builder: (_) => VoterDetailScreen(voter: voter)));
+                      },
+                    );
                   },
                 );
               },
+              loading: () => const Center(child: CircularProgressIndicator()),
+              error: (error, stack) => Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Text(
+                    'खोजमा समस्या: $error',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                ),
+              ),
             ),
           ),
         ],
