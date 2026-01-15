@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../services/location_repository.dart';
-
-final locationRepoProvider = FutureProvider<LocationRepository>((ref) async {
-  return LocationRepository.loadFromAsset('assets/location_data.json');
-});
 
 class FilterState {
   final String? province;
@@ -13,21 +8,26 @@ class FilterState {
   final int? wardNo;
   final String? boothCode;
   final String? gender;
-  final RangeValues? ageRange;
+  final int? minAge;
+  final int? maxAge;
   final String? startingLetter;
+  final String?
+  mainCategory; // e.g. "Chhetri", "Brahmin", "Tharu", etc. from group_category
 
-  // Optional but very useful additions
+  // Optional: keep search query here if you want filters + search combined
   final String? searchQuery;
 
-  FilterState({
+  const FilterState({
     this.province,
     this.district,
     this.municipality,
     this.wardNo,
     this.boothCode,
     this.gender,
-    this.ageRange,
+    this.minAge,
+    this.maxAge,
     this.startingLetter,
+    this.mainCategory,
     this.searchQuery,
   });
 
@@ -38,8 +38,10 @@ class FilterState {
     int? wardNo,
     String? boothCode,
     String? gender,
-    RangeValues? ageRange,
+    int? minAge,
+    int? maxAge,
     String? startingLetter,
+    String? mainCategory,
     String? searchQuery,
   }) {
     return FilterState(
@@ -49,25 +51,33 @@ class FilterState {
       wardNo: wardNo ?? this.wardNo,
       boothCode: boothCode ?? this.boothCode,
       gender: gender ?? this.gender,
-      ageRange: ageRange ?? this.ageRange,
+      minAge: minAge ?? this.minAge,
+      maxAge: maxAge ?? this.maxAge,
       startingLetter: startingLetter ?? this.startingLetter,
+      mainCategory: mainCategory ?? this.mainCategory,
       searchQuery: searchQuery ?? this.searchQuery,
     );
   }
 
-  // Very useful for UI: check if anything is actually filtered
-  bool get isEmpty =>
-      province == null &&
-      district == null &&
-      municipality == null &&
-      wardNo == null &&
-      boothCode == null &&
-      gender == null &&
-      ageRange == null &&
-      startingLetter == null &&
-      (searchQuery?.trim().isEmpty ?? true);
+  // Check if any filter is active (this replaces the old hasAnyFilter)
+  bool get hasAnyFilter {
+    return province != null ||
+        district != null ||
+        municipality != null ||
+        wardNo != null ||
+        boothCode != null ||
+        gender != null ||
+        minAge != null ||
+        maxAge != null ||
+        startingLetter != null ||
+        mainCategory != null ||
+        (searchQuery?.trim().isNotEmpty ?? false);
+  }
 
-  // Nice formatted summary for showing active filters
+  // Alternative name: isDefault / isNotFiltered
+  bool get isDefault => !hasAnyFilter;
+
+  // Nice formatted summary for UI chips or display
   String get summary {
     final parts = <String>[];
     if (province != null) parts.add('प्रदेश: $province');
@@ -76,10 +86,11 @@ class FilterState {
     if (wardNo != null) parts.add('वडा: $wardNo');
     if (boothCode != null) parts.add('बुथ: $boothCode');
     if (gender != null) parts.add('लिङ्ग: $gender');
-    if (ageRange != null) {
-      parts.add('उमेर: ${ageRange!.start.round()}–${ageRange!.end.round()}');
+    if (minAge != null || maxAge != null) {
+      parts.add('उमेर: ${minAge ?? 18}–${maxAge ?? 100}');
     }
-    if (startingLetter != null) parts.add('सुरु अक्षर: $startingLetter');
+    if (startingLetter != null) parts.add('सुरु: $startingLetter');
+    if (mainCategory != null) parts.add('समूह: $mainCategory');
     if (searchQuery?.isNotEmpty == true) parts.add('खोजी: "$searchQuery"');
 
     return parts.isEmpty ? 'सबै' : parts.join(' • ');
@@ -87,16 +98,16 @@ class FilterState {
 }
 
 class FilterNotifier extends StateNotifier<FilterState> {
-  FilterNotifier() : super(FilterState());
+  FilterNotifier() : super(const FilterState());
 
   void setProvince(String? value) {
     state = state.copyWith(
       province: value,
+      // Reset lower levels when province changes
       district: null,
       municipality: null,
       wardNo: null,
       boothCode: null,
-      // Note: searchQuery & startingLetter usually stay across location changes
     );
   }
 
@@ -125,12 +136,16 @@ class FilterNotifier extends StateNotifier<FilterState> {
     state = state.copyWith(gender: value);
   }
 
-  void setAgeRange(RangeValues? value) {
-    state = state.copyWith(ageRange: value);
+  void setAgeRange(int? min, int? max) {
+    state = state.copyWith(minAge: min, maxAge: max);
   }
 
   void setStartingLetter(String? value) {
     state = state.copyWith(startingLetter: value);
+  }
+
+  void setMainCategory(String? value) {
+    state = state.copyWith(mainCategory: value);
   }
 
   void setSearchQuery(String? value) {
@@ -138,11 +153,10 @@ class FilterNotifier extends StateNotifier<FilterState> {
   }
 
   void clearFilters() {
-    state = FilterState();
+    state = const FilterState();
   }
 
-  // Optional: reset only location-related filters (keep name/gender/age)
-  void clearLocation() {
+  void clearLocationFilters() {
     state = state.copyWith(
       province: null,
       district: null,

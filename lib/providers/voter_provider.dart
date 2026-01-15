@@ -1,24 +1,34 @@
-import 'dart:async';
 import 'package:flutter/foundation.dart';
-import '../models/voter.dart';
-import '../database_helper.dart';
-import '../services/transliteration_service.dart';
-import '../providers/filter_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// Reactive analytics provider – recomputes when filter changes
-final analyticsDataProvider = FutureProvider.autoDispose<Map<String, dynamic>>((
-  ref,
-) async {
-  // Watch filterProvider → rebuilds on any filter change
-  ref.watch(filterProvider);
+import '../models/voter.dart';
+import '../helpers/database_helper.dart';
+import '../services/transliteration_service.dart';
+import '../providers/filter_provider.dart';
 
-  // Optional: more precise dependency (only when filter reference changes)
-  ref.watch(voterProvider.select((p) => p.currentFilter));
+// ─────────────────────────────────────────────────────────────────────────────
+// Analytics provider – recomputes when filter changes
+// ─────────────────────────────────────────────────────────────────────────────
 
-  final voterNotifier = ref.read(voterProvider.notifier);
-  return voterNotifier.getAnalyticsData();
+final analyticsDataProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+  final filter = ref.watch(filterProvider);
+  final notifier = ref.read(voterProvider.notifier);
+  return notifier.getAnalyticsData(filter: filter);
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Total count provider – depends on current filter
+// ─────────────────────────────────────────────────────────────────────────────
+
+final totalVoterCountProvider = FutureProvider.autoDispose<int>((ref) async {
+  final filter = ref.watch(filterProvider);
+  final notifier = ref.read(voterProvider.notifier);
+  return notifier.getTotalCount(filter: filter);
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Main Voter State & Notifier
+// ─────────────────────────────────────────────────────────────────────────────
 
 class VoterState {
   final List<Voter> voters;
@@ -30,7 +40,6 @@ class VoterState {
   final String groupBy;
   final Map<String, Map<String, dynamic>> analyticsCache;
   final int? cachedTotalCount;
-  final Map<String, dynamic>? analyticsData;
   final bool isAnalyticsLoading;
   final String? analyticsError;
   final String? loadingError;
@@ -45,7 +54,6 @@ class VoterState {
     this.groupBy = 'ward',
     this.analyticsCache = const {},
     this.cachedTotalCount,
-    this.analyticsData,
     this.isAnalyticsLoading = false,
     this.analyticsError,
     this.loadingError,
@@ -61,7 +69,6 @@ class VoterState {
     String? groupBy,
     Map<String, Map<String, dynamic>>? analyticsCache,
     int? cachedTotalCount,
-    Map<String, dynamic>? analyticsData,
     bool? isAnalyticsLoading,
     String? analyticsError,
     String? loadingError,
@@ -76,7 +83,6 @@ class VoterState {
       groupBy: groupBy ?? this.groupBy,
       analyticsCache: analyticsCache ?? this.analyticsCache,
       cachedTotalCount: cachedTotalCount ?? this.cachedTotalCount,
-      analyticsData: analyticsData ?? this.analyticsData,
       isAnalyticsLoading: isAnalyticsLoading ?? this.isAnalyticsLoading,
       analyticsError: analyticsError ?? this.analyticsError,
       loadingError: loadingError ?? this.loadingError,
@@ -88,9 +94,8 @@ class VoterState {
 }
 
 class VoterNotifier extends StateNotifier<VoterState> {
-  final DatabaseHelper _dbHelper = DatabaseHelper();
-  final TransliterationService _transliterationService =
-      TransliterationService();
+  final DatabaseHelper _dbHelper = DatabaseHelper.instance;
+  final TransliterationService _transliteration = TransliterationService();
 
   static const List<String> _groupByOptions = [
     'province',
@@ -102,154 +107,87 @@ class VoterNotifier extends StateNotifier<VoterState> {
 
   VoterNotifier() : super(VoterState());
 
-  Future<List<Voter>> getVotersForExport(int start, int end) async {
-    final limit = end - start + 1;
-    final offset = start - 1;
-
-    final rawData = await _dbHelper.getVoters(
-      searchQuery: state.currentFilter?.searchQuery,
-      transliteratedQuery: await _getTransliteratedQuery(),
-      startingLetter: state.currentFilter?.startingLetter,
-      boothCode: state.currentFilter?.boothCode,
-      wardNo: state.currentFilter?.wardNo,
-      municipalityId: await _getMunicipalityId(
-        state.currentFilter?.municipality,
-      ),
-      districtId: await _getDistrictId(state.currentFilter?.district),
-      provinceId: await _getProvinceId(state.currentFilter?.province),
-      gender: state.currentFilter?.gender,
-      minAge: state.currentFilter?.ageRange?.start.round(),
-      maxAge: state.currentFilter?.ageRange?.end.round(),
-      limit: limit,
-      offset: offset,
-    );
-
-    return rawData.map((map) => Voter.fromMap(map)).toList();
-  }
-
-  Future<String?> _getTransliteratedQuery() async {
-    if (state.currentFilter?.searchQuery?.isNotEmpty != true) return null;
-    try {
-      return await _transliterationService.transliterateToNepali(
-        state.currentFilter!.searchQuery!,
-      );
-    } catch (_) {
-      return null;
-    }
-  }
-
-  Future<Map<String, dynamic>> getVoterDetails(int voterId) async {
-    try {
-      final details = await _dbHelper.getVoterDetails(voterId);
-      return details;
-    } catch (e) {
-      debugPrint('Error fetching voter details: $e');
-      return {};
-    }
-  }
-
-  Future<int> getTotalCount() async {
-    if (state.cachedTotalCount != null) return state.cachedTotalCount!;
-
-    final count = await _dbHelper.getVoterCount(
-      searchQuery: state.currentFilter?.searchQuery,
-      startingLetter: state.currentFilter?.startingLetter,
-      boothCode: state.currentFilter?.boothCode,
-      wardNo: state.currentFilter?.wardNo,
-      municipalityId: await _getMunicipalityId(
-        state.currentFilter?.municipality,
-      ),
-      districtId: await _getDistrictId(state.currentFilter?.district),
-      provinceId: await _getProvinceId(state.currentFilter?.province),
-      gender: state.currentFilter?.gender,
-      minAge: state.currentFilter?.ageRange?.start.round(),
-      maxAge: state.currentFilter?.ageRange?.end.round(),
-    );
-
-    state = state.copyWith(cachedTotalCount: count);
-    return count;
-  }
-
-  Future<int?> _getProvinceId(String? name) async {
-    return name != null ? await _dbHelper.getProvinceIdByName(name) : null;
-  }
-
-  Future<int?> _getDistrictId(String? name) async {
-    return name != null ? await _dbHelper.getDistrictIdByName(name) : null;
-  }
-
-  Future<int?> _getMunicipalityId(String? name) async {
-    return name != null ? await _dbHelper.getMunicipalityIdByName(name) : null;
-  }
+  // ────────────────────────────────────────────────────────────────────────────
+  // Core loading logic
+  // ────────────────────────────────────────────────────────────────────────────
 
   Future<void> loadVoters() async {
-    debugPrint('loadVoters: Starting to load voters');
+    if (state.isLoading) return;
+
     state = state.copyWith(isLoading: true, loadingError: null);
+    debugPrint('VoterNotifier: Loading voters (page ${state.currentPage})');
 
     try {
-      await _performLoadVoters().timeout(const Duration(seconds: 30));
-    } on TimeoutException catch (error) {
-      debugPrint('loadVoters: Timeout error: $error');
+      final filter = state.currentFilter ?? const FilterState();
+
+      // Transliterate search query if needed
+      String? transliteratedQuery;
+      if (filter.searchQuery?.isNotEmpty == true) {
+        transliteratedQuery = await _transliteration.transliterateToNepali(
+          filter.searchQuery!,
+        );
+        debugPrint('Transliterated query: $transliteratedQuery');
+      }
+
+      // Get total count first (for pagination)
+      final totalCount = await _dbHelper.getVoterCount(
+        searchQuery: filter.searchQuery,
+        transliteratedQuery: transliteratedQuery,
+        startingLetter: filter.startingLetter,
+        provinceId: await _getProvinceId(filter.province),
+        districtId: await _getDistrictId(filter.district),
+        municipalityId: await _getMunicipalityId(filter.municipality),
+        wardNo: filter.wardNo,
+        boothCode: filter.boothCode,
+        gender: filter.gender,
+        minAge: filter.minAge,
+        maxAge: filter.maxAge,
+      );
+
+      final totalPages = state.pageSize == -1
+          ? 1
+          : (totalCount / state.pageSize).ceil();
+
+      // Fetch paginated voters
+      final rows = await _dbHelper.getVoters(
+        searchQuery: filter.searchQuery,
+        transliteratedQuery: transliteratedQuery,
+        startingLetter: filter.startingLetter,
+        provinceId: await _getProvinceId(filter.province),
+        districtId: await _getDistrictId(filter.district),
+        municipalityId: await _getMunicipalityId(filter.municipality),
+        wardNo: filter.wardNo,
+        boothCode: filter.boothCode,
+        gender: filter.gender,
+        minAge: filter.minAge,
+        maxAge: filter.maxAge,
+        limit: state.pageSize == -1 ? null : state.pageSize,
+        offset: state.pageSize == -1
+            ? null
+            : (state.currentPage - 1) * state.pageSize,
+      );
+
+      final newVoters = rows.map((row) => Voter.fromMap(row)).toList();
+
       state = state.copyWith(
+        voters: newVoters,
+        totalPages: totalPages,
+        cachedTotalCount: totalCount,
         isLoading: false,
-        loadingError:
-            'Loading timed out after 30 seconds. Please check your database connection.',
       );
-    } catch (error) {
-      debugPrint('loadVoters: Error loading voters: $error');
-      state = state.copyWith(isLoading: false, loadingError: error.toString());
+
+      debugPrint(
+        'Loaded ${newVoters.length} voters | Total: $totalCount | Pages: $totalPages',
+      );
+    } catch (e, stack) {
+      debugPrint('VoterNotifier load error: $e\n$stack');
+      state = state.copyWith(isLoading: false, loadingError: e.toString());
     }
   }
 
-  Future<void> _performLoadVoters() async {
-    debugPrint('loadVoters: Starting transliteration if needed');
-    String? transliterated;
-    if (state.currentFilter?.searchQuery?.isNotEmpty == true) {
-      transliterated = await _transliterationService.transliterateToNepali(
-        state.currentFilter!.searchQuery!,
-      );
-      debugPrint('loadVoters: Transliterated query: $transliterated');
-    }
-
-    debugPrint('loadVoters: Getting total count');
-    final total = await getTotalCount();
-    debugPrint('loadVoters: Total count: $total');
-
-    final totalPages = state.pageSize == -1
-        ? 1
-        : (total / state.pageSize).ceil();
-    debugPrint('loadVoters: Total pages: $totalPages');
-
-    debugPrint('loadVoters: Fetching voters from database');
-    final newItems = await _dbHelper.getVoters(
-      searchQuery: state.currentFilter?.searchQuery,
-      transliteratedQuery: transliterated,
-      startingLetter: state.currentFilter?.startingLetter,
-      boothCode: state.currentFilter?.boothCode,
-      wardNo: state.currentFilter?.wardNo,
-      municipalityId: await _getMunicipalityId(
-        state.currentFilter?.municipality,
-      ),
-      districtId: await _getDistrictId(state.currentFilter?.district),
-      provinceId: await _getProvinceId(state.currentFilter?.province),
-      gender: state.currentFilter?.gender,
-      minAge: state.currentFilter?.ageRange?.start.round(),
-      maxAge: state.currentFilter?.ageRange?.end.round(),
-      limit: state.pageSize == -1 ? null : state.pageSize,
-      offset: state.pageSize == -1
-          ? null
-          : (state.currentPage - 1) * state.pageSize,
-    );
-    debugPrint('loadVoters: Fetched ${newItems.length} voters');
-
-    state = state.copyWith(
-      voters: newItems.map((e) => Voter.fromMap(e)).toList(),
-      totalPages: totalPages,
-      cachedTotalCount: total,
-      isLoading: false,
-    );
-    debugPrint('loadVoters: Successfully loaded voters');
-  }
+  // ────────────────────────────────────────────────────────────────────────────
+  // Filter & reload
+  // ────────────────────────────────────────────────────────────────────────────
 
   Future<void> applyFiltersAndReload(FilterState filter) async {
     state = state.copyWith(
@@ -257,29 +195,23 @@ class VoterNotifier extends StateNotifier<VoterState> {
       currentPage: 1,
       cachedTotalCount: null,
     );
-    clearAnalyticsData();
+    clearAnalyticsCache();
     await loadVoters();
   }
 
   void clearFilters() {
     state = state.copyWith(
-      currentFilter: FilterState(),
+      currentFilter: const FilterState(),
       currentPage: 1,
       cachedTotalCount: null,
     );
-    clearAnalyticsData();
+    clearAnalyticsCache();
     loadVoters();
   }
 
-  void setPageSize(int size) {
-    if (state.pageSize == size) return;
-    state = state.copyWith(
-      pageSize: size,
-      currentPage: 1,
-      cachedTotalCount: null,
-    );
-    loadVoters();
-  }
+  // ────────────────────────────────────────────────────────────────────────────
+  // Pagination
+  // ────────────────────────────────────────────────────────────────────────────
 
   void goToPage(int page) {
     if (page < 1 || page > state.totalPages || page == state.currentPage)
@@ -289,96 +221,142 @@ class VoterNotifier extends StateNotifier<VoterState> {
   }
 
   void nextPage() {
-    if (state.currentPage < state.totalPages) {
+    if (state.canGoNext) {
       state = state.copyWith(currentPage: state.currentPage + 1);
       loadVoters();
     }
   }
 
   void previousPage() {
-    if (state.currentPage > 1) {
+    if (state.canGoPrevious) {
       state = state.copyWith(currentPage: state.currentPage - 1);
       loadVoters();
     }
   }
 
-  Future<Map<String, dynamic>> getAnalyticsData() async {
-    final cacheKey = '${state.currentFilter}#${state.groupBy}';
+  void setPageSize(int size) {
+    if (size == state.pageSize) return;
+    state = state.copyWith(
+      pageSize: size,
+      currentPage: 1,
+      cachedTotalCount: null,
+    );
+    loadVoters();
+  }
+
+  // ────────────────────────────────────────────────────────────────────────────
+  // Analytics
+  // ────────────────────────────────────────────────────────────────────────────
+
+  Future<Map<String, dynamic>> getAnalyticsData({FilterState? filter}) async {
+    final effectiveFilter =
+        filter ?? state.currentFilter ?? const FilterState();
+    final cacheKey = effectiveFilter.toString() + state.groupBy;
+
     if (state.analyticsCache.containsKey(cacheKey)) {
       return state.analyticsCache[cacheKey]!;
     }
 
     final data = await _dbHelper.getAnalyticsData(
-      searchQuery: state.currentFilter?.searchQuery,
-      startingLetter: state.currentFilter?.startingLetter,
-      boothCode: state.currentFilter?.boothCode,
-      wardNo: state.currentFilter?.wardNo,
-      municipalityId: await _getMunicipalityId(
-        state.currentFilter?.municipality,
-      ),
-      districtId: await _getDistrictId(state.currentFilter?.district),
-      provinceId: await _getProvinceId(state.currentFilter?.province),
-      gender: state.currentFilter?.gender,
-      minAge: state.currentFilter?.ageRange?.start.round(),
-      maxAge: state.currentFilter?.ageRange?.end.round(),
+      searchQuery: effectiveFilter.searchQuery,
+      startingLetter: effectiveFilter.startingLetter,
+      provinceId: await _getProvinceId(effectiveFilter.province),
+      districtId: await _getDistrictId(effectiveFilter.district),
+      municipalityId: await _getMunicipalityId(effectiveFilter.municipality),
+      wardNo: effectiveFilter.wardNo,
+      boothCode: effectiveFilter.boothCode,
+      gender: effectiveFilter.gender,
+      minAge: effectiveFilter.minAge,
+      maxAge: effectiveFilter.maxAge,
       groupBy: state.groupBy,
     );
 
     state = state.copyWith(
       analyticsCache: {...state.analyticsCache, cacheKey: data},
     );
+
     return data;
   }
 
-  void setGroupBy(String value) {
-    if (!_groupByOptions.contains(value) || state.groupBy == value) return;
-    state = state.copyWith(groupBy: value, analyticsCache: {});
+  Future<int> getTotalCount({FilterState? filter}) async {
+    final effectiveFilter =
+        filter ?? state.currentFilter ?? const FilterState();
+    return await _dbHelper.getVoterCount(
+      searchQuery: effectiveFilter.searchQuery,
+      transliteratedQuery: null, // Add if needed
+      startingLetter: effectiveFilter.startingLetter,
+      provinceId: await _getProvinceId(effectiveFilter.province),
+      districtId: await _getDistrictId(effectiveFilter.district),
+      municipalityId: await _getMunicipalityId(effectiveFilter.municipality),
+      wardNo: effectiveFilter.wardNo,
+      boothCode: effectiveFilter.boothCode,
+      gender: effectiveFilter.gender,
+      minAge: effectiveFilter.minAge,
+      maxAge: effectiveFilter.maxAge,
+    );
+  }
+
+  Future<List<Voter>> getVotersForExport({FilterState? filter}) async {
+    final effectiveFilter =
+        filter ?? state.currentFilter ?? const FilterState();
+    final rows = await _dbHelper.getVoters(
+      searchQuery: effectiveFilter.searchQuery,
+      transliteratedQuery: null,
+      startingLetter: effectiveFilter.startingLetter,
+      provinceId: await _getProvinceId(effectiveFilter.province),
+      districtId: await _getDistrictId(effectiveFilter.district),
+      municipalityId: await _getMunicipalityId(effectiveFilter.municipality),
+      wardNo: effectiveFilter.wardNo,
+      boothCode: effectiveFilter.boothCode,
+      gender: effectiveFilter.gender,
+      minAge: effectiveFilter.minAge,
+      maxAge: effectiveFilter.maxAge,
+      limit: null,
+      offset: null,
+    );
+    return rows.map((row) => Voter.fromMap(row)).toList();
   }
 
   Future<void> loadAnalyticsData() async {
-    if (state.analyticsData != null) return; // Already loaded
-
-    state = state.copyWith(isAnalyticsLoading: true, analyticsError: null);
-
+    state = state.copyWith(isAnalyticsLoading: true);
     try {
       final data = await getAnalyticsData();
-      state = state.copyWith(analyticsData: data, isAnalyticsLoading: false);
-    } catch (error) {
+      state = state.copyWith(isAnalyticsLoading: false);
+    } catch (e) {
       state = state.copyWith(
-        analyticsError: error.toString(),
         isAnalyticsLoading: false,
+        analyticsError: e.toString(),
       );
     }
   }
 
-  void clearAnalyticsData() {
-    state = state.copyWith(
-      analyticsData: null,
-      analyticsError: null,
-      isAnalyticsLoading: false,
-    );
+  Future<Voter?> getVoterDetails(int voterId) async {
+    final voterMap = await _dbHelper.getVoterById(voterId);
+    return voterMap != null ? Voter.fromMap(voterMap) : null;
   }
 
-  void refresh() {
-    state = state.copyWith(cachedTotalCount: null);
-    loadVoters();
+  void clearAnalyticsCache() {
     state = state.copyWith(analyticsCache: {});
-    clearAnalyticsData();
   }
+
+  // ────────────────────────────────────────────────────────────────────────────
+  // Helper methods for ID resolution
+  // ────────────────────────────────────────────────────────────────────────────
+
+  Future<int?> _getProvinceId(String? name) async =>
+      name != null ? await _dbHelper.getProvinceIdByName(name) : null;
+
+  Future<int?> _getDistrictId(String? name) async =>
+      name != null ? await _dbHelper.getDistrictIdByName(name) : null;
+
+  Future<int?> _getMunicipalityId(String? name) async =>
+      name != null ? await _dbHelper.getMunicipalityIdByName(name) : null;
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Providers
+// ─────────────────────────────────────────────────────────────────────────────
 
 final voterProvider = StateNotifierProvider<VoterNotifier, VoterState>(
   (ref) => VoterNotifier(),
 );
-
-final totalVoterCountProvider = FutureProvider.autoDispose<int>((ref) async {
-  // Watch the current filter from filterProvider
-  final currentFilter = ref.watch(filterProvider);
-
-  // Watch the voter provider's current filter to trigger recomputation when it changes
-  ref.watch(voterProvider.select((state) => state.currentFilter));
-
-  // Now safely call the method
-  final voterNotifier = ref.read(voterProvider.notifier);
-  return voterNotifier.getTotalCount();
-});

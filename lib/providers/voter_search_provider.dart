@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../helpers/database_helper.dart';
 import '../models/search_models.dart';
+import '../models/voter.dart';
 import 'location_providers.dart';
 
 // ── Search Params Provider ───────────────────────────────────────────────────

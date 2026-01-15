@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../models/search_models.dart';
+import '../models/voter.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._();
@@ -130,7 +131,7 @@ class DatabaseHelper {
   Future<Map<String, int>> getGenderStats() async {
     final db = await database;
     final result = await db.rawQuery('''
-      SELECT 
+      SELECT
         COUNT(*) AS total,
         SUM(CASE WHEN gender = 'M' THEN 1 ELSE 0 END) AS male,
         SUM(CASE WHEN gender = 'F' THEN 1 ELSE 0 END) AS female
@@ -143,28 +144,106 @@ class DatabaseHelper {
       'female': row['female'] as int? ?? 0,
     };
   }
-}
 
-// Update your Voter model
-class Voter {
-  final int? id;
-  final String name;
-  final String voterId;
-  final String gender;
-
-  Voter({
-    this.id,
-    required this.name,
-    required this.voterId,
-    required this.gender,
-  });
-
-  factory Voter.fromMap(Map<String, dynamic> map) {
-    return Voter(
-      id: map['id'] as int?,
-      name: map['name'] as String,
-      voterId: map['voterId'] as String,
-      gender: map['gender'] as String? ?? 'U',
+  Future<Map<String, dynamic>?> getVoterById(int voterId) async {
+    final db = await database;
+    final rows = await db.query(
+      'voter',
+      where: 'id = ?',
+      whereArgs: [voterId],
+      limit: 1,
     );
+    return rows.isNotEmpty ? rows.first : null;
+  }
+
+  // Placeholder methods - implement based on your DB schema
+  Future<int> getVoterCount({
+    String? searchQuery,
+    String? transliteratedQuery,
+    String? startingLetter,
+    int? provinceId,
+    int? districtId,
+    int? municipalityId,
+    int? wardNo,
+    String? boothCode,
+    String? gender,
+    int? minAge,
+    int? maxAge,
+  }) async {
+    final db = await database;
+    // Implement count query with filters
+    final result = await db.rawQuery('SELECT COUNT(*) as count FROM voter');
+    return Sqflite.firstIntValue(result) ?? 0;
+  }
+
+  Future<List<Map<String, dynamic>>> getVoters({
+    String? searchQuery,
+    String? transliteratedQuery,
+    String? startingLetter,
+    int? provinceId,
+    int? districtId,
+    int? municipalityId,
+    int? wardNo,
+    String? boothCode,
+    String? gender,
+    int? minAge,
+    int? maxAge,
+    int? limit,
+    int? offset,
+  }) async {
+    final db = await database;
+    // Implement query with filters
+    return await db.query('voter', limit: limit, offset: offset);
+  }
+
+  Future<Map<String, dynamic>> getAnalyticsData({
+    String? searchQuery,
+    String? startingLetter,
+    int? provinceId,
+    int? districtId,
+    int? municipalityId,
+    int? wardNo,
+    String? boothCode,
+    String? gender,
+    int? minAge,
+    int? maxAge,
+    String? groupBy,
+  }) async {
+    final db = await database;
+    // Implement analytics query
+    return {'total': 0, 'male': 0, 'female': 0};
+  }
+
+  Future<int?> getProvinceIdByName(String name) async {
+    final db = await database;
+    final rows = await db.query(
+      'province',
+      where: 'name = ?',
+      whereArgs: [name],
+      limit: 1,
+    );
+    return rows.isNotEmpty ? rows.first['id'] as int : null;
+  }
+
+  Future<int?> getDistrictIdByName(String name) async {
+    final db = await database;
+    final rows = await db.query(
+      'district',
+      where: 'name = ?',
+      whereArgs: [name],
+      limit: 1,
+    );
+    return rows.isNotEmpty ? rows.first['id'] as int : null;
+  }
+
+  Future<int?> getMunicipalityIdByName(String name) async {
+    final db = await database;
+    final rows = await db.query(
+      'municipality',
+      where: 'name = ?',
+      whereArgs: [name],
+      limit: 1,
+    );
+    return rows.isNotEmpty ? rows.first['id'] as int : null;
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/voter.dart';
 import '../providers/voter_provider.dart';
 import '../providers/filter_provider.dart';
-import '../widgets/filter_panel.dart';
+import '../widgets/filter_panel_widget.dart';
 
 class VotersListScreen extends ConsumerStatefulWidget {
   const VotersListScreen({super.key});
@@ -129,7 +129,8 @@ class _VotersListScreenState extends ConsumerState<VotersListScreen> {
         filter.wardNo != null ||
         filter.boothCode != null ||
         filter.gender != null ||
-        filter.ageRange != null ||
+        filter.minAge != null ||
+        filter.maxAge != null ||
         filter.startingLetter != null ||
         (filter.searchQuery?.isNotEmpty ?? false);
   }
@@ -143,10 +144,8 @@ class _VotersListScreenState extends ConsumerState<VotersListScreen> {
     if (filter.wardNo != null) parts.add('Ward: ${filter.wardNo}');
     if (filter.boothCode != null) parts.add('Booth: ${filter.boothCode}');
     if (filter.gender != null) parts.add('Gender: ${filter.gender}');
-    if (filter.ageRange != null) {
-      parts.add(
-        'Age: ${filter.ageRange!.start.round()}–${filter.ageRange!.end.round()}',
-      );
+    if (filter.minAge != null || filter.maxAge != null) {
+      parts.add('Age: ${filter.minAge ?? 18}–${filter.maxAge ?? 100}');
     }
     if (filter.startingLetter != null)
       parts.add('Starts with: ${filter.startingLetter}');

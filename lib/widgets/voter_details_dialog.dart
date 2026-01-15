@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../helpers/database_helper.dart';
 import '../providers/voter_provider.dart';
 
 class VoterDetailsDialog extends ConsumerWidget {
@@ -127,6 +128,7 @@ final voterDetailsProvider = FutureProvider.family<Map<String, dynamic>, int>((
   ref,
   voterId,
 ) async {
-  final provider = ref.watch(voterProvider.notifier);
-  return provider.getVoterDetails(voterId);
+  final dbHelper = DatabaseHelper.instance;
+  final voterMap = await dbHelper.getVoterById(voterId);
+  return voterMap ?? {};
 });
