@@ -5,6 +5,9 @@ import '../models/voter.dart';
 import '../helpers/database_helper.dart';
 import '../services/transliteration_service.dart';
 import '../providers/filter_provider.dart';
+import '../helpers/text_helper.dart';
+import '../models/search_params.dart';
+import '../providers/voter_search_provider.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Analytics provider – recomputes when filter changes
@@ -111,7 +114,10 @@ class VoterNotifier extends StateNotifier<VoterState> {
   // Core loading logic
   // ────────────────────────────────────────────────────────────────────────────
 
-  Future<void> loadVoters() async {
+  Future<void> loadVoters({
+    SearchField? field,
+    SearchMatchMode? matchMode,
+  }) async {
     if (state.isLoading) return;
 
     state = state.copyWith(isLoading: true, loadingError: null);
@@ -129,11 +135,13 @@ class VoterNotifier extends StateNotifier<VoterState> {
         debugPrint('Transliterated query: $transliteratedQuery');
       }
 
-      // Get total count first (for pagination)
-      final totalCount = await _dbHelper.getVoterCount(
-        searchQuery: filter.searchQuery,
-        transliteratedQuery: transliteratedQuery,
+      // Fetch all voters with other filters (no search)
+      final rows = await _dbHelper.getVoters(
+        searchQuery: null,
+        transliteratedQuery: null,
         startingLetter: filter.startingLetter,
+        field: null,
+        matchMode: null,
         provinceId: await _getProvinceId(filter.province),
         districtId: await _getDistrictId(filter.district),
         municipalityId: await _getMunicipalityId(filter.municipality),
@@ -142,32 +150,52 @@ class VoterNotifier extends StateNotifier<VoterState> {
         gender: filter.gender,
         minAge: filter.minAge,
         maxAge: filter.maxAge,
+        limit: null,
+        offset: null,
       );
 
+      List<Voter> allVoters = rows.map((row) => Voter.fromMap(row)).toList();
+
+      // Apply search filtering in memory if query exists
+      List<Voter> filteredVoters = allVoters;
+      if (filter.searchQuery?.isNotEmpty == true) {
+        final queryNorm = normalizeNepali(filter.searchQuery);
+        final effectiveField = field ?? filter.searchField ?? SearchField.name;
+        final effectiveMatchMode =
+            matchMode ?? filter.searchMatchMode ?? SearchMatchMode.startsWith;
+
+        filteredVoters = allVoters.where((v) {
+          final value = effectiveField == SearchField.voterId
+              ? v.voterId
+              : v.nameNepali;
+          final valueNorm = normalizeNepali(value);
+          final matches = effectiveMatchMode == SearchMatchMode.startsWith
+              ? valueNorm.startsWith(queryNorm)
+              : valueNorm.contains(queryNorm);
+
+          if (kDebugMode) {
+            debugPrint(
+              'Query: "$queryNorm", Value: "$valueNorm", Matches: $matches',
+            );
+          }
+
+          return matches;
+        }).toList();
+      }
+
+      final totalCount = filteredVoters.length;
       final totalPages = state.pageSize == -1
           ? 1
           : (totalCount / state.pageSize).ceil();
 
-      // Fetch paginated voters
-      final rows = await _dbHelper.getVoters(
-        searchQuery: filter.searchQuery,
-        transliteratedQuery: transliteratedQuery,
-        startingLetter: filter.startingLetter,
-        provinceId: await _getProvinceId(filter.province),
-        districtId: await _getDistrictId(filter.district),
-        municipalityId: await _getMunicipalityId(filter.municipality),
-        wardNo: filter.wardNo,
-        boothCode: filter.boothCode,
-        gender: filter.gender,
-        minAge: filter.minAge,
-        maxAge: filter.maxAge,
-        limit: state.pageSize == -1 ? null : state.pageSize,
-        offset: state.pageSize == -1
-            ? null
-            : (state.currentPage - 1) * state.pageSize,
-      );
-
-      final newVoters = rows.map((row) => Voter.fromMap(row)).toList();
+      // Paginate the filtered list
+      final startIndex = state.pageSize == -1
+          ? 0
+          : (state.currentPage - 1) * state.pageSize;
+      final endIndex = state.pageSize == -1
+          ? filteredVoters.length
+          : (startIndex + state.pageSize).clamp(0, filteredVoters.length);
+      final newVoters = filteredVoters.sublist(startIndex, endIndex);
 
       state = state.copyWith(
         voters: newVoters,
@@ -281,10 +309,14 @@ class VoterNotifier extends StateNotifier<VoterState> {
   Future<int> getTotalCount({FilterState? filter}) async {
     final effectiveFilter =
         filter ?? state.currentFilter ?? const FilterState();
-    return await _dbHelper.getVoterCount(
-      searchQuery: effectiveFilter.searchQuery,
-      transliteratedQuery: null, // Add if needed
+
+    // Fetch all voters with other filters
+    final rows = await _dbHelper.getVoters(
+      searchQuery: null,
+      transliteratedQuery: null,
       startingLetter: effectiveFilter.startingLetter,
+      field: null,
+      matchMode: null,
       provinceId: await _getProvinceId(effectiveFilter.province),
       districtId: await _getDistrictId(effectiveFilter.district),
       municipalityId: await _getMunicipalityId(effectiveFilter.municipality),
@@ -293,7 +325,31 @@ class VoterNotifier extends StateNotifier<VoterState> {
       gender: effectiveFilter.gender,
       minAge: effectiveFilter.minAge,
       maxAge: effectiveFilter.maxAge,
+      limit: null,
+      offset: null,
     );
+
+    List<Voter> allVoters = rows.map((row) => Voter.fromMap(row)).toList();
+
+    // Apply search filtering in memory if query exists
+    if (effectiveFilter.searchQuery?.isNotEmpty == true) {
+      final queryNorm = normalizeNepali(effectiveFilter.searchQuery);
+      final effectiveField = effectiveFilter.searchField ?? SearchField.name;
+      final effectiveMatchMode =
+          effectiveFilter.searchMatchMode ?? SearchMatchMode.startsWith;
+
+      allVoters = allVoters.where((v) {
+        final value = effectiveField == SearchField.voterId
+            ? v.voterId
+            : v.nameNepali;
+        final valueNorm = normalizeNepali(value);
+        return effectiveMatchMode == SearchMatchMode.startsWith
+            ? valueNorm.startsWith(queryNorm)
+            : valueNorm.contains(queryNorm);
+      }).toList();
+    }
+
+    return allVoters.length;
   }
 
   Future<List<Voter>> getVotersForExport({FilterState? filter}) async {

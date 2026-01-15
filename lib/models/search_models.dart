@@ -8,22 +8,26 @@ class SearchParams {
   final SearchField field;
   final SearchMatchMode matchMode;
   final String query;
+  final int limit;
 
   const SearchParams({
     this.field = SearchField.name,
     this.matchMode = SearchMatchMode.startsWith,
     this.query = '',
+    this.limit = 100,
   });
 
   SearchParams copyWith({
     SearchField? field,
     SearchMatchMode? matchMode,
     String? query,
+    int? limit,
   }) {
     return SearchParams(
       field: field ?? this.field,
       matchMode: matchMode ?? this.matchMode,
       query: query ?? this.query,
+      limit: limit ?? this.limit,
     );
   }
 }

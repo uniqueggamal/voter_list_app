@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../models/search_params.dart';
+
 class FilterState {
   final String? province;
   final String? district;
@@ -16,6 +18,8 @@ class FilterState {
 
   // Optional: keep search query here if you want filters + search combined
   final String? searchQuery;
+  final SearchField searchField;
+  final SearchMatchMode searchMatchMode;
 
   const FilterState({
     this.province,
@@ -29,6 +33,8 @@ class FilterState {
     this.startingLetter,
     this.mainCategory,
     this.searchQuery,
+    this.searchField = SearchField.name,
+    this.searchMatchMode = SearchMatchMode.startsWith,
   });
 
   FilterState copyWith({
@@ -43,6 +49,8 @@ class FilterState {
     String? startingLetter,
     String? mainCategory,
     String? searchQuery,
+    SearchField? searchField,
+    SearchMatchMode? searchMatchMode,
   }) {
     return FilterState(
       province: province ?? this.province,
@@ -56,6 +64,8 @@ class FilterState {
       startingLetter: startingLetter ?? this.startingLetter,
       mainCategory: mainCategory ?? this.mainCategory,
       searchQuery: searchQuery ?? this.searchQuery,
+      searchField: searchField ?? this.searchField,
+      searchMatchMode: searchMatchMode ?? this.searchMatchMode,
     );
   }
 

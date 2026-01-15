@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../helpers/database_helper.dart';
 import '../providers/voter_provider.dart';
@@ -22,7 +23,7 @@ class VoterDetailsDialog extends ConsumerWidget {
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 500, maxWidth: 600),
         child: voterDetailsAsync.when(
-          data: (details) => _buildDetailsContent(details),
+          data: (details) => _buildDetailsContent(context, details),
           loading: () => const Center(
             child: Padding(
               padding: EdgeInsets.all(32),
@@ -55,7 +56,10 @@ class VoterDetailsDialog extends ConsumerWidget {
     );
   }
 
-  Widget _buildDetailsContent(Map<String, dynamic> details) {
+  Widget _buildDetailsContent(
+    BuildContext context,
+    Map<String, dynamic> details,
+  ) {
     if (details.isEmpty) {
       return const Center(
         child: Text(
@@ -65,59 +69,148 @@ class VoterDetailsDialog extends ConsumerWidget {
       );
     }
 
-    final fieldOrder = [
-      {'key': 'name_np', 'label': 'नाम'},
-      {'key': 'name', 'label': 'Name (English)'},
-      {'key': 'voter_no', 'label': 'मतदाता नं.'},
-      {'key': 'age', 'label': 'उमेर'},
-      {'key': 'gender', 'label': 'लिङ्ग'},
-      {'key': 'parent_name_np', 'label': 'बुवा/आमाको नाम'},
-      {'key': 'spouse_name_np', 'label': 'पति/पत्नीको नाम'},
-      {'key': 'province', 'label': 'प्रदेश'},
-      {'key': 'district', 'label': 'जिल्ला'},
-      {'key': 'municipality', 'label': 'नगरपालिका / गाउँपालिका'},
-      {'key': 'ward_no', 'label': 'वडा नं.'},
-      {'key': 'booth_name', 'label': 'मतदान केन्द्र'},
-      {'key': 'booth_code', 'label': 'बूथ कोड'},
-    ];
+    final name =
+        details['name_np']?.toString() ??
+        details['name']?.toString() ??
+        'नाम उपलब्ध छैन';
+    final voterId =
+        details['voter_no']?.toString() ?? details['voterId']?.toString() ?? '';
+    final gender = details['gender']?.toString() ?? '';
+    final age = details['age']?.toString() ?? '';
 
     return SingleChildScrollView(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
-        children: fieldOrder.map((field) {
-          final key = field['key']!;
-          final label = field['label']!;
-          final value = details[key]?.toString();
-
-          if (value == null || value.isEmpty) return const SizedBox.shrink();
-
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 160,
-                  child: Text(
-                    '$label :',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15,
-                      color: Colors.blueGrey,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    value,
-                    style: const TextStyle(fontSize: 15, height: 1.4),
-                  ),
-                ),
-              ],
+        children: [
+          // Gender Avatar
+          CircleAvatar(
+            radius: 40,
+            backgroundColor: gender == 'M' ? Colors.blue : Colors.pink,
+            child: Text(
+              gender,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          );
-        }).toList(),
+          ),
+          const SizedBox(height: 16),
+          // Name
+          Text(
+            name,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          // Voter ID with copy
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'ID: $voterId',
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+              IconButton(
+                icon: const Icon(Icons.copy, size: 16),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: voterId));
+                  // Show snackbar, but since it's dialog, perhaps not
+                },
+                tooltip: 'Copy Voter ID',
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          // Details Cards
+          _buildDetailCard('नाम', name),
+          _buildDetailCard('मतदाता नं.', voterId),
+          _buildDetailCard('उमेर', age),
+          _buildDetailCard(
+            'लिङ्ग',
+            gender == 'M'
+                ? 'पुरुष'
+                : gender == 'F'
+                ? 'महिला'
+                : gender,
+          ),
+          if (details['parent_name_np']?.toString().isNotEmpty ?? false)
+            _buildDetailCard(
+              'बुवा/आमा नाम',
+              details['parent_name_np'].toString(),
+            ),
+          if (details['spouse_name_np']?.toString().isNotEmpty ?? false)
+            _buildDetailCard(
+              'श्रीमान्/श्रीमती नाम',
+              details['spouse_name_np'].toString(),
+            ),
+          if (details['ward_no']?.toString().isNotEmpty ?? false)
+            _buildDetailCard('वडा नं.', details['ward_no'].toString()),
+          if (details['booth_code']?.toString().isNotEmpty ?? false)
+            _buildDetailCard('बुथ कोड', details['booth_code'].toString()),
+          // Placeholders
+          _buildDetailCard('फोन', 'आउँदैछ...'),
+          _buildDetailCard('टिप्पणीहरू', 'आउँदैछ...'),
+          _buildDetailCard('समूह/वर्गीकरण', 'आउँदैछ...'),
+          const SizedBox(height: 16),
+          // Action Buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton.icon(
+                icon: const Icon(Icons.call),
+                label: const Text('कल गर्नुहोस्'),
+                onPressed: () {
+                  // Placeholder
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Call feature coming soon')),
+                  );
+                },
+              ),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.message),
+                label: const Text('सन्देश पठाउनुहोस्'),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Message feature coming soon'),
+                    ),
+                  );
+                },
+              ),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.edit),
+                label: const Text('सम्पादन गर्नुहोस्'),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Edit feature coming soon')),
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailCard(String label, String value) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          children: [
+            Text(
+              '$label: ',
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.blueGrey,
+              ),
+            ),
+            Expanded(child: Text(value, style: const TextStyle(fontSize: 16))),
+          ],
+        ),
       ),
     );
   }

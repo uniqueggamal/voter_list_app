@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../helpers/database_helper.dart';
-import '../models/search_models.dart';
+import '../models/search_params.dart';
 import '../models/voter.dart';
 import 'location_providers.dart';
 
@@ -38,6 +38,7 @@ final voterSearchProvider = FutureProvider.family<List<Voter>, SearchParams>((
       municipalityId: ref.watch(selectedMunicipalityProvider),
       wardId: ref.watch(selectedWardProvider),
       boothId: ref.watch(selectedBoothProvider),
+      limit: params.limit,
     );
   } catch (e, stack) {
     // In real app: log error (e.g. Firebase Crashlytics, Sentry)

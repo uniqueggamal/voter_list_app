@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../providers/filter_provider.dart';
 import '../providers/location_repo_provider.dart';
+import '../providers/voter_provider.dart';
 import '../providers/voter_search_provider.dart';
 
 class FilterPanelWidget extends ConsumerStatefulWidget {
@@ -110,13 +111,17 @@ class _FilterPanelWidgetState extends ConsumerState<FilterPanelWidget> {
                 data: (repo) {
                   final provinces = repo
                       .getProvinces(); // assume returns List<String> or List<Map>
-                  final districts = repo.getDistricts(
-                    province: filter.province,
-                  );
-                  final muns = repo.getMunicipalities(
-                    province: filter.province,
-                    district: filter.district,
-                  );
+                  final districts = repo
+                      .getDistricts(province: filter.province)
+                      .toSet()
+                      .toList();
+                  final muns = repo
+                      .getMunicipalities(
+                        province: filter.province,
+                        district: filter.district,
+                      )
+                      .toSet()
+                      .toList();
                   final wards = repo.getWards(
                     province: filter.province,
                     district: filter.district,
@@ -133,6 +138,7 @@ class _FilterPanelWidgetState extends ConsumerState<FilterPanelWidget> {
                       wards
                           .map((w) => w['ward_no'] as int?)
                           .whereType<int>()
+                          .toSet()
                           .toList()
                         ..sort();
 
@@ -296,8 +302,10 @@ class _FilterPanelWidgetState extends ConsumerState<FilterPanelWidget> {
                     icon: const Icon(Icons.refresh),
                     label: const Text('Apply & Refresh'),
                     onPressed: () {
-                      // Force search refresh
-                      ref.invalidate(voterSearchProvider);
+                      final currentFilter = ref.read(filterProvider);
+                      ref
+                          .read(voterProvider.notifier)
+                          .applyFiltersAndReload(currentFilter);
                       Navigator.pop(context);
                     },
                   ),
