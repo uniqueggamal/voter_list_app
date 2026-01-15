@@ -1,0 +1,90 @@
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL UNIQUE
+            )
+
+CREATE TABLE sqlite_sequence(name,seq)
+
+CREATE TABLE district (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                province_id INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                FOREIGN KEY (province_id) REFERENCES province(id)
+            )
+
+CREATE TABLE municipality (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                district_id INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                type TEXT,
+                FOREIGN KEY (district_id) REFERENCES district(id)
+            )
+
+CREATE TABLE ward (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                municipality_id INTEGER NOT NULL,
+                ward_no INTEGER NOT NULL,
+                FOREIGN KEY (municipality_id) REFERENCES municipality(id),
+                UNIQUE(municipality_id, ward_no)
+            )
+
+CREATE TABLE election_booth (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                ward_id INTEGER NOT NULL,
+                booth_code TEXT NOT NULL,
+                booth_name TEXT,
+                FOREIGN KEY (ward_id) REFERENCES ward(id)
+            )
+
+CREATE TABLE voter (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                booth_id INTEGER NOT NULL,
+                voter_no TEXT NOT NULL,
+                name_np TEXT NOT NULL,
+                age INTEGER,
+                gender TEXT,
+                spouse_name_np TEXT,
+                parent_name_np TEXT,
+                FOREIGN KEY (booth_id) REFERENCES election_booth(id),
+                UNIQUE (booth_id, voter_no)
+            )
+
+CREATE TABLE voterdetails (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                voterid INTEGER NOT NULL,
+                name TEXT NOT NULL,
+                phone TEXT,
+                landline TEXT,
+                social_media TEXT,
+                FOREIGN KEY (voterid) REFERENCES voter(id)
+            )
+
+CREATE TABLE group_category (
+                GID INTEGER PRIMARY KEY AUTOINCREMENT,
+                Gname TEXT NOT NULL UNIQUE
+            )
+
+CREATE TABLE sub_category (
+                SID INTEGER PRIMARY KEY AUTOINCREMENT,
+                GID INTEGER NOT NULL,
+                Sname TEXT NOT NULL,
+                FOREIGN KEY (GID) REFERENCES group_category(GID)
+            )
+
+CREATE TABLE lastname (
+                SID INTEGER NOT NULL,
+                lname TEXT NOT NULL,
+                FOREIGN KEY (SID) REFERENCES sub_category(SID)
+            )
+
+CREATE TABLE category_lastname (
+                group_id INTEGER NOT NULL,
+                lastname TEXT NOT NULL,
+                FOREIGN KEY (group_id) REFERENCES group_category(GID)
+            )
+
+CREATE TABLE last_names (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                SID INTEGER,
+                Lname TEXT NOT NULL UNIQUE,
+                FOREIGN KEY (SID) REFERENCES sub_category(SID)
+            )
