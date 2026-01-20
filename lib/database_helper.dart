@@ -26,7 +26,7 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     final documentsDir = await getApplicationDocumentsDirectory();
-    final path = join(documentsDir.path, 'election.db');
+    final path = join(documentsDir.path, 'notes_list.db');
 
     // Debug path (only in debug mode)
     if (kDebugMode) {
@@ -41,7 +41,7 @@ class DatabaseHelper {
 
       // Copy from assets
       try {
-        final data = await rootBundle.load('assets/election.db');
+        final data = await rootBundle.load('assets/notes_list.db');
         final bytes = data.buffer.asUint8List(
           data.offsetInBytes,
           data.lengthInBytes,
@@ -80,7 +80,7 @@ class DatabaseHelper {
       debugPrint('Failed to open DB: $e');
       // Retry copy on failure (e.g., corrupted file)
       try {
-        final data = await rootBundle.load('assets/election.db');
+        final data = await rootBundle.load('assets/notes_list.db');
         final bytes = data.buffer.asUint8List(
           data.offsetInBytes,
           data.lengthInBytes,

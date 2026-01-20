@@ -1,0 +1,139 @@
+-- t1  → province
+CREATE TABLE t1 (
+    c1 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c2 TEXT NOT NULL UNIQUE
+);
+
+-- t2  → district
+CREATE TABLE t2 (
+    c3 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c4 INTEGER NOT NULL,
+    c5 TEXT NOT NULL,
+    FOREIGN KEY (c4) REFERENCES t1(c1)
+);
+
+-- t3  → municipality
+CREATE TABLE t3 (
+    c6 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c7 INTEGER NOT NULL,
+    c8 TEXT NOT NULL,
+    c9 TEXT,
+    FOREIGN KEY (c7) REFERENCES t2(c3)
+);
+
+-- t4  → ward
+CREATE TABLE t4 (
+    c10 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c11 INTEGER NOT NULL,
+    c12 INTEGER NOT NULL,
+    FOREIGN KEY (c11) REFERENCES t3(c6),
+    UNIQUE(c11, c12)
+);
+
+-- t5  → election_booth
+CREATE TABLE t5 (
+    c13 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c14 INTEGER NOT NULL,
+    c15 TEXT NOT NULL,
+    c16 TEXT,
+    FOREIGN KEY (c14) REFERENCES t4(c10)
+);
+
+-- t6  → voter
+CREATE TABLE t6 (
+    c17 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c18 INTEGER NOT NULL,
+    c19 TEXT NOT NULL,
+    c20 TEXT NOT NULL,
+    c21 INTEGER,
+    c22 TEXT,
+    c23 TEXT,
+    c24 TEXT,
+    FOREIGN KEY (c18) REFERENCES t5(c13),
+    UNIQUE (c18, c19)
+);
+
+-- t7  → voterdetails
+CREATE TABLE t7 (
+    c25 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c26 INTEGER NOT NULL,
+    c27 TEXT NOT NULL,
+    c28 TEXT,
+    c29 TEXT,
+    c30 TEXT,
+    FOREIGN KEY (c26) REFERENCES t6(c17)
+);
+
+-- t8  → tags
+CREATE TABLE t8 (
+    c31 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c32 TEXT NOT NULL UNIQUE,
+    c33 TEXT,
+    c34 TEXT DEFAULT (datetime('now'))
+);
+
+-- t9  → voter_tag
+CREATE TABLE t9 (
+    c35 INTEGER NOT NULL,
+    c36 INTEGER NOT NULL,
+    c37 TEXT DEFAULT (datetime('now')),
+    PRIMARY KEY (c35, c36),
+    FOREIGN KEY (c35) REFERENCES t7(c25) ON DELETE CASCADE,
+    FOREIGN KEY (c36) REFERENCES t8(c31) ON DELETE RESTRICT
+);
+
+-- t10 → main_ethnic_category
+CREATE TABLE t10 (
+    c38 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c39 TEXT NOT NULL UNIQUE,
+    c40 TEXT,
+    c41 TEXT DEFAULT (datetime('now')),
+    c42 TEXT DEFAULT (datetime('now')),
+    CONSTRAINT chk_c39_not_empty CHECK (c39 <> '')
+);
+
+-- t11 → sub_ethnic_category
+CREATE TABLE t11 (
+    c43 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c44 INTEGER NOT NULL,
+    c45 TEXT NOT NULL,
+    c46 TEXT,
+    c47 TEXT DEFAULT (datetime('now')),
+    c48 TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY (c44) REFERENCES t10(c38) ON DELETE RESTRICT,
+    UNIQUE (c44, c45),
+    CONSTRAINT chk_c45_not_empty CHECK (c45 <> '')
+);
+
+-- t12 → lastnames
+CREATE TABLE t12 (
+    c49 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c50 INTEGER,
+    c51 TEXT NOT NULL,
+    c52 TEXT,
+    c53 TEXT,
+    c54 TEXT,
+    c55 TEXT,
+    c56 INTEGER DEFAULT 0 CHECK (c56 IN (0,1)),
+    c57 TEXT,
+    c58 TEXT DEFAULT (datetime('now')),
+    c59 TEXT DEFAULT (datetime('now')),
+    FOREIGN KEY (c50) REFERENCES t11(c43) ON DELETE SET NULL,
+    CONSTRAINT chk_c51_not_empty CHECK (c51 <> '')
+);
+
+-- t13 → categorized
+CREATE TABLE t13 (
+    c60 INTEGER PRIMARY KEY AUTOINCREMENT,
+    c61 TEXT NOT NULL,
+    c62 TEXT NOT NULL,
+    c63 TEXT,
+    c64 TEXT,
+    c65 TEXT,
+    c66 TEXT DEFAULT (datetime('now'))
+);
+
+-- Indexes (optional but recommended)
+CREATE INDEX idx_c51 ON t12(c51);
+CREATE INDEX idx_c50 ON t12(c50);
+CREATE INDEX idx_c44 ON t11(c44);

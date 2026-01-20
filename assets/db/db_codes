@@ -1,0 +1,91 @@
+t1   → province
+  c1   → id
+  c2   → name
+
+t2   → district
+  c3   → id
+  c4   → province_id
+  c5   → name
+
+t3   → municipality
+  c6   → id
+  c7   → district_id
+  c8   → name
+  c9   → type
+
+t4   → ward
+  c10  → id
+  c11  → municipality_id
+  c12  → ward_no
+
+t5   → election_booth
+  c13  → id
+  c14  → ward_id
+  c15  → booth_code
+  c16  → booth_name
+
+t6   → voter
+  c17  → id
+  c18  → booth_id
+  c19  → voter_no
+  c20  → name_np
+  c21  → age
+  c22  → gender
+  c23  → spouse_name_np
+  c24  → parent_name_np
+
+t7   → voterdetails
+  c25  → id
+  c26  → voterid
+  c27  → name
+  c28  → phone
+  c29  → landline
+  c30  → social_media
+
+t8   → tags
+  c31  → id
+  c32  → name
+  c33  → category
+  c34  → created_at
+
+t9   → voter_tag
+  c35  → voterdetail_id
+  c36  → tag_id
+  c37  → assigned_at
+
+t10  → main_ethnic_category
+  c38  → MID
+  c39  → Mname
+  c40  → description
+  c41  → created_at
+  c42  → updated_at
+
+t11  → sub_ethnic_category
+  c43  → SID
+  c44  → MID
+  c45  → Sname
+  c46  → description
+  c47  → created_at
+  c48  → updated_at
+
+t12  → lastnames
+  c49  → id
+  c50  → SID
+  c51  → lastname
+  c52  → root
+  c53  → root_np
+  c54  → variants_en
+  c55  → variants_np
+  c56  → is_ambiguous
+  c57  → notes
+  c58  → created_at
+  c59  → updated_at
+
+t13  → categorized
+  c60  → id
+  c61  → voter_no
+  c62  → name
+  c63  → Mname
+  c64  → Sname
+  c65  → Lastname
+  c66  → created_at
