@@ -1,8 +1,8 @@
-# TODO: Fix App Loading Issue - COMPLETED
+# TODO for Remaking Filter Logic
 
-## Tasks
-- [x] Add `loadingError` field to VoterState in voter_provider.dart
-- [x] Update VoterState copyWith to include loadingError
-- [x] Modify loadVoters() in VoterNotifier to include timeout handling (30 seconds) and debug prints
-- [x] Update LoadingScreen to watch voterProvider instead of locationRepoProvider, show loading/error/retry for voter data
-- [x] Test the app to ensure loading completes or shows error/retry properly
+- [x] Simplify VoterNotifier loadVoters method to apply all filters at database level
+- [x] Remove complex caching and in-memory search filtering from VoterNotifier
+- [x] Update database_helper.dart getVoters method to handle mainCategory filter
+- [ ] Update VoterNotifier applyFiltersAndReload to use simplified approach
+- [ ] Update filter_panel_widget.dart to ensure proper filter application
+- [ ] Test the updated filter logic

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../helpers/database_helper.dart';
-import '../models/search_params.dart';
+import '../models/search_models.dart';
 import '../models/voter.dart';
 import 'location_providers.dart';
 
@@ -30,7 +30,7 @@ final voterSearchProvider = FutureProvider.family<List<Voter>, SearchParams>((
   final dbHelper = ref.watch(dbHelperProvider);
 
   try {
-    return await dbHelper.searchVoters(
+    return await dbHelper.searchVotersForProvider(
       query: query,
       field: params.field,
       mode: params.matchMode,

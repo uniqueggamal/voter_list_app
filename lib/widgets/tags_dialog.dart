@@ -40,56 +40,67 @@ class _TagsDialogState extends ConsumerState<TagsDialog> {
       title: const Text('Tags'),
       content: SizedBox(
         width: double.maxFinite,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Add new tag input
-            Row(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(context).size.height * 0.6,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: _tagController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter tag name',
-                      border: OutlineInputBorder(),
+                // Add new tag input
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _tagController,
+                        decoration: const InputDecoration(
+                          hintText: 'Enter tag name',
+                          border: OutlineInputBorder(),
+                        ),
+                        onSubmitted: (_) => _addTag(),
+                      ),
                     ),
-                    onSubmitted: (_) => _addTag(),
-                  ),
+                    const SizedBox(width: 8),
+                    ElevatedButton(
+                      onPressed: _addTag,
+                      child: const Text('Add'),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                ElevatedButton(onPressed: _addTag, child: const Text('Add')),
+                const SizedBox(height: 16),
+                // Existing tags list
+                if (tags.isEmpty)
+                  const Text('No tags yet. Add your first tag above!')
+                else
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: tags.length,
+                    itemBuilder: (context, index) {
+                      final tag = tags[index];
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Color(
+                            int.parse(tag.color.replaceFirst('#', '0xFF')),
+                          ),
+                          radius: 12,
+                        ),
+                        title: Text(tag.name),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete, size: 20),
+                          onPressed: () async {
+                            await ref
+                                .read(tagProvider.notifier)
+                                .removeTag(tag.id);
+                          },
+                        ),
+                      );
+                    },
+                  ),
               ],
             ),
-            const SizedBox(height: 16),
-            // Existing tags list
-            if (tags.isEmpty)
-              const Text('No tags yet. Add your first tag above!')
-            else
-              SizedBox(
-                height: 200,
-                child: ListView.builder(
-                  itemCount: tags.length,
-                  itemBuilder: (context, index) {
-                    final tag = tags[index];
-                    return ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: Color(
-                          int.parse(tag.color.replaceFirst('#', '0xFF')),
-                        ),
-                        radius: 12,
-                      ),
-                      title: Text(tag.name),
-                      trailing: IconButton(
-                        icon: const Icon(Icons.delete, size: 20),
-                        onPressed: () {
-                          ref.read(tagProvider.notifier).removeTag(tag.id);
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-          ],
+          ),
         ),
       ),
       actions: [

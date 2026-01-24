@@ -23,7 +23,7 @@ class VoterDetailsDialog extends ConsumerWidget {
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 500, maxWidth: 600),
         child: voterDetailsAsync.when(
-          data: (details) => _buildDetailsContent(context, details),
+          data: (details) => _buildDetailsContent(context, ref, details),
           loading: () => const Center(
             child: Padding(
               padding: EdgeInsets.all(32),
@@ -58,6 +58,7 @@ class VoterDetailsDialog extends ConsumerWidget {
 
   Widget _buildDetailsContent(
     BuildContext context,
+    WidgetRef ref,
     Map<String, dynamic> details,
   ) {
     if (details.isEmpty) {
@@ -145,12 +146,47 @@ class VoterDetailsDialog extends ConsumerWidget {
               details['spouse_name_np'].toString(),
             ),
           if (details['ward_no']?.toString().isNotEmpty ?? false)
-            _buildDetailCard('वडा नं.', details['ward_no'].toString()),
+            _buildDetailCard(
+              'वडा नं.',
+              details['ward_no'].toString(),
+              copyable: true,
+            ),
           if (details['booth_code']?.toString().isNotEmpty ?? false)
-            _buildDetailCard('बुथ कोड', details['booth_code'].toString()),
-          // Placeholders
-          _buildDetailCard('फोन', 'आउँदैछ...'),
-          _buildDetailCard('टिप्पणीहरू', 'आउँदैछ...'),
+            _buildDetailCard(
+              'बुथ कोड',
+              details['booth_code'].toString(),
+              copyable: true,
+            ),
+          if (details['province']?.toString().isNotEmpty ?? false)
+            _buildDetailCard(
+              'प्रदेश',
+              details['province'].toString(),
+              copyable: true,
+            ),
+          if (details['district']?.toString().isNotEmpty ?? false)
+            _buildDetailCard(
+              'जिल्ला',
+              details['district'].toString(),
+              copyable: true,
+            ),
+          if (details['municipality']?.toString().isNotEmpty ?? false)
+            _buildDetailCard(
+              'नगरपालिका',
+              details['municipality'].toString(),
+              copyable: true,
+            ),
+          if (details['boothName']?.toString().isNotEmpty ?? false)
+            _buildDetailCard(
+              'बुथ नाम',
+              details['boothName'].toString(),
+              copyable: true,
+            ),
+          // Phone and Description
+          _buildDetailCard('फोन', details['phone']?.toString() ?? ''),
+          _buildDetailCard(
+            'टिप्पणीहरू',
+            details['description']?.toString() ?? '',
+          ),
           _buildDetailCard('समूह/वर्गीकरण', 'आउँदैछ...'),
           const SizedBox(height: 16),
           // Action Buttons
@@ -181,11 +217,7 @@ class VoterDetailsDialog extends ConsumerWidget {
               ElevatedButton.icon(
                 icon: const Icon(Icons.edit),
                 label: const Text('सम्पादन गर्नुहोस्'),
-                onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Edit feature coming soon')),
-                  );
-                },
+                onPressed: () => _showEditDialog(context, ref, details),
               ),
             ],
           ),
@@ -194,7 +226,7 @@ class VoterDetailsDialog extends ConsumerWidget {
     );
   }
 
-  Widget _buildDetailCard(String label, String value) {
+  Widget _buildDetailCard(String label, String value, {bool copyable = false}) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
       child: Padding(
@@ -209,9 +241,90 @@ class VoterDetailsDialog extends ConsumerWidget {
               ),
             ),
             Expanded(child: Text(value, style: const TextStyle(fontSize: 16))),
+            if (copyable && value.isNotEmpty)
+              IconButton(
+                icon: const Icon(Icons.copy, size: 16),
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: value));
+                },
+                tooltip: 'Copy $label',
+              ),
           ],
         ),
       ),
+    );
+  }
+
+  void _showEditDialog(
+    BuildContext context,
+    WidgetRef ref,
+    Map<String, dynamic> details,
+  ) {
+    final phoneController = TextEditingController(
+      text: details['phone']?.toString() ?? '',
+    );
+    final descriptionController = TextEditingController(
+      text: details['description']?.toString() ?? '',
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('सम्पादन गर्नुहोस्'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: phoneController,
+                decoration: const InputDecoration(labelText: 'फोन'),
+                keyboardType: TextInputType.phone,
+              ),
+              TextField(
+                controller: descriptionController,
+                decoration: const InputDecoration(labelText: 'टिप्पणीहरू'),
+                maxLines: 3,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('रद्द गर्नुहोस्'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final dbHelper = DatabaseHelper.instance;
+                final Map<String, dynamic> data = {
+                  'phone': phoneController.text.trim(),
+                  'description': descriptionController.text.trim(),
+                };
+
+                // Update the voter details record using the correct voter ID
+                final int voterIdToUpdate = voterId;
+                final result = await dbHelper.updateVoterDetails(
+                  voterIdToUpdate,
+                  data,
+                );
+
+                if (result > 0) {
+                  // Refresh the provider
+                  ref.refresh(voterDetailsProvider(voterId));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('विवरण अपडेट गरियो')),
+                  );
+                  Navigator.of(context).pop();
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('अपडेट गर्न सकिएन')),
+                  );
+                }
+              },
+              child: const Text('सुरक्षित गर्नुहोस्'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
@@ -223,5 +336,16 @@ final voterDetailsProvider = FutureProvider.family<Map<String, dynamic>, int>((
 ) async {
   final dbHelper = DatabaseHelper.instance;
   final voterMap = await dbHelper.getVoterById(voterId);
+  if (voterMap != null) {
+    // Fetch additional details from voterdetails table
+    final voterDetails = await dbHelper.getVoterDetailByVoterId(voterId);
+    if (voterDetails != null) {
+      voterMap.addAll(voterDetails);
+    } else {
+      // If no voterdetails entry, initialize with empty values
+      voterMap['phone'] = '';
+      voterMap['description'] = '';
+    }
+  }
   return voterMap ?? {};
 });

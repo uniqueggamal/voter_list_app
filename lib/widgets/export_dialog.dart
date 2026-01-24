@@ -22,6 +22,22 @@ class _ExportDialogState extends ConsumerState<ExportDialog> {
   bool _includeAllFilters = true;
   bool _isExporting = false;
 
+  // Column selection
+  final Map<String, bool> _selectedColumns = {
+    'voter_no': true,
+    'name': true,
+    'age': true,
+    'parents_name': true,
+    'spouse_name': true,
+    'province': true,
+    'district': true,
+    'municipality': true,
+    'ward_no': true,
+    'booth_name': true,
+    'main_category': true,
+    'sub_category': true,
+  };
+
   @override
   void initState() {
     super.initState();
@@ -44,6 +60,37 @@ class _ExportDialogState extends ConsumerState<ExportDialog> {
       final endIndex = total > 1000 ? 1000 : total;
       _endIndexController.text = endIndex.toString();
     });
+  }
+
+  String _getColumnDisplayName(String key) {
+    switch (key) {
+      case 'voter_no':
+        return 'Voter No.';
+      case 'name':
+        return 'Name';
+      case 'age':
+        return 'Age';
+      case 'parents_name':
+        return 'Parents Name';
+      case 'spouse_name':
+        return 'Spouse Name';
+      case 'province':
+        return 'Province';
+      case 'district':
+        return 'District';
+      case 'municipality':
+        return 'Municipality';
+      case 'ward_no':
+        return 'Ward No.';
+      case 'booth_name':
+        return 'Booth Name';
+      case 'main_category':
+        return 'Main Category';
+      case 'sub_category':
+        return 'Sub Category';
+      default:
+        return key;
+    }
   }
 
   @override
@@ -109,8 +156,53 @@ class _ExportDialogState extends ConsumerState<ExportDialog> {
 
             const SizedBox(height: 16),
             const Text(
-              'Columns: Voter ID, Name (Nepali), Age, Gender, District, Municipality, Ward, etc.',
-              style: TextStyle(fontSize: 12, color: Colors.grey),
+              'Select Columns to Export:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 4,
+              children: _selectedColumns.keys.map((key) {
+                return SizedBox(
+                  width: 150,
+                  child: CheckboxListTile(
+                    title: Text(
+                      _getColumnDisplayName(key),
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                    value: _selectedColumns[key],
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedColumns[key] = value ?? true;
+                      });
+                    },
+                    dense: true,
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedColumns.updateAll((key, value) => true);
+                    });
+                  },
+                  child: const Text('Select All'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      _selectedColumns.updateAll((key, value) => false);
+                    });
+                  },
+                  child: const Text('Deselect All'),
+                ),
+              ],
             ),
           ],
         ),
@@ -166,42 +258,51 @@ class _ExportDialogState extends ConsumerState<ExportDialog> {
       final excel = Excel.createExcel();
       final sheet = excel['Voters'];
 
+      // Get selected columns
+      final selectedKeys = _selectedColumns.entries
+          .where((entry) => entry.value)
+          .map((entry) => entry.key)
+          .toList();
+
       // Headers
-      sheet.appendRow([
-        TextCellValue('Voter ID'),
-        TextCellValue('Name (Nepali)'),
-        TextCellValue('Name (English)'),
-        TextCellValue('Age'),
-        TextCellValue('Gender'),
-        TextCellValue('District'),
-        TextCellValue('Municipality'),
-        TextCellValue('Ward'),
-        TextCellValue('Booth Code'),
-        TextCellValue('Province'),
-        TextCellValue('Father Name'),
-        TextCellValue('Mother Name'),
-        TextCellValue('Address'),
-        TextCellValue('Citizenship No'),
-      ]);
+      final headers = selectedKeys
+          .map((key) => TextCellValue(_getColumnDisplayName(key)))
+          .toList();
+      sheet.appendRow(headers);
 
       // Data rows
       for (final voter in exportVoters) {
-        sheet.appendRow([
-          TextCellValue(voter.voterId ?? ''),
-          TextCellValue(voter.nameNepali ?? ''),
-          TextCellValue(voter.nameEnglish ?? ''),
-          TextCellValue(voter.age?.toString() ?? ''),
-          TextCellValue(voter.gender ?? ''),
-          TextCellValue(voter.district ?? ''),
-          TextCellValue(voter.municipality ?? ''),
-          TextCellValue(voter.wardNo?.toString() ?? ''),
-          TextCellValue(voter.boothCode ?? ''),
-          TextCellValue(voter.province ?? ''),
-          TextCellValue(voter.fatherName ?? ''),
-          TextCellValue(voter.motherName ?? ''),
-          TextCellValue(voter.address ?? ''),
-          TextCellValue(voter.citizenshipNo ?? ''),
-        ]);
+        final row = selectedKeys.map((key) {
+          switch (key) {
+            case 'voter_no':
+              return TextCellValue(voter.voterNo ?? '');
+            case 'name':
+              return TextCellValue(voter.nameNepali ?? '');
+            case 'age':
+              return TextCellValue(voter.age?.toString() ?? '');
+            case 'parents_name':
+              return TextCellValue(voter.parentname ?? '');
+            case 'spouse_name':
+              return TextCellValue(voter.spouseNameNp ?? '');
+            case 'province':
+              return TextCellValue(voter.province);
+            case 'district':
+              return TextCellValue(voter.district);
+            case 'municipality':
+              return TextCellValue(voter.municipality);
+            case 'ward_no':
+              return TextCellValue(voter.wardNo?.toString() ?? '');
+            case 'booth_name':
+              return TextCellValue(voter.boothName);
+            case 'main_category':
+              return TextCellValue(voter.mainCategory ?? '');
+            case 'sub_category':
+              return TextCellValue(voter.subCategory ?? '');
+            default:
+              return TextCellValue('');
+          }
+        }).toList();
+        sheet.appendRow(row);
       }
 
       // Save file

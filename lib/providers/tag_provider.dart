@@ -1,18 +1,31 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/tag.dart';
+import '../helpers/tags_database_helper.dart';
 
 class TagNotifier extends StateNotifier<List<Tag>> {
-  TagNotifier() : super([]);
+  final TagsDatabaseHelper _dbHelper = TagsDatabaseHelper();
 
-  void addTag(Tag tag) {
+  TagNotifier() : super([]) {
+    _loadTags();
+  }
+
+  Future<void> _loadTags() async {
+    final tags = await _dbHelper.getTags();
+    state = tags;
+  }
+
+  Future<void> addTag(Tag tag) async {
+    await _dbHelper.insertTag(tag);
     state = [...state, tag];
   }
 
-  void removeTag(int id) {
+  Future<void> removeTag(int id) async {
+    await _dbHelper.deleteTag(id);
     state = state.where((tag) => tag.id != id).toList();
   }
 
-  void updateTag(Tag updatedTag) {
+  Future<void> updateTag(Tag updatedTag) async {
+    await _dbHelper.updateTag(updatedTag);
     state = state
         .map((tag) => tag.id == updatedTag.id ? updatedTag : tag)
         .toList();

@@ -16,7 +16,7 @@ final databaseInitializedProvider = FutureProvider<bool>((ref) async {
 
 /// Provides gender statistics (total, male, female) from the voter table
 /// Auto-refreshes if DB changes (though unlikely in this offline app)
-final statsProvider = FutureProvider<Map<String, int>>((ref) async {
+final statsProvider = FutureProvider<Map<String, dynamic>>((ref) async {
   final dbHelper = ref.watch(dbHelperProvider);
   return dbHelper.getGenderStats();
 });

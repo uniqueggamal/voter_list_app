@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/search_params.dart';
+import '../../models/search_models.dart';
 
 class SearchModeSelector extends StatelessWidget {
   final SearchField selectedField;

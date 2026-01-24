@@ -5,6 +5,7 @@ import '../models/voter.dart';
 import '../providers/voter_provider.dart';
 import '../providers/filter_provider.dart';
 import '../widgets/filter_panel_widget.dart';
+import 'voter_detail_screen.dart';
 
 class VotersListScreen extends ConsumerStatefulWidget {
   const VotersListScreen({super.key});
@@ -197,40 +198,50 @@ class _VotersListScreenState extends ConsumerState<VotersListScreen> {
   }
 }
 
-// VoterCard unchanged
 class VoterCard extends StatelessWidget {
   final Voter voter;
   const VoterCard({super.key, required this.voter});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              voter.nameNepali,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Text('Voter No: ${voter.voterNo}'),
-                const SizedBox(width: 16),
-                if (voter.age != null) Text('Age: ${voter.age}'),
-                const SizedBox(width: 16),
-                Text(voter.gender),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '${voter.municipality} - Ward ${voter.wardNo} - ${voter.boothName}',
-            ),
-            Text('${voter.district}, ${voter.province}'),
-          ],
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => VoterDetailScreen(voter: voter)),
+        );
+      },
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                voter.nameNepali,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Text('Voter No: ${voter.voterNo}'),
+                  const SizedBox(width: 16),
+                  if (voter.age != null) Text('Age: ${voter.age}'),
+                  const SizedBox(width: 16),
+                  Text(voter.gender),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '${voter.municipality} - Ward ${voter.wardNo} - ${voter.boothName}',
+              ),
+              Text('${voter.district}, ${voter.province}'),
+            ],
+          ),
         ),
       ),
     );

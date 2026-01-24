@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/search_params.dart';
+import '../models/search_models.dart';
 
 class FilterState {
   final String? province;
@@ -9,6 +9,11 @@ class FilterState {
   final String? municipality;
   final int? wardNo;
   final String? boothCode;
+  final List<String>? selectedProvinces;
+  final List<String>? selectedDistricts;
+  final List<String>? selectedMunicipalities;
+  final List<int>? selectedWards;
+  final List<String>? selectedBooths;
   final String? gender;
   final int? minAge;
   final int? maxAge;
@@ -27,6 +32,11 @@ class FilterState {
     this.municipality,
     this.wardNo,
     this.boothCode,
+    this.selectedProvinces,
+    this.selectedDistricts,
+    this.selectedMunicipalities,
+    this.selectedWards,
+    this.selectedBooths,
     this.gender,
     this.minAge,
     this.maxAge,
@@ -43,6 +53,11 @@ class FilterState {
     String? municipality,
     int? wardNo,
     String? boothCode,
+    List<String>? selectedProvinces,
+    List<String>? selectedDistricts,
+    List<String>? selectedMunicipalities,
+    List<int>? selectedWards,
+    List<String>? selectedBooths,
     String? gender,
     int? minAge,
     int? maxAge,
@@ -58,6 +73,12 @@ class FilterState {
       municipality: municipality ?? this.municipality,
       wardNo: wardNo ?? this.wardNo,
       boothCode: boothCode ?? this.boothCode,
+      selectedProvinces: selectedProvinces ?? this.selectedProvinces,
+      selectedDistricts: selectedDistricts ?? this.selectedDistricts,
+      selectedMunicipalities:
+          selectedMunicipalities ?? this.selectedMunicipalities,
+      selectedWards: selectedWards ?? this.selectedWards,
+      selectedBooths: selectedBooths ?? this.selectedBooths,
       gender: gender ?? this.gender,
       minAge: minAge ?? this.minAge,
       maxAge: maxAge ?? this.maxAge,
@@ -140,6 +161,41 @@ class FilterNotifier extends StateNotifier<FilterState> {
 
   void setBoothCode(String? value) {
     state = state.copyWith(boothCode: value);
+  }
+
+  void setSelectedProvinces(List<String> values) {
+    state = state.copyWith(
+      selectedProvinces: values,
+      selectedDistricts: [],
+      selectedMunicipalities: [],
+      selectedWards: [],
+      selectedBooths: [],
+    );
+  }
+
+  void setSelectedDistricts(List<String> values) {
+    state = state.copyWith(
+      selectedDistricts: values,
+      selectedMunicipalities: [],
+      selectedWards: [],
+      selectedBooths: [],
+    );
+  }
+
+  void setSelectedMunicipalities(List<String> values) {
+    state = state.copyWith(
+      selectedMunicipalities: values,
+      selectedWards: [],
+      selectedBooths: [],
+    );
+  }
+
+  void setSelectedWards(List<int> values) {
+    state = state.copyWith(selectedWards: values, selectedBooths: []);
+  }
+
+  void setSelectedBooths(List<String> values) {
+    state = state.copyWith(selectedBooths: values);
   }
 
   void setGender(String? value) {

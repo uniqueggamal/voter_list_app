@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/voter_provider.dart';
 import '../../providers/filter_provider.dart';
+import '../../models/search_models.dart';
 
 enum SearchMode {
   defaultMode(label: 'Name / Voter ID'),
@@ -21,7 +22,6 @@ class SearchBarWidget extends ConsumerStatefulWidget {
 
 class _SearchBarWidgetState extends ConsumerState<SearchBarWidget> {
   late final TextEditingController _searchController;
-  Timer? _debounceTimer;
   SearchMode _selectedMode = SearchMode.defaultMode; // default
 
   @override
@@ -33,27 +33,33 @@ class _SearchBarWidgetState extends ConsumerState<SearchBarWidget> {
 
   @override
   void dispose() {
-    _debounceTimer?.cancel();
     _searchController.dispose();
     super.dispose();
   }
 
-  void _onSearchChanged(String value) {
-    _debounceTimer?.cancel();
-    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
-      final query = value.trim();
-      if (query.isEmpty) {
-        ref.read(filterProvider.notifier).setSearchQuery(null);
-        return;
-      }
+  void _onSearchTextChanged(String value) {
+    // Only update the pending query in the provider, don't trigger search
+    ref.read(voterProvider.notifier).updateQuery(value.trim());
+  }
 
-      // Apply mode-specific logic
-      final effectiveQuery = _selectedMode == SearchMode.startsWith
-          ? '$query%' // Starts with: query%
-          : '%$query%'; // Default: contains
+  void _performSearch() {
+    final query = _searchController.text.trim();
+    if (query.isNotEmpty) {
+      // Determine search field and match mode based on selected mode
+      final searchField = SearchField.name; // Default to name search
+      final matchMode = _selectedMode == SearchMode.startsWith
+          ? SearchMatchMode.startsWith
+          : SearchMatchMode.contains;
 
-      ref.read(filterProvider.notifier).setSearchQuery(effectiveQuery);
-    });
+      // Perform the actual search
+      ref
+          .read(voterProvider.notifier)
+          .performSearch(
+            query: query,
+            field: searchField,
+            matchMode: matchMode,
+          );
+    }
   }
 
   @override
@@ -88,7 +94,7 @@ class _SearchBarWidgetState extends ConsumerState<SearchBarWidget> {
                 setState(() => _selectedMode = value);
                 // Re-trigger search with new mode if there's text
                 if (_searchController.text.trim().isNotEmpty) {
-                  _onSearchChanged(_searchController.text);
+                  _performSearch();
                 }
               }
             },
@@ -100,7 +106,7 @@ class _SearchBarWidgetState extends ConsumerState<SearchBarWidget> {
           Expanded(
             child: TextField(
               controller: _searchController,
-              onChanged: _onSearchChanged,
+              onChanged: _onSearchTextChanged,
               decoration: InputDecoration(
                 hintText: _selectedMode == SearchMode.startsWith
                     ? 'नाम सुरु हुने अक्षर... (उदा: क)'
@@ -134,17 +140,24 @@ class _SearchBarWidgetState extends ConsumerState<SearchBarWidget> {
                 ),
               ),
               textInputAction: TextInputAction.search,
-              onSubmitted: (_) {
-                final query = _searchController.text.trim();
-                if (query.isNotEmpty) {
-                  final effectiveQuery = _selectedMode == SearchMode.startsWith
-                      ? '$query%'
-                      : '%$query%';
-                  ref
-                      .read(filterProvider.notifier)
-                      .setSearchQuery(effectiveQuery);
-                }
-              },
+              onSubmitted: (_) => _performSearch(),
+            ),
+          ),
+
+          const SizedBox(width: 12),
+
+          // Search button
+          ElevatedButton.icon(
+            onPressed: _performSearch,
+            icon: const Icon(Icons.search),
+            label: const Text('खोज्नुहोस्'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
         ],

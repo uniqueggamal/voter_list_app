@@ -1,6 +1,6 @@
 // lib/models/search_models.dart
 
-enum SearchField { name, voterId }
+enum SearchField { name, voterId, more }
 
 enum SearchMatchMode { startsWith, contains }
 
