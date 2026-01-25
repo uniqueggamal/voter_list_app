@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:math' as math;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,36 +15,40 @@ import '../providers/voter_search_provider.dart';
 // ─────────────────────────────────────────────────────────────────────────────
 // Analytics provider – recomputes when filter changes
 // ─────────────────────────────────────────────────────────────────────────────
-
 final analyticsDataProvider = FutureProvider<Map<String, dynamic>>((ref) async {
+  final globalFilter = ref.watch(filterProvider);
   final voterState = ref.watch(voterProvider);
-  final notifier = ref.read(voterProvider.notifier);
 
-  // If we have search results, use analytics based on the current displayed data
-  if (voterState.isClientSidePagination && voterState.allVoters.isNotEmpty) {
-    // For search results, calculate analytics from the current search results
-    return notifier.getAnalyticsDataFromVoters(voterState.allVoters);
-  } else {
-    // For regular filters, use the filter-based analytics
-    final filter = ref.watch(filterProvider);
-    return notifier.getAnalyticsData(filter: filter);
-  }
+  // Use the filter from voter state if it has search parameters, otherwise use global filter
+  final effectiveFilter =
+      voterState.currentFilter?.searchQuery?.isNotEmpty == true
+      ? voterState.currentFilter!
+      : globalFilter;
+
+  final notifier = ref.read(voterProvider.notifier);
+  return notifier.getAnalyticsData(filter: effectiveFilter);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Total count provider – depends on current filter
 // ─────────────────────────────────────────────────────────────────────────────
-
 final totalVoterCountProvider = FutureProvider.autoDispose<int>((ref) async {
-  final filter = ref.watch(filterProvider);
+  final globalFilter = ref.watch(filterProvider);
+  final voterState = ref.watch(voterProvider);
+
+  // Use the filter from voter state if it has search parameters, otherwise use global filter
+  final effectiveFilter =
+      voterState.currentFilter?.searchQuery?.isNotEmpty == true
+      ? voterState.currentFilter!
+      : globalFilter;
+
   final notifier = ref.read(voterProvider.notifier);
-  return notifier.getTotalCount(filter: filter);
+  return notifier.getTotalCount(filter: effectiveFilter);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Main categories provider
 // ─────────────────────────────────────────────────────────────────────────────
-
 final mainCategoriesProvider = FutureProvider<List<Map<String, dynamic>>>((
   ref,
 ) async {
@@ -53,10 +59,9 @@ final mainCategoriesProvider = FutureProvider<List<Map<String, dynamic>>>((
 // ─────────────────────────────────────────────────────────────────────────────
 // Main Voter State & Notifier
 // ─────────────────────────────────────────────────────────────────────────────
-
 class VoterState {
-  final List<Voter> voters; // Current page voters (shown)
-  final List<Voter> allVoters; // All loaded voters for client-side pagination
+  final List<Voter> voters;
+  final List<Voter> allVoters;
   final bool isLoading;
   final int pageSize;
   final int currentPage;
@@ -67,9 +72,8 @@ class VoterState {
   final bool isAnalyticsLoading;
   final String? analyticsError;
   final String? loadingError;
-  final bool isInitialLoad; // Track if we've done the initial full load
-  final bool
-  isClientSidePagination; // Whether we're using client-side pagination
+  final bool isInitialLoad;
+  final bool isClientSidePagination;
 
   VoterState({
     this.voters = const [],
@@ -132,8 +136,8 @@ class VoterNotifier extends StateNotifier<VoterState> {
   final TransliterationService _transliteration = TransliterationService();
   final SearchService _searchService;
 
-  // Pending query for decoupled search
   String _pendingQuery = '';
+  Timer? _debounceTimer; // ← added for live search debounce
 
   static const List<String> _groupByOptions = [
     'province',
@@ -148,7 +152,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
   // ────────────────────────────────────────────────────────────────────────────
   // Core loading logic
   // ────────────────────────────────────────────────────────────────────────────
-
   Future<void> loadVoters() async {
     if (state.isLoading) return;
 
@@ -158,9 +161,7 @@ class VoterNotifier extends StateNotifier<VoterState> {
     try {
       final filter = state.currentFilter ?? const FilterState();
 
-      // Check if there's an active search in the filter (from previous search)
       if (filter.searchQuery?.isNotEmpty == true) {
-        // This is a refresh with active search - call performSearch to restore search results
         debugPrint(
           'VoterNotifier: Restoring search results for query: ${filter.searchQuery}',
         );
@@ -172,7 +173,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
         return;
       }
 
-      // Apply search if searchQuery is present
       String? searchQuery;
       if (filter.searchQuery?.isNotEmpty == true) {
         final effectiveField = filter.searchField ?? SearchField.name;
@@ -183,13 +183,9 @@ class VoterNotifier extends StateNotifier<VoterState> {
             ? filter.searchQuery!
             : filter.searchQuery!;
 
-        // For name search, try transliteration and handle variations
         if (effectiveField == SearchField.name) {
-          // Try to transliterate English to Nepali
           String transliteratedQuery = await _transliteration
               .transliterateToNepali(queryValue);
-
-          // Use the transliterated version if it's different, otherwise use original
           searchQuery = transliteratedQuery.isNotEmpty
               ? transliteratedQuery
               : queryValue;
@@ -197,13 +193,11 @@ class VoterNotifier extends StateNotifier<VoterState> {
           searchQuery = queryValue;
         }
 
-        // Create search pattern based on match mode
         searchQuery = effectiveMatchMode == SearchMatchMode.startsWith
             ? '$searchQuery%'
             : '%$searchQuery%';
       }
 
-      // Get total count first (without pagination)
       final totalRows = await _dbHelper.getVoters(
         searchQuery: searchQuery,
         startingLetter: filter.startingLetter,
@@ -225,23 +219,19 @@ class VoterNotifier extends StateNotifier<VoterState> {
           ? 1
           : (totalCount / state.pageSize).ceil();
 
-      // Check if we should use client-side pagination (for small datasets)
-      const int maxClientSideCount =
-          50000; // Max records for client-side pagination
+      const int maxClientSideCount = 100000;
       final shouldUseClientSide =
           totalCount <= maxClientSideCount && totalCount > 0;
 
       if (shouldUseClientSide) {
-        // Load all data for client-side pagination
         final allVoters = totalRows.map((row) => Voter.fromMap(row)).toList();
 
-        // Calculate current page voters
         final startIndex = (state.currentPage - 1) * state.pageSize;
-        final endIndex = startIndex + state.pageSize;
-        final pageVoters = allVoters.sublist(
-          startIndex,
-          endIndex > allVoters.length ? allVoters.length : endIndex,
-        );
+        final endIndex = state.pageSize == -1
+            ? allVoters.length
+            : math.min(startIndex + state.pageSize, allVoters.length);
+
+        final pageVoters = allVoters.sublist(startIndex, endIndex);
 
         state = state.copyWith(
           voters: pageVoters,
@@ -257,7 +247,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
           'Loaded all ${allVoters.length} voters for client-side pagination (showing page ${state.currentPage}/${totalPages})',
         );
       } else {
-        // Database pagination for large datasets
         final offset = state.pageSize == -1
             ? null
             : (state.currentPage - 1) * state.pageSize;
@@ -301,23 +290,34 @@ class VoterNotifier extends StateNotifier<VoterState> {
   }
 
   // ────────────────────────────────────────────────────────────────────────────
-  // Search functionality (triggered by search button)
+  // Search functionality
   // ────────────────────────────────────────────────────────────────────────────
 
-  // Method to update pending query without triggering search
   void updateQuery(String val) {
-    _pendingQuery = val;
+    _pendingQuery = val.trim();
   }
 
-  // Method to perform search using the pending query
+  // New: live/debounced search – call this from TextField onChanged
+  void searchWithDebounce(String value) {
+    _debounceTimer?.cancel();
+    updateQuery(value);
+
+    _debounceTimer = Timer(const Duration(milliseconds: 400), () {
+      if (_pendingQuery.isNotEmpty) {
+        performSearch(query: _pendingQuery);
+      } else {
+        loadVoters(); // clear search → show normal filtered list
+      }
+    });
+  }
+
   Future<void> performSearch({
     String? query,
     SearchField? field,
     SearchMatchMode? matchMode,
   }) async {
-    final effectiveQuery = query ?? _pendingQuery;
+    final effectiveQuery = (query ?? _pendingQuery).trim();
     if (effectiveQuery.isEmpty) {
-      // Clear results if search query is empty
       state = state.copyWith(
         voters: [],
         currentPage: 1,
@@ -328,7 +328,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
       return;
     }
 
-    // Clear previous results before starting new search
     state = state.copyWith(
       voters: [],
       currentPage: 1,
@@ -342,55 +341,135 @@ class VoterNotifier extends StateNotifier<VoterState> {
       final filter = state.currentFilter ?? const FilterState();
 
       final effectiveField = field ?? filter.searchField ?? SearchField.name;
-      final effectiveMatchMode =
+      var effectiveMatchMode =
           matchMode ?? filter.searchMatchMode ?? SearchMatchMode.startsWith;
 
-      // Use SearchService to perform the search
-      final searchResults = await _searchService.performSearch(
-        query: effectiveQuery,
-        field: effectiveField as SearchField,
-        matchMode: effectiveMatchMode as SearchMatchMode,
-        province: filter.province,
-        district: filter.district,
-        municipality: filter.municipality,
-        wardNo: filter.wardNo?.toString(),
-        boothCode: filter.boothCode,
-        gender: filter.gender,
-        minAge: filter.minAge,
-        maxAge: filter.maxAge,
-        mainCategory: filter.mainCategory,
-        limit: 10000, // Limit for search results
+      // For testing: temporarily bypass all filters to see if they kill matches
+      // TODO: Remove this after debugging
+      const bool bypassFiltersForTesting = true;
+
+      // Optional: one-time hardcoded test query — comment it out after testing
+      // finalQuery = "गौरव गमाल";
+
+      // Detect if input already contains Devanagari characters
+      bool isDevanagari = RegExp(r'[\u0900-\u097F]').hasMatch(effectiveQuery);
+      debugPrint('Input script: ${isDevanagari ? "Devanagari" : "Romanized"}');
+
+      // Set final query based on script detection
+      String finalQuery;
+      if (effectiveField == SearchField.name) {
+        finalQuery = effectiveQuery.trim();
+        debugPrint('Transliteration skipped: already Devanagari');
+      } else {
+        finalQuery = effectiveQuery;
+      }
+
+      // Normalize spaces between Devanagari characters
+      finalQuery = finalQuery.replaceAllMapped(
+        RegExp(r'([\u0900-\u097F])\s+([\u0900-\u097F])'),
+        (match) => '${match.group(1)}${match.group(2)}',
       );
+      finalQuery = finalQuery.replaceAll('\u200C', '').replaceAll('\u200D', '');
+      debugPrint('Space-normalized query: "$finalQuery"');
+
+      // DEBUG: Print all filter values
+      debugPrint(
+        'Filters - Province: ${bypassFiltersForTesting ? "BYPASSED" : filter.province}',
+      );
+      debugPrint(
+        'Filters - District: ${bypassFiltersForTesting ? "BYPASSED" : filter.district}',
+      );
+      debugPrint(
+        'Filters - Municipality: ${bypassFiltersForTesting ? "BYPASSED" : filter.municipality}',
+      );
+      debugPrint(
+        'Filters - Ward: ${bypassFiltersForTesting ? "BYPASSED" : filter.wardNo}',
+      );
+      debugPrint(
+        'Filters - Booth: ${bypassFiltersForTesting ? "BYPASSED" : filter.boothCode}',
+      );
+      debugPrint(
+        'Filters - Gender: ${bypassFiltersForTesting ? "BYPASSED" : filter.gender}',
+      );
+      debugPrint(
+        'Filters - Age: ${bypassFiltersForTesting ? "BYPASSED" : "${filter.minAge}-${filter.maxAge}"}',
+      );
+      debugPrint(
+        'Filters - Category: ${bypassFiltersForTesting ? "BYPASSED" : filter.mainCategory}',
+      );
+
+      final searchResults = await _searchService.performSearch(
+        query: finalQuery, // Pass single query
+        field: effectiveField,
+        matchMode: effectiveMatchMode,
+        // Temporarily bypass all filters for testing
+        province: bypassFiltersForTesting ? null : filter.province,
+        district: bypassFiltersForTesting ? null : filter.district,
+        municipality: bypassFiltersForTesting ? null : filter.municipality,
+        wardNo: bypassFiltersForTesting ? null : filter.wardNo?.toString(),
+        boothCode: bypassFiltersForTesting ? null : filter.boothCode,
+        gender: bypassFiltersForTesting ? null : filter.gender,
+        minAge: bypassFiltersForTesting ? null : filter.minAge,
+        maxAge: bypassFiltersForTesting ? null : filter.maxAge,
+        mainCategory: bypassFiltersForTesting ? null : filter.mainCategory,
+        limit: 10000,
+      );
+
+      // DEBUG: Print results count
+      debugPrint('Results returned: ${searchResults.length}');
+      if (searchResults.isEmpty) {
+        debugPrint('ZERO RESULTS — possible causes:');
+        debugPrint(
+          '  - Wrong column name in DB query (check v.name_np vs actual column)',
+        );
+        debugPrint(
+          '  - LIKE pattern not matching (case sensitivity, collation)',
+        );
+        debugPrint('  - No data in database');
+        debugPrint('  - Transliteration producing wrong text');
+        debugPrint(
+          '  - Field mapping issue (SearchField.name -> "name" vs expected "voterId")',
+        );
+      } else {
+        debugPrint('SUCCESS: Found ${searchResults.length} results');
+        // Show first result for verification
+        if (searchResults.isNotEmpty) {
+          final first = searchResults.first;
+          debugPrint(
+            'First result: ${first.nameNepali} (ID: ${first.voterNo ?? first.voterId})',
+          );
+        }
+      }
 
       final totalCount = searchResults.length;
       final totalPages = state.pageSize == -1
           ? 1
           : (totalCount / state.pageSize).ceil();
 
-      // Paginate search results
       final startIndex = 0;
-      final endIndex = state.pageSize == -1 ? totalCount : state.pageSize;
+      final endIndex = math.min(
+        state.pageSize == -1 ? totalCount : state.pageSize,
+        totalCount,
+      ); // ← guard
+
       final pageVoters = searchResults.sublist(startIndex, endIndex);
 
-      // Update the filter with search parameters to persist search state
       final updatedFilter = (state.currentFilter ?? const FilterState())
           .copyWith(
             searchQuery: effectiveQuery,
-            searchField: effectiveField as SearchField?,
-            searchMatchMode: effectiveMatchMode as SearchMatchMode?,
+            searchField: effectiveField,
+            searchMatchMode: effectiveMatchMode,
           );
 
       state = state.copyWith(
         voters: pageVoters,
-        allVoters:
-            searchResults, // Store all results for client-side pagination
+        allVoters: searchResults,
         totalPages: totalPages,
         cachedTotalCount: totalCount,
         currentFilter: updatedFilter,
         isLoading: false,
         isInitialLoad: true,
-        isClientSidePagination:
-            true, // Enable client-side pagination for search results
+        isClientSidePagination: true,
       );
 
       debugPrint(
@@ -402,7 +481,56 @@ class VoterNotifier extends StateNotifier<VoterState> {
     }
   }
 
-  // Helper method to check if filters have changed
+  List<String> _generateSearchVariants(String query) {
+    final variants = <String>[];
+
+    // Full normalized
+    final normalized = normalizeForSearch(query);
+    variants.add(normalized);
+
+    // Normalized without spaces
+    final noSpaces = normalized.replaceAll(' ', '');
+    if (noSpaces != normalized) {
+      variants.add(noSpaces);
+    }
+
+    // First half of normalized (if long enough)
+    if (normalized.length > 3) {
+      final halfLength = (normalized.length / 2).ceil();
+      final firstHalf = normalized.substring(0, halfLength);
+      variants.add(firstHalf);
+    }
+
+    // Last half of normalized (if long enough)
+    if (normalized.length > 3) {
+      final halfLength = (normalized.length / 2).floor();
+      final lastHalf = normalized.substring(normalized.length - halfLength);
+      variants.add(lastHalf);
+    }
+
+    // First 4 chars (prefix) - always include for robustness
+    if (query.length >= 3) {
+      final prefix = normalizeForSearch(
+        query.substring(0, query.length > 4 ? 4 : query.length),
+      );
+      if (!variants.contains(prefix)) {
+        variants.add(prefix);
+      }
+    }
+
+    // For very short queries (<3 chars), only use prefix variant to avoid too many results
+    if (query.length < 3) {
+      return variants.where((v) => v.length <= 4).toList();
+    }
+
+    // Limit to max 5 variants for performance
+    return variants.take(5).toList();
+  }
+
+  // ────────────────────────────────────────────────────────────────────────────
+  // The rest remains completely unchanged
+  // ────────────────────────────────────────────────────────────────────────────
+
   bool _hasFilterChanged(FilterState newFilter) {
     final currentFilter = state.currentFilter ?? const FilterState();
     return currentFilter.province != newFilter.province ||
@@ -416,24 +544,14 @@ class VoterNotifier extends StateNotifier<VoterState> {
         currentFilter.startingLetter != newFilter.startingLetter;
   }
 
-  // ────────────────────────────────────────────────────────────────────────────
-  // Filter & reload
-  // ────────────────────────────────────────────────────────────────────────────
-
   Future<void> applyFiltersAndReload(FilterState filter) async {
-    // Handle multi-select vs single-select logic
     FilterState effectiveFilter = filter;
 
-    // If using advanced mode with multi-select, we need to handle it differently
-    // For now, we'll use the first selected item from multi-select as the filter
-    // or combine them appropriately
     if (filter.selectedProvinces?.isNotEmpty == true ||
         filter.selectedDistricts?.isNotEmpty == true ||
         filter.selectedMunicipalities?.isNotEmpty == true ||
         filter.selectedWards?.isNotEmpty == true ||
         filter.selectedBooths?.isNotEmpty == true) {
-      // For multi-select, we need to modify the query to handle multiple values
-      // For now, let's use the first selected item to avoid crashes
       effectiveFilter = FilterState(
         province: filter.selectedProvinces?.isNotEmpty == true
             ? filter.selectedProvinces!.first
@@ -458,7 +576,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
         searchQuery: filter.searchQuery,
         searchField: filter.searchField,
         searchMatchMode: filter.searchMatchMode,
-        // Keep multi-select fields for UI state
         selectedProvinces: filter.selectedProvinces,
         selectedDistricts: filter.selectedDistricts,
         selectedMunicipalities: filter.selectedMunicipalities,
@@ -488,7 +605,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
   }
 
   void updateVoterInCache(Voter updatedVoter) {
-    // Update in current page if present
     final pageIndex = state.voters.indexWhere((v) => v.id == updatedVoter.id);
     if (pageIndex != -1) {
       final updatedPageList = List<Voter>.from(state.voters);
@@ -507,51 +623,43 @@ class VoterNotifier extends StateNotifier<VoterState> {
     loadVoters();
   }
 
-  // ────────────────────────────────────────────────────────────────────────────
-  // Pagination (client-side or database)
-  // ────────────────────────────────────────────────────────────────────────────
-
   void goToPage(int page) {
     if (page < 1 || page > state.totalPages || page == state.currentPage)
       return;
 
     if (state.isClientSidePagination && state.allVoters.isNotEmpty) {
-      // Client-side pagination - synchronous
       final startIndex = (page - 1) * state.pageSize;
-      final endIndex = startIndex + state.pageSize;
-      final pageVoters = state.allVoters.sublist(
-        startIndex,
-        endIndex > state.allVoters.length ? state.allVoters.length : endIndex,
-      );
+      final endIndex = math.min(
+        startIndex + state.pageSize,
+        state.allVoters.length,
+      ); // ← guard
+      final pageVoters = state.allVoters.sublist(startIndex, endIndex);
       state = state.copyWith(currentPage: page, voters: pageVoters);
     } else {
-      // Database pagination - async
       state = state.copyWith(currentPage: page);
       loadVoters();
     }
   }
 
   void nextPage() {
-    if (state.canGoNext) {
-      goToPage(state.currentPage + 1);
-    }
+    if (state.canGoNext) goToPage(state.currentPage + 1);
   }
 
   void previousPage() {
-    if (state.canGoPrevious) {
-      goToPage(state.currentPage - 1);
-    }
+    if (state.canGoPrevious) goToPage(state.currentPage - 1);
   }
 
   Future<void> setPageSize(int size) async {
     if (size == state.pageSize) return;
 
     if (state.isClientSidePagination && state.allVoters.isNotEmpty) {
-      // Recalculate pagination for client-side
       final totalCount = state.allVoters.length;
       final totalPages = size == -1 ? 1 : (totalCount / size).ceil();
       final startIndex = 0;
-      final endIndex = size == -1 ? totalCount : size;
+      final endIndex = math.min(
+        size == -1 ? totalCount : size,
+        totalCount,
+      ); // ← guard
       final pageVoters = state.allVoters.sublist(startIndex, endIndex);
 
       state = state.copyWith(
@@ -561,24 +669,14 @@ class VoterNotifier extends StateNotifier<VoterState> {
         voters: pageVoters,
       );
     } else {
-      // Database pagination
       state = state.copyWith(pageSize: size, currentPage: 1);
       await loadVoters();
     }
   }
 
-  // ────────────────────────────────────────────────────────────────────────────
-  // Analytics
-  // ────────────────────────────────────────────────────────────────────────────
-
   Future<Map<String, dynamic>> getAnalyticsData({FilterState? filter}) async {
     final effectiveFilter =
         filter ?? state.currentFilter ?? const FilterState();
-    // final cacheKey = effectiveFilter.toString() + state.groupBy;
-
-    // if (state.analyticsCache.containsKey(cacheKey)) {
-    //   return state.analyticsCache[cacheKey]!;
-    // }
 
     final data = await _dbHelper.getAnalyticsData(
       searchQuery: effectiveFilter.searchQuery,
@@ -591,12 +689,7 @@ class VoterNotifier extends StateNotifier<VoterState> {
       gender: effectiveFilter.gender,
       minAge: effectiveFilter.minAge,
       maxAge: effectiveFilter.maxAge,
-      // groupBy: state.groupBy,
     );
-
-    // state = state.copyWith(
-    //   analyticsCache: {...state.analyticsCache, cacheKey: data},
-    // );
 
     return data;
   }
@@ -604,10 +697,8 @@ class VoterNotifier extends StateNotifier<VoterState> {
   Future<Map<String, dynamic>> getAnalyticsDataFromVoters(
     List<Voter> voters,
   ) async {
-    // Calculate analytics directly from the voter list (for search results)
     final totalVoters = voters.length;
 
-    // Gender distribution
     final maleCount = voters
         .where(
           (v) =>
@@ -624,7 +715,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
         .length;
     final otherGenderCount = totalVoters - maleCount - femaleCount;
 
-    // Age distribution
     final ageGroups = {
       '18-25': voters
           .where((v) => v.age != null && v.age! >= 18 && v.age! <= 25)
@@ -642,14 +732,12 @@ class VoterNotifier extends StateNotifier<VoterState> {
       'Unknown': voters.where((v) => v.age == null).length,
     };
 
-    // Province distribution
     final provinceGroups = <String, int>{};
     for (final voter in voters) {
       final province = voter.province ?? 'Unknown';
       provinceGroups[province] = (provinceGroups[province] ?? 0) + 1;
     }
 
-    // Main category distribution
     final categoryGroups = <String, int>{};
     for (final voter in voters) {
       final category = voter.mainCategory ?? 'Unknown';
@@ -673,7 +761,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
     final effectiveFilter =
         filter ?? state.currentFilter ?? const FilterState();
 
-    // Build search query for database
     String? searchQuery;
     if (effectiveFilter.searchQuery?.isNotEmpty == true) {
       final effectiveField = effectiveFilter.searchField ?? SearchField.name;
@@ -688,7 +775,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
           : '%$queryValue%';
     }
 
-    // Get total count with all filters applied at database level
     final rows = await _dbHelper.getVoters(
       searchQuery: searchQuery,
       startingLetter: effectiveFilter.startingLetter,
@@ -712,7 +798,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
     final effectiveFilter =
         filter ?? state.currentFilter ?? const FilterState();
 
-    // Build search query for database
     String? searchQuery;
     if (effectiveFilter.searchQuery?.isNotEmpty == true) {
       final effectiveField = effectiveFilter.searchField ?? SearchField.name;
@@ -767,16 +852,10 @@ class VoterNotifier extends StateNotifier<VoterState> {
     state = state.copyWith(analyticsCache: {});
   }
 
-  // ────────────────────────────────────────────────────────────────────────────
-  // Helper methods for ID resolution
-  // ────────────────────────────────────────────────────────────────────────────
-
   Future<int?> _getProvinceId(String? name) async =>
       name != null ? await _dbHelper.getProvinceIdByName(name) : null;
-
   Future<int?> _getDistrictId(String? name) async =>
       name != null ? await _dbHelper.getDistrictIdByName(name) : null;
-
   Future<int?> _getMunicipalityId(String? name) async =>
       name != null ? await _dbHelper.getMunicipalityIdByName(name) : null;
 }
@@ -784,7 +863,6 @@ class VoterNotifier extends StateNotifier<VoterState> {
 // ─────────────────────────────────────────────────────────────────────────────
 // Providers
 // ─────────────────────────────────────────────────────────────────────────────
-
 final searchServiceProvider = Provider<SearchService>((ref) => SearchService());
 
 final voterProvider = StateNotifierProvider<VoterNotifier, VoterState>(

@@ -62,7 +62,19 @@ class _AnalyticsScreenState extends ConsumerState<AnalyticsScreen>
           SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: analyticsAsync.when(
-              loading: () => const Center(child: CircularProgressIndicator()),
+              loading: () => Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircularProgressIndicator(),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Processing analytics...',
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
+                  ],
+                ),
+              ),
               error: (error, stack) => Center(child: Text('Error: $error')),
               data: (data) => _buildOverallAnalytics(data, totalCountAsync),
             ),

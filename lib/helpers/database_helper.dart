@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -27,29 +28,31 @@ class DatabaseHelper {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, 'voter_list_readable.db');
 
-    // Check if the database exists
-    bool exists = await databaseExists(path);
-
-    if (!exists) {
-      // Copy from asset
-      ByteData data = await rootBundle.load(
-        join('assets', 'db', 'voter_list_readable.db'),
-      );
-      List<int> bytes = data.buffer.asUint8List(
-        data.offsetInBytes,
-        data.lengthInBytes,
-      );
-
-      // Write and flush the bytes written
-      await File(path).writeAsBytes(bytes, flush: true);
+    if (kDebugMode) {
+      await deleteDatabase(path);
+      debugPrint('Debug: Deleted old DB to force clean start');
     }
 
-    return await openDatabase(
+    // Always copy fresh database from assets to ensure clean state
+    ByteData data = await rootBundle.load(
+      join('assets', 'db', 'voter_list_readable.db'),
+    );
+    List<int> bytes = data.buffer.asUint8List(
+      data.offsetInBytes,
+      data.lengthInBytes,
+    );
+
+    // Write and flush the bytes written
+    await File(path).writeAsBytes(bytes, flush: true);
+
+    Database db = await openDatabase(
       path,
-      version: 2,
+      version: 4,
       onCreate: _onCreate,
       onUpgrade: _onUpgrade,
     );
+
+    return db;
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -60,7 +63,7 @@ class DatabaseHelper {
         voterid INTEGER NOT NULL,
         name TEXT NOT NULL,
         phone TEXT,
-        social_media TEXT,
+        name_en TEXT,
         description TEXT,
         FOREIGN KEY (voterid) REFERENCES voter(id)
       )
@@ -84,8 +87,122 @@ class DatabaseHelper {
           await db.execute('ALTER TABLE voterdetails DROP COLUMN landline');
         }
         break;
+      case 2:
+        // Upgrade from version 2 to 3: Add voter_name_normalized table
+        await db.execute('''
+          CREATE TABLE IF NOT EXISTS voter_name_normalized (
+            voter_no TEXT PRIMARY KEY,
+            original_name TEXT NOT NULL,
+            normalized_name TEXT NOT NULL
+          )
+        ''');
+        await db.execute('''
+          INSERT OR REPLACE INTO voter_name_normalized (voter_no, original_name, normalized_name)
+          SELECT voter_no, name_np, REPLACE(REPLACE(REPLACE(name_np, ' ', ''), '\u200C', ''), '\u200D', '')
+          FROM voter
+        ''');
+        break;
+      case 3:
+        // Upgrade from version 3 to 4: Rename social_media column to name_en in voterdetails table
+        debugPrint('Migration to v4: Renaming social_media column to name_en');
+
+        // SQLite doesn't support direct column renaming, so we need to recreate the table
+        await db.execute('''
+          CREATE TABLE voterdetails_temp (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            voterid INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            phone TEXT,
+            name_en TEXT,
+            description TEXT,
+            FOREIGN KEY (voterid) REFERENCES voter(id)
+          )
+        ''');
+
+        // Copy data from old table to new table
+        await db.execute('''
+          INSERT INTO voterdetails_temp (id, voterid, name, phone, name_en, description)
+          SELECT id, voterid, name, phone, social_media, description FROM voterdetails
+        ''');
+
+        // Drop old table
+        await db.execute('DROP TABLE voterdetails');
+
+        // Rename new table to old name
+        await db.execute(
+          'ALTER TABLE voterdetails_temp RENAME TO voterdetails',
+        );
+
+        debugPrint('Migration to v4: Column renamed successfully');
+        break;
       default:
         break;
+    }
+  }
+
+  static Future<void> _populateNormalizedTable(_) async {
+    final db = await DatabaseHelper.instance.database;
+    await db.execute('''
+      INSERT OR REPLACE INTO voter_name_normalized (voter_no, original_name, normalized_name)
+      SELECT voter_no, name_np, REPLACE(REPLACE(REPLACE(name_np, ' ', ''), '\u200C', ''), '\u200D', '')
+      FROM voter
+    ''');
+    final newCount =
+        Sqflite.firstIntValue(
+          await db.rawQuery('SELECT COUNT(*) FROM voter_name_normalized'),
+        ) ??
+        0;
+    debugPrint('Fallback: normalized table populated with $newCount rows');
+  }
+
+  Future<void> _ensureNormalizedTable(Database db) async {
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS voter_name_normalized (
+        voter_no TEXT PRIMARY KEY,
+        original_name TEXT NOT NULL,
+        normalized_name TEXT NOT NULL
+      )
+    ''');
+    final count =
+        Sqflite.firstIntValue(
+          await db.rawQuery('SELECT COUNT(*) FROM voter_name_normalized'),
+        ) ??
+        0;
+    if (count == 0) {
+      await db.execute('''
+        INSERT OR REPLACE INTO voter_name_normalized (voter_no, original_name, normalized_name)
+        SELECT voter_no, name_np, REPLACE(REPLACE(REPLACE(name_np, ' ', ''), '\u200C', ''), '\u200D', '')
+        FROM voter
+      ''');
+      final newCount =
+          Sqflite.firstIntValue(
+            await db.rawQuery('SELECT COUNT(*) FROM voter_name_normalized'),
+          ) ??
+          0;
+      debugPrint('Normalized table populated with $newCount rows');
+    } else {
+      debugPrint('Normalized table already has $count rows');
+    }
+  }
+
+  Future<void> ensureNormalizedTable() async {
+    Database db = await database;
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS voter_name_normalized (
+        voter_no TEXT PRIMARY KEY,
+        original_name TEXT NOT NULL,
+        normalized_name TEXT NOT NULL
+      )
+    ''');
+    final count =
+        Sqflite.firstIntValue(
+          await db.rawQuery('SELECT COUNT(*) FROM voter_name_normalized'),
+        ) ??
+        0;
+    if (count == 0) {
+      await _populateNormalizedTable(null);
+    } else {
+      debugPrint('Normalized table already has $count rows');
     }
   }
 
@@ -234,6 +351,7 @@ class DatabaseHelper {
   // Voter methods
   Future<List<Map<String, dynamic>>> getVoters({
     String? searchQuery,
+    List<String>? searchQueries,
     String? transliteratedQuery,
     String? startingLetter,
     String? field,
@@ -254,7 +372,9 @@ class DatabaseHelper {
     String query = '''
       SELECT v.*, eb.booth_code, eb.booth_name, w.ward_no, m.name as municipality_name,
              d.name as district_name, p.name as province_name,
-             COALESCE(c.Mname, 'Unrecognized') as main_category
+             COALESCE(c.Mname, 'Unrecognized') as main_category,
+             c.Sname as sub_category,
+             vd.name_en as voter_name_en, vd.phone as voter_phone, vd.description as voter_description
       FROM voter v
       LEFT JOIN election_booth eb ON v.booth_id = eb.id
       LEFT JOIN ward w ON eb.ward_id = w.id
@@ -262,20 +382,43 @@ class DatabaseHelper {
       LEFT JOIN district d ON m.district_id = d.id
       LEFT JOIN province p ON d.province_id = p.id
       LEFT JOIN categorized c ON v.voter_no = c.voter_no
+      LEFT JOIN voter_name_normalized n ON v.voter_no = n.voter_no
+      LEFT JOIN voterdetails vd ON v.id = vd.voterid
       WHERE 1=1
     ''';
 
     List<dynamic> args = [];
 
-    if (searchQuery != null && searchQuery.isNotEmpty) {
-      // Determine which column to search based on field parameter
-      String searchColumn = 'v.name_np'; // default to name
-      if (field == 'voterId' || field == 'voter_id') {
-        searchColumn = 'v.voter_no';
+    if (searchQuery != null && searchQuery.trim().isNotEmpty) {
+      String normalizedQuery = searchQuery;
+      if (field != 'voterId' &&
+          field != 'voter_id' &&
+          field != 'voter_no' &&
+          field != 'tag') {
+        normalizedQuery = searchQuery
+            .replaceAll(' ', '')
+            .replaceAll('\u200C', '')
+            .replaceAll('\u200D', '');
       }
 
-      query += ' AND $searchColumn LIKE ?';
-      args.add('%$searchQuery%');
+      String pattern = matchMode == 'startsWith'
+          ? '$normalizedQuery%'
+          : '%$normalizedQuery%';
+
+      if (field == 'voterId' || field == 'voter_id' || field == 'voter_no') {
+        query += ' AND v.voter_no LIKE ?';
+        args.add(pattern);
+      } else if (field == 'tag') {
+        // Search voter names among voters who have at least one tag
+        query +=
+            ' AND n.normalized_name LIKE ? AND EXISTS (SELECT 1 FROM voter_tag vt WHERE vt.voterdetail_id = vd.id)';
+        args.add(pattern);
+      } else {
+        // default name search
+        query += ' AND n.normalized_name LIKE ?';
+        args.add(pattern);
+        debugPrint('Searching normalized_name LIKE $pattern with args: $args');
+      }
     }
 
     if (transliteratedQuery != null && transliteratedQuery.isNotEmpty) {
@@ -335,6 +478,8 @@ class DatabaseHelper {
       args.add(mainCategory);
     }
 
+    query += ' GROUP BY v.id';
+
     if (limit != null) {
       query += ' LIMIT ?';
       args.add(limit);
@@ -345,6 +490,7 @@ class DatabaseHelper {
       args.add(offset);
     }
 
+    debugPrint('Executing SQL: $query with args: $args');
     return await db.rawQuery(query, args);
   }
 
@@ -560,7 +706,7 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> getVotersWithDetails() async {
     Database db = await database;
     return await db.rawQuery('''
-      SELECT v.*, vd.name, vd.phone, vd.landline, vd.social_media
+      SELECT v.*, vd.name, vd.phone, vd.landline, vd.name_en
       FROM voter v
       LEFT JOIN voterdetails vd ON v.id = vd.voterid
     ''');
@@ -1228,6 +1374,55 @@ class DatabaseHelper {
       return rows.map((row) => Voter.fromMap(row)).toList();
     }
 
+    // If searching by tag, search voter names among voters who have at least one tag
+    if (field == SearchField.tag) {
+      String sql = '''
+        SELECT DISTINCT v.*, eb.booth_code, eb.booth_name, w.ward_no, m.name as municipality_name,
+               d.name as district_name, p.name as province_name
+        FROM voter v
+        LEFT JOIN election_booth eb ON v.booth_id = eb.id
+        LEFT JOIN ward w ON eb.ward_id = w.id
+        LEFT JOIN municipality m ON w.municipality_id = m.id
+        LEFT JOIN district d ON m.district_id = d.id
+        LEFT JOIN province p ON d.province_id = p.id
+        LEFT JOIN voter_name_normalized n ON v.voter_no = n.voter_no
+        LEFT JOIN voterdetails vd ON v.id = vd.voterid
+        WHERE n.normalized_name LIKE ? AND EXISTS (SELECT 1 FROM voter_tag vt WHERE vt.voterdetail_id = vd.id)
+      ''';
+
+      List<dynamic> args = [
+        mode == SearchMatchMode.startsWith ? '$query%' : '%$query%',
+      ];
+
+      if (districtId != null) {
+        sql += ' AND d.id = ?';
+        args.add(districtId);
+      }
+
+      if (municipalityId != null) {
+        sql += ' AND m.id = ?';
+        args.add(municipalityId);
+      }
+
+      if (wardId != null) {
+        sql += ' AND w.id = ?';
+        args.add(wardId);
+      }
+
+      if (boothId != null) {
+        sql += ' AND eb.id = ?';
+        args.add(boothId);
+      }
+
+      if (limit != null) {
+        sql += ' LIMIT ?';
+        args.add(limit);
+      }
+
+      final rows = await db.rawQuery(sql, args);
+      return rows.map((row) => Voter.fromMap(row)).toList();
+    }
+
     // For name search, use simple search
     String sql = '''
       SELECT v.*, eb.booth_code, eb.booth_name, w.ward_no, m.name as municipality_name,
@@ -1238,7 +1433,7 @@ class DatabaseHelper {
       LEFT JOIN municipality m ON w.municipality_id = m.id
       LEFT JOIN district d ON m.district_id = d.id
       LEFT JOIN province p ON d.province_id = p.id
-      WHERE v.name LIKE ?
+      WHERE v.name_np LIKE ?
     ''';
 
     List<dynamic> args = [
@@ -1336,7 +1531,7 @@ class DatabaseHelper {
           'voterid': voterId,
           'name': voter['name_np'],
           'phone': data['phone'] ?? '',
-          'social_media': '',
+          'name_en': data['name_en'] ?? '',
           'description': data['description'] ?? '',
         };
         return await db.insert('voterdetails', insertData);

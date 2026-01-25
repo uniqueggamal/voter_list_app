@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../models/search_models.dart';
 import '../models/voter.dart';
 import '../helpers/database_helper.dart';
@@ -26,28 +28,11 @@ class SearchService {
       return [];
     }
 
-    // Build search query with transliteration support
-    String searchQuery;
-    if (field == SearchField.name) {
-      // Try to transliterate English to Nepali
-      String transliteratedQuery = await _transliteration.transliterateToNepali(
-        query,
-      );
-      searchQuery = transliteratedQuery.isNotEmpty
-          ? transliteratedQuery
-          : query;
-    } else {
-      searchQuery = query;
-    }
-
-    // Create search pattern based on match mode
-    searchQuery = matchMode == SearchMatchMode.startsWith
-        ? '$searchQuery%'
-        : '%$searchQuery%';
-
-    // Perform the search
+    // Perform the search with single query
     final rows = await _dbHelper.getVoters(
-      searchQuery: searchQuery,
+      searchQuery: query, // Pass single query
+      field: field.name, // Use field.name directly (handles name, voterId, tag)
+      matchMode: matchMode.name, // Convert enum to string
       startingLetter: null, // Not used in search
       provinceId: province != null ? await _getProvinceId(province) : null,
       districtId: district != null ? await _getDistrictId(district) : null,

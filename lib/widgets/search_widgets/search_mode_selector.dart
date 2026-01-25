@@ -17,6 +17,7 @@ class SearchModeSelector extends StatelessWidget {
       segments: const [
         ButtonSegment(value: SearchField.name, label: Text('नामबाट')),
         ButtonSegment(value: SearchField.voterId, label: Text('ID बाट')),
+        ButtonSegment(value: SearchField.tag, label: Text('ट्यागबाट')),
       ],
       selected: {selectedField},
       onSelectionChanged: (newSelection) {

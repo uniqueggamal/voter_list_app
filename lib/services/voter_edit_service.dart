@@ -93,6 +93,9 @@ class VoterEditService {
       if (description != null) {
         voterDetailsUpdateData['description'] = description;
       }
+      if (englishName != null) {
+        voterDetailsUpdateData['name_en'] = englishName;
+      }
 
       debugPrint('VoterDetails update data: $voterDetailsUpdateData');
 

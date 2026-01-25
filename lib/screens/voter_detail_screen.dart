@@ -85,6 +85,10 @@ class _VoterDetailScreenState extends ConsumerState<VoterDetailScreen> {
           loadedVoter = loadedVoter.copyWith(
             phone: voterDetails['phone'] as String?,
             description: voterDetails['description'] as String?,
+            nameEnglish:
+                (voterDetails['name_en'] as String?)?.isNotEmpty == true
+                ? voterDetails['name_en'] as String
+                : loadedVoter.nameEnglish,
           );
         }
 
@@ -206,6 +210,8 @@ class _VoterDetailScreenState extends ConsumerState<VoterDetailScreen> {
             // Details Cards
             if (nameController != null)
               _buildEditableDetailCard('नाम', nameController),
+            if (englishNameController != null)
+              _buildEditableDetailCard('Name (English)', englishNameController),
             if (voterIdController != null)
               _buildEditableDetailCard('मतदाता नं.', voterIdController),
             if (ageController != null)

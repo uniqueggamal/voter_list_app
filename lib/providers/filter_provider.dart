@@ -218,6 +218,10 @@ class FilterNotifier extends StateNotifier<FilterState> {
     state = state.copyWith(searchQuery: value?.trim());
   }
 
+  void setSearchMatchMode(SearchMatchMode value) {
+    state = state.copyWith(searchMatchMode: value);
+  }
+
   void clearFilters() {
     state = const FilterState();
   }

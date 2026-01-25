@@ -3,6 +3,7 @@ class Voter {
   final String voterId;
   final String nameEnglish;
   final String nameNepali;
+  final String? nameEn;
   final String? parentname;
   final String? spouseNameNp;
   final String gender;
@@ -31,6 +32,7 @@ class Voter {
     required this.voterId,
     required this.nameEnglish,
     required this.nameNepali,
+    this.nameEn,
     this.parentname,
     this.spouseNameNp,
     required this.gender,
@@ -59,8 +61,13 @@ class Voter {
     return Voter(
       id: map['id'] as int? ?? 0,
       voterId: map['voterId'] as String? ?? map['voter_no'] as String? ?? '',
-      nameEnglish: map['nameEnglish'] as String? ?? '',
+      nameEnglish:
+          map['name_english'] as String? ?? map['nameEnglish'] as String? ?? '',
       nameNepali: map['name'] as String? ?? map['name_np'] as String? ?? '',
+      nameEn:
+          map['voter_name_en'] as String? ??
+          map['name_en'] as String? ??
+          map['name_english'] as String?,
       parentname: map['parent_name_np'] as String?,
       spouseNameNp: map['spouse_name_np'] as String?,
       gender: map['gender'] as String? ?? '',
@@ -74,11 +81,16 @@ class Voter {
           map['citizenshipNo'] as String? ?? map['citizenship_no'] as String?,
       address: map['address'] as String?,
       provinceId: map['provinceId'] as int? ?? 0,
-      province: map['province'] as String? ?? '',
+      province:
+          map['province'] as String? ?? map['province_name'] as String? ?? '',
       districtId: map['districtId'] as int? ?? 0,
-      district: map['district'] as String? ?? '',
+      district:
+          map['district'] as String? ?? map['district_name'] as String? ?? '',
       municipalityId: map['municipalityId'] as int? ?? 0,
-      municipality: map['municipality'] as String? ?? '',
+      municipality:
+          map['municipality'] as String? ??
+          map['municipality_name'] as String? ??
+          '',
       municipalityCode:
           map['municipalityCode'] as String? ??
           map['municipality_code'] as String? ??
@@ -97,6 +109,9 @@ class Voter {
       voterNo: map['voterNo'] as String? ?? map['voter_no'] as String?,
       mainCategory: map['main_category'] as String?,
       subCategory: map['sub_category'] as String?,
+      phone: map['voter_phone'] as String? ?? map['phone'] as String?,
+      description:
+          map['voter_description'] as String? ?? map['description'] as String?,
     );
   }
 

@@ -66,15 +66,18 @@ class _FilterPanelWidgetState extends ConsumerState<FilterPanelWidget> {
                             ? 'Name'
                             : searchParams.field == SearchField.voterId
                             ? 'Voter ID'
+                            : searchParams.field == SearchField.tag
+                            ? 'Tag'
                             : 'More',
-                        items: const ['Name', 'Voter ID', 'More'],
+                        items: const ['Name', 'Voter ID', 'Tag', 'More'],
                         onChanged: (value) {
                           if (value != null) {
                             SearchField? newField;
                             if (value == 'Name')
                               newField = SearchField.name;
-                            else if (value == 'Voter ID')
-                              newField = SearchField.voterId;
+                            else if (value == 'Voter ID')newField = SearchField.voterId;
+                            else if (value == 'Tag')
+                              newField = SearchField.tag;
                             else
                               newField = SearchField.more;
                             ref
@@ -90,7 +93,7 @@ class _FilterPanelWidgetState extends ConsumerState<FilterPanelWidget> {
                         label: 'Search Mode (खोज मोड)',
                         icon: Icons.filter_list,
                         value:
-                            searchParams.matchMode == SearchMatchMode.startsWith
+                            filter.searchMatchMode == SearchMatchMode.startsWith
                             ? 'Starts with'
                             : 'Contains',
                         items: const ['Starts with', 'Contains'],
@@ -100,10 +103,8 @@ class _FilterPanelWidgetState extends ConsumerState<FilterPanelWidget> {
                                 ? SearchMatchMode.startsWith
                                 : SearchMatchMode.contains;
                             ref
-                                .read(searchParamsProvider.notifier)
-                                .update(
-                                  (state) => state.copyWith(matchMode: newMode),
-                                );
+                                .read(filterProvider.notifier)
+                                .setSearchMatchMode(newMode);
                             ref.read(voterProvider.notifier).loadVoters();
                           }
                         },

@@ -12,6 +12,7 @@ import '../widgets/export_dialog.dart';
 import '../widgets/tags_dialog.dart';
 import '../helpers/database_helper.dart';
 import '../helpers/tags_database_helper.dart';
+import '../services/import_service.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -73,13 +74,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // Live search
     _searchController.addListener(() {
       final query = _searchController.text.trim();
-      ref
-          .read(searchParamsProvider.notifier)
-          .update((state) => state.copyWith(query: query));
-      final currentFilter = ref.read(filterProvider);
-      final updatedFilter = currentFilter.copyWith(searchQuery: query);
-      ref.read(voterProvider.notifier).applyFiltersAndReload(updatedFilter);
+      Future(() {
+        ref
+            .read(searchParamsProvider.notifier)
+            .update((state) => state.copyWith(query: query));
+        final currentFilter = ref.read(filterProvider);
+        final updatedFilter = currentFilter.copyWith(searchQuery: query);
+        ref.read(voterProvider.notifier).applyFiltersAndReload(updatedFilter);
+      });
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Sync search controller with current search state
+    final currentQuery = ref.read(searchParamsProvider).query;
+    if (_searchController.text != currentQuery) {
+      _searchController.text = currentQuery;
+    }
   }
 
   @override
@@ -180,6 +193,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   context: context,
                   builder: (_) => const TagsDialog(),
                 );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.upload),
+              title: const Text('Import'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+                ImportService().importExcelFile(context);
               },
             ),
           ],
@@ -508,7 +529,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               size: 18,
                             ),
                             onTap: () {
-                              _searchController.clear();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

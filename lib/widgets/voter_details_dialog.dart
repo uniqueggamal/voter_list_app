@@ -187,6 +187,8 @@ class VoterDetailsDialog extends ConsumerWidget {
             'टिप्पणीहरू',
             details['description']?.toString() ?? '',
           ),
+          if (details['name_en']?.toString().isNotEmpty ?? false)
+            _buildDetailCard('Name (English)', details['name_en'].toString()),
           _buildDetailCard('समूह/वर्गीकरण', 'आउँदैछ...'),
           const SizedBox(height: 16),
           // Action Buttons
@@ -266,6 +268,9 @@ class VoterDetailsDialog extends ConsumerWidget {
     final descriptionController = TextEditingController(
       text: details['description']?.toString() ?? '',
     );
+    final nameEnController = TextEditingController(
+      text: details['name_en']?.toString() ?? '',
+    );
 
     showDialog(
       context: context,
@@ -285,6 +290,10 @@ class VoterDetailsDialog extends ConsumerWidget {
                 decoration: const InputDecoration(labelText: 'टिप्पणीहरू'),
                 maxLines: 3,
               ),
+              TextField(
+                controller: nameEnController,
+                decoration: const InputDecoration(labelText: 'Name (English)'),
+              ),
             ],
           ),
           actions: [
@@ -298,6 +307,7 @@ class VoterDetailsDialog extends ConsumerWidget {
                 final Map<String, dynamic> data = {
                   'phone': phoneController.text.trim(),
                   'description': descriptionController.text.trim(),
+                  'name_en': nameEnController.text.trim(),
                 };
 
                 // Update the voter details record using the correct voter ID

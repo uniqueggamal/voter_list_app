@@ -1,6 +1,6 @@
 // lib/models/search_models.dart
 
-enum SearchField { name, voterId, more }
+enum SearchField { name, voterId, tag, more }
 
 enum SearchMatchMode { startsWith, contains }
 
@@ -12,7 +12,7 @@ class SearchParams {
 
   const SearchParams({
     this.field = SearchField.name,
-    this.matchMode = SearchMatchMode.startsWith,
+    this.matchMode = SearchMatchMode.contains,
     this.query = '',
     this.limit = 100,
   });
